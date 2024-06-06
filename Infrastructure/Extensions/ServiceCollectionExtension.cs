@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Infrastructure.Jwt;
+using Infrastructure.Persistence.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -27,5 +29,9 @@ namespace Infrastructure.Extensions
                 .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, null!)
                 .Services;
         }
+        public static void ConfigureDbContext(this IServiceCollection services,
+          IConfiguration configuration) =>
+          services.AddDbContext<CBTDbContext>(opts =>
+              opts.UseSqlServer(configuration.GetConnectionString("sqlConnection")));
     }
 }

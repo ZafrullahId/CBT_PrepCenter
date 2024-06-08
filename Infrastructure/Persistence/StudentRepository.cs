@@ -1,4 +1,5 @@
-﻿using Domain.Entity;
+﻿using Application.Abstraction.Repositiories.IRepository;
+using Domain.Entity;
 using Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Persistence
 {
-    public class StudentRepository(CBTDbContext context)
+    public class StudentRepository(CBTDbContext context) : IStudentRepository
     {
         public async Task CreateAsync(Student student, CancellationToken cancellationToken)
         {

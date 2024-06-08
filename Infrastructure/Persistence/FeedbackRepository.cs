@@ -1,4 +1,5 @@
-﻿using Domain.Entity;
+﻿using Application.Abstraction.Repositiories.IRepository;
+using Domain.Entity;
 using Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Persistence
 {
-    public class FeedbackRepository(CBTDbContext cBTDbContext)
+    public class FeedbackRepository(CBTDbContext cBTDbContext) : IFeedbackRepository
     {
         public async Task CreateAsync(Feedback feedback, CancellationToken cancellationToken)
         {

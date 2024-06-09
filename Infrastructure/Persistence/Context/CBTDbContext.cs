@@ -1,21 +1,22 @@
 ﻿using Domain.Entity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Persistence.Context
 {
-    public class CBTDbContext(DbContextOptions<CBTDbContext> options) : DbContext(options)
+    public class CBTDbContext(DbContextOptions<CBTDbContext> options) : IdentityDbContext<User>(options)
     {
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Student>(entity =>
             {
                 entity.HasMany(s => s.Subjects)
                       .WithMany(s => s.Students);
+            });
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasKey(s => s.Id);
             });
 
             modelBuilder.Entity<Subject>(entity =>
@@ -30,5 +31,7 @@ namespace Infrastructure.Persistence.Context
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<CbtSession> CbtSessions { get; set; }
         public DbSet<SessionResult> SessionResults { get; set; }
+
+        
     }
 }

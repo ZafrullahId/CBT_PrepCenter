@@ -18,6 +18,11 @@ namespace Infrastructure.Extensions
     {
         public static IServiceCollection AddJWTAuth(this IServiceCollection services, IConfiguration config)
         {
+            services.AddOptions<JwtSettings>()
+           .BindConfiguration(nameof(JwtSettings))
+           .ValidateDataAnnotations()
+           .ValidateOnStart();
+
             services.AddSingleton<IConfigureOptions<JwtBearerOptions>, ConfigureJwtBearerOptions>();
 
             return services

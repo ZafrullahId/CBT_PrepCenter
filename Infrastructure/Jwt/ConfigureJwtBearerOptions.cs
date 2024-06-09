@@ -57,12 +57,11 @@ namespace Infrastructure.Jwt
                 OnForbidden = _ => throw new ForbiddenExceptionHandler("You are not authorized to access this resource."),
                 OnMessageReceived = context =>
                 {
-                    var accessToken = context.Request.Headers["Authorization"];
+                    var accessToken = context.Request.Headers.Authorization;
 
                     if (!string.IsNullOrEmpty(accessToken) &&
                         context.HttpContext.Request.Path.StartsWithSegments("/notifications"))
                     {
-                        // Read the token out of the query string
                         context.Token = accessToken;
                     }
 

@@ -11,7 +11,6 @@ namespace Domain.Entity
     {
         public int Age { get; set; }
         public string? Base64Image { get; set; }
-        public Guid UserId { get; set; } 
         public User User { get; set; }
         public IEnumerable<Feedback> Feedbacks { get; set; } = [];
         public IEnumerable<CbtSession> Sessions { get; set; } = [];

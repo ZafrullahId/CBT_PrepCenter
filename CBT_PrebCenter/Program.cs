@@ -22,8 +22,6 @@ builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<UnauthorizedExceptionHandler>();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 builder.Services.AddAuthorization();
-builder.Services.AddAuthentication().AddCookie(IdentityConstants.ApplicationScheme).AddBearerToken(IdentityConstants.BearerScheme);
-builder.Services.AddIdentityCore<User>().AddEntityFrameworkStores<CBTDbContext>().AddApiEndpoints();
 
 var app = builder.Build();
 

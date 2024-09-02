@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.Dtos.ResponseModel
 {
-    public class AuthResponseDto
+    public class AuthResponseDto : BaseResponse
     {
         public string? Token {  get; set; }
         public UserDto? User { get; set; }

@@ -1,4 +1,4 @@
-﻿using Application.Abstraction.Repositiories.IRepository;
+﻿using Application.Abstraction.Repositories;
 using Domain.Entity;
 using Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +24,5 @@ namespace Infrastructure.Persistence
         {
             return await context.Students.ToListAsync(cancellationToken);
         }
-        // User Repo
-        // Role
     }
 }

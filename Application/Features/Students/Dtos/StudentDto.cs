@@ -1,11 +1,7 @@
-﻿using Domain.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Features.UserManagement.Dtos;
+using Domain.Entity;
 
-namespace Application.Dtos
+namespace Application.Features.Students.Dtos
 {
     public class StudentDto
     {

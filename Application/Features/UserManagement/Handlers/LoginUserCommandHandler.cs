@@ -1,19 +1,16 @@
 ﻿using Application.Abstraction.Repositiories.IRepository;
-using Application.Dtos.ResponseModel;
+using Application.Features.UserManagement.Command;
+using Application.Features.UserManagement.Dtos.ResponseModel;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Application.Command.UserCommand.Login
+
+namespace Application.Features.UserManagement.Handlers
 {
-    public class LoginUserCommandHandler(IUserRepository  userRepository) : IRequestHandler<LoginUserCommand, AuthResponseDto>
+    public class LoginUserCommandHandler(IUserRepository userRepository) : IRequestHandler<LoginUserCommand, AuthResponseDto>
     {
         public async Task<AuthResponseDto> Handle(LoginUserCommand request, CancellationToken cancellationToken)
         {
-            var login = await userRepository.GetAsync(x => x.Email == request.Request.Email && x.Password == request.Request.Password,cancellationToken);
+            var login = await userRepository.GetAsync(x => x.Email == request.Request.Email && x.Password == request.Request.Password, cancellationToken);
             if (login is null)
             {
                 return new AuthResponseDto
@@ -29,7 +26,7 @@ namespace Application.Command.UserCommand.Login
                 Success = true,
 
             };
-                    
+
         }
     }
 }

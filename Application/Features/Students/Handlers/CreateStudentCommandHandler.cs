@@ -1,0 +1,31 @@
+﻿using Application.Abstraction.Repositiories.IRepository;
+using Application.Features.Students.Command;
+using Application.Features.Students.CustomException;
+using Application.Features.Students.Dtos.Response;
+using Domain.Entity;
+using Mapster;
+using MediatR;
+
+namespace Application.Features.Students.Handlers
+{
+    public class CreateStudentCommandHandler(IStudentRepository _studentRepository, IUserRepository _userRepository) : IRequestHandler<CreateStudentCommand, StudentResponse>
+    {
+        public async Task<StudentResponse> Handle(CreateStudentCommand request, CancellationToken cancellationToken)
+        {
+            var userExist = await _userRepository.GetAsync(x => x.Email == request.Model.Email, cancellationToken);
+            if (userExist is null)
+            {
+                /*return new StudentResponse { Message = "Email Already IN  Use" };*/
+                throw new StudentAlreadyExistException(userExist.Email);
+            }
+            await _userRepository.CreateAsync(request.Adapt<User>(), cancellationToken);
+            await _studentRepository.CreateAsync(request.Adapt<Student>(), cancellationToken);
+            return new StudentResponse()
+            {
+                Message = "Student Successfully Created",
+                Success = true
+            };
+
+        }
+    }
+}

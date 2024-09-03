@@ -1,5 +1,5 @@
 ﻿using Application.Command.StudentCommand.CreateStudent;
-using Application.Dtos.RequestModel;
+using Application.Features.Students.Dtos.Request;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

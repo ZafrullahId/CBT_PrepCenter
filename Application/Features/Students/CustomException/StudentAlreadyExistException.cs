@@ -1,12 +1,7 @@
 ﻿using Application.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Application.Command.StudentCommand.CreateStudent
+namespace Application.Features.Students.CustomException
 {
     public sealed class StudentAlreadyExistException : BaseException
     {

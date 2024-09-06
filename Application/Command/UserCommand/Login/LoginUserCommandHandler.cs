@@ -1,4 +1,4 @@
-﻿using Application.Abstraction.Repositiories.IRepository;
+﻿using Application.Abstraction.Repositiories;
 using Application.Dtos.ResponseModel;
 using MediatR;
 using System;

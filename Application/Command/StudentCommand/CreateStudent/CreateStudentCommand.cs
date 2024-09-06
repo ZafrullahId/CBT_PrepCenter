@@ -9,6 +9,6 @@ using System.Threading.Tasks;
 
 namespace Application.Command.StudentCommand.CreateStudent
 {
-    public record CreateStudentCommand(CreateStudentRequestModel  Model)  : IRequest<StudentResponse>;
+    public record CreateStudentCommand(CreateStudentRequest  model)  : IRequest<StudentResponse>;
     
 }

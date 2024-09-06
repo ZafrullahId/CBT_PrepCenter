@@ -15,5 +15,9 @@ namespace Domain.Entity
         public CbtSession CbtSession { get; set; }
         public string Question { get; set; } = default!;
         public IEnumerable<Options> Options { get; set; } = [];
+        public SessionResult(Guid cbtSessionId, )
+        {
+            
+        }
     }
 }

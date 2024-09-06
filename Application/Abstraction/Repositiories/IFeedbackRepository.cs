@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Abstraction.Repositiories.IRepository
+namespace Application.Abstraction.Repositiories
 {
     public interface IFeedbackRepository
     {

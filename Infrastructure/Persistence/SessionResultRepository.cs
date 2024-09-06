@@ -1,4 +1,4 @@
-﻿using Application.Abstraction.Repositiories.IRepository;
+﻿using Application.Abstraction.Repositiories;
 using Domain.Entity;
 using Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;

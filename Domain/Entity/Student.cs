@@ -9,10 +9,10 @@ namespace Domain.Entity
 {
     public class Student : AuditableEntity
     {
+        private readonly List<Feedback> _feedbacks = new();
         public Guid UserId { get; private set; }
-        public IEnumerable<Feedback> Feedbacks { get; set; } = [];
+        public IReadOnlyCollection<Feedback> Feedbacks => _feedbacks;
         public IEnumerable<CbtSession> Sessions { get; set; } = [];
-        public IEnumerable<Subject> Subjects { get; set; } = [];
 
         private Student(User user)
         {
@@ -22,6 +22,12 @@ namespace Domain.Entity
         {
             var student = new Student(user);
             return student;
+        }
+        public Feedback AddFeedBack(Guid studentId, string comment)
+        {
+            var feedBack = new Feedback(studentId, comment);
+            _feedbacks.Add(feedBack);
+            return feedBack;
         }
     }
 }

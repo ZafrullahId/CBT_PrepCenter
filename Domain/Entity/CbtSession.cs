@@ -13,7 +13,7 @@ namespace Domain.Entity
         public double Score { get; private set; }
         public Guid StudentId { get; private set; }
         // In progress field
-        // Current question in progess
+        // Current question in progress
         public TimeSpan Duration { get; private set; }
         public int NumberOfQuestion { get; private set; }
         public int NumberOfWrongAnswers { get; private set; }

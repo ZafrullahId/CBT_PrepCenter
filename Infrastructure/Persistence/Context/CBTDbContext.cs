@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Persistence.Context
 {
-    public class CBTDbContext(DbContextOptions<CBTDbContext> options) : IdentityDbContext<User>(options)
+    public class CBTDbContext(DbContextOptions<CBTDbContext> options) : DbContext(options)
     {
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -11,5 +11,10 @@ namespace Domain.Entity
     {
         public string Comment { get; set; } = default!;
         public Guid? StudentId { get; set; }
+        public Feedback(Guid studentId, string comment)
+        {
+            StudentId = studentId;
+            Comment = comment;
+        }
     }
 }

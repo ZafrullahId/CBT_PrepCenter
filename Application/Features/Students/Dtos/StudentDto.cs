@@ -9,6 +9,5 @@ namespace Application.Features.Students.Dtos
         public UserDto? User { get; set; }
         public IEnumerable<Feedback> Feedbacks { get; set; } = [];
         public IEnumerable<CbtSession> Sessions { get; set; } = [];
-        public IEnumerable<Subject> Subjects { get; set; } = [];
     }
 }

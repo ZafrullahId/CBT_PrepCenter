@@ -9,6 +9,14 @@ namespace Domain.Entity
 {
     public class Admin : AuditableEntity
     {
-        public User User {  get; set; } 
+        public Guid UserId { get; private set; }
+        public Admin(Guid userId)
+        {
+            UserId = userId;
+        }
+        public static Admin Create(Guid userId)
+        {
+            return new Admin(userId);
+        }
     }
 }

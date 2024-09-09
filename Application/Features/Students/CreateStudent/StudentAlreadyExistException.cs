@@ -3,12 +3,9 @@ using System.Net;
 
 namespace Application.Features.Students.Command
 {
-    public sealed class StudentAlreadyExistException : BaseException
+    public sealed class StudentAlreadyExistException(string email, HttpStatusCode statusCode = HttpStatusCode.BadRequest) 
+        : BaseException(string.Format(_messages, email), statusCode)
     {
-        private const string _messages = "Student with The `{3}` already exists.";
-        public StudentAlreadyExistException(string message, HttpStatusCode statusCode = HttpStatusCode.InternalServerError) : base(message, statusCode)
-        {
-
-        }
+        private const string _messages = "Student with The `{0}` already exists.";
     }
 }

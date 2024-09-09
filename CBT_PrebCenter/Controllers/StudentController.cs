@@ -18,7 +18,7 @@ namespace CBT_PrepCenter.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register([FromBody] CreateStudentRequestModel model,CancellationToken  cancellationToken)
+        public async Task<IActionResult> Register([FromBody] CreateStudentRequest model,CancellationToken  cancellationToken)
         {
             var command = new CreateStudentCommand(model);
             if(command == null) return BadRequest(model);

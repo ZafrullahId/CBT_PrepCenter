@@ -1,4 +1,4 @@
-﻿namespace Application.Features.UserManagement.Dtos
+﻿namespace Application.Features.Auth.Dtos
 {
     public class UserDto
     {

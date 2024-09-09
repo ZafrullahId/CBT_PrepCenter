@@ -1,4 +1,4 @@
-﻿namespace Application.Features.UserManagement.Dtos.RequestModel
+﻿namespace Application.Features.Auth.Dtos.Request
 {
     public class LoginUserRequestModel
     {

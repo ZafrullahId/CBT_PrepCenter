@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Abstraction.Repositiories
+namespace Application.Abstraction.Repositories
 {
     public interface IUserRepository
     {

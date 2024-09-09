@@ -1,7 +1,6 @@
-﻿using Application.Command.StudentCommand.CreateStudent;
+﻿using Application.Features.Students.CreateStudent;
 using Application.Features.Students.Dtos.Request;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CBT_PrepCenter.Controllers
@@ -18,11 +17,12 @@ namespace CBT_PrepCenter.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register([FromBody] CreateStudentRequest model,CancellationToken  cancellationToken)
+        public async Task<IActionResult> Register([FromBody] CreateStudentRequestModel model)
         {
+            var tokenSource = new CancellationTokenSource();
             var command = new CreateStudentCommand(model);
             if(command == null) return BadRequest(model);
-            var studentCommand  = await _mediator.Send(command, cancellationToken);
+            var studentCommand  = await _mediator.Send(command, tokenSource.Token);
             return  Ok(studentCommand);
 
 

@@ -1,6 +1,5 @@
-﻿using Application.Abstraction.Repositiories.IRepository;
-using Application.Features.UserManagement.Command;
-using Application.Features.UserManagement.Dtos.ResponseModel;
+﻿using Application.Abstraction.Repositories;
+using Application.Features.Auth.Dtos.Response;
 using MediatR;
 
 

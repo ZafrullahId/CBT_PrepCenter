@@ -1,4 +1,4 @@
-﻿using Application.Features.UserManagement.Dtos;
+﻿using Application.Features.Auth.Dtos;
 using Domain.Entity;
 
 namespace Application.Features.Students.Dtos

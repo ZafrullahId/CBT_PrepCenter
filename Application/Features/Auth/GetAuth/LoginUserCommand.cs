@@ -1,9 +1,9 @@
-﻿using Application.Features.UserManagement.Dtos.RequestModel;
-using Application.Features.UserManagement.Dtos.ResponseModel;
+﻿using Application.Features.Auth.Dtos.Request;
+using Application.Features.Auth.Dtos.Response;
 using MediatR;
 
 
-namespace Application.Features.UserManagement.Command
+namespace Application.Features.Auth.GetAuth
 {
     public record LoginUserCommand(LoginUserRequestModel Request) : IRequest<AuthResponseDto>
     {

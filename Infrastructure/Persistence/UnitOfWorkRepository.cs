@@ -1,4 +1,4 @@
-﻿using Application.Abstraction.Repositiories;
+﻿using Application.Abstraction.Repositories;
 using Infrastructure.Persistence.Context;
 using System;
 using System.Collections.Generic;
@@ -10,9 +10,9 @@ namespace Infrastructure.Persistence
 {
     public class UnitOfWorkRepository(CBTDbContext cBTDbContext) : IUnitOfWorkRepository
     {
-        public async Task SaveChangesAsync()
+        public async Task SaveChangesAsync(CancellationToken cancellationToken)
         {
-            await cBTDbContext.SaveChangesAsync();
+            await cBTDbContext.SaveChangesAsync(cancellationToken);
         }
     }
 }

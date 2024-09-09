@@ -1,7 +1,7 @@
 ﻿using Application.Exceptions;
 using System.Net;
 
-namespace Application.Features.Students.Command
+namespace Application.Features.Students.CreateStudent
 {
     public sealed class StudentAlreadyExistException(string email, HttpStatusCode statusCode = HttpStatusCode.BadRequest) 
         : BaseException(string.Format(_messages, email), statusCode)

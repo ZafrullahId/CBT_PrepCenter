@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Abstraction.Repositiories
+namespace Application.Abstraction.Repositories
 {
     public interface ISessionRepository
     {

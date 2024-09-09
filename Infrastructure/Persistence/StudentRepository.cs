@@ -1,4 +1,4 @@
-﻿using Application.Abstraction.Repositiories;
+﻿using Application.Abstraction.Repositories;
 using Domain.Entity;
 using Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +18,7 @@ namespace Infrastructure.Persistence
         }
         public async Task<Student?> GetAsync(Guid userId, CancellationToken cancellationToken)
         {
-            return await context.Students.Where(x => x.User.Id == userId).Include(x => x.User).FirstOrDefaultAsync(cancellationToken);
+            return await context.Students.Where(x => x.UserId == userId).FirstOrDefaultAsync(cancellationToken);
         }
         public async Task<IReadOnlyList<Student>> GetAllAsync(CancellationToken cancellationToken)
         {

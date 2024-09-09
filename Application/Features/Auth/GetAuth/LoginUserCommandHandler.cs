@@ -4,20 +4,20 @@ using Application.Features.UserManagement.Dtos.ResponseModel;
 using MediatR;
 
 
-namespace Application.Features.UserManagement.Handlers
+namespace Application.Features.Auth.GetAuth
 {
     public class LoginUserCommandHandler(IUserRepository userRepository) : IRequestHandler<LoginUserCommand, AuthResponseDto>
     {
         public async Task<AuthResponseDto> Handle(LoginUserCommand request, CancellationToken cancellationToken)
         {
-            var login = await userRepository.GetAsync(x => x.Email == request.Request.Email && x.Password == request.Request.Password, cancellationToken);
-            if (login is null)
+            var user = await userRepository.GetAsync(x => x.Email == request.Request.Email && x.Password == request.Request.Password, cancellationToken);
+            // we still need to work on JWT here
+            if (user is null)
             {
                 return new AuthResponseDto
                 {
                     Message = "Invalid Credentials",
                     Success = false,
-
                 };
             }
             return new AuthResponseDto

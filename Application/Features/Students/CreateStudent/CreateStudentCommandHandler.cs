@@ -1,12 +1,10 @@
 ﻿using Application.Abstraction.Repositiories.IRepository;
-using Application.Features.Students.Command;
-using Application.Features.Students.CustomException;
 using Application.Features.Students.Dtos.Response;
 using Domain.Entity;
 using Mapster;
 using MediatR;
 
-namespace Application.Features.Students.Handlers
+namespace Application.Features.Students.Command
 {
     public class CreateStudentCommandHandler(IStudentRepository _studentRepository, IUserRepository _userRepository) : IRequestHandler<CreateStudentCommand, StudentResponse>
     {

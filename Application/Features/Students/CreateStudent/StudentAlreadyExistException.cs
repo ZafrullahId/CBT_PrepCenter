@@ -1,7 +1,7 @@
 ﻿using Application.Exceptions;
 using System.Net;
 
-namespace Application.Features.Students.CustomException
+namespace Application.Features.Students.Command
 {
     public sealed class StudentAlreadyExistException : BaseException
     {

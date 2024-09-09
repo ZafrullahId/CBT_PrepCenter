@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Features\Auth\Queries\**" />
+    <Compile Remove="Features\Students\Queries\**" />
+    <EmbeddedResource Remove="Features\Auth\Queries\**" />
+    <EmbeddedResource Remove="Features\Students\Queries\**" />
+    <None Remove="Features\Auth\Queries\**" />
+    <None Remove="Features\Students\Queries\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Mapster" Version="7.4.0" />
     <PackageReference Include="MediatR" Version="12.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6" />
@@ -15,11 +24,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Features\Students\Queries\" />
-    <Folder Include="Features\UserManagement\Queries\" />
   </ItemGroup>
 
 </Project>

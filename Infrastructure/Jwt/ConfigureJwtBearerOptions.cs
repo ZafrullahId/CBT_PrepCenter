@@ -54,7 +54,7 @@ namespace Infrastructure.Jwt
 
                     return Task.CompletedTask;
                 },
-                OnForbidden = _ => throw new ForbiddenExceptionHandler("You are not authorized to access this resource."),
+                OnForbidden = _ => throw new ForbiddenException("You are not authorized to access this resource."),
                 OnMessageReceived = context =>
                 {
                     var accessToken = context.Request.Headers.Authorization;

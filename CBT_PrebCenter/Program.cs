@@ -1,10 +1,6 @@
+using CBT_PrepCenter.Extensions;
 using CBT_PrepCenter.Middlewares;
-using Domain.Entity;
 using Infrastructure.Extensions;
-using Infrastructure.Jwt.Exceptions;
-using Infrastructure.Persistence.Context;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,11 +13,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.ConfigureDbContext(builder.Configuration);
 builder.Services.AddJWTAuth(builder.Configuration);
 builder.Services.AddSwaggerGen();
+builder.Services.ConfigureCors();
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+builder.Services.AddEndpoints();
+builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
-builder.Services.AddExceptionHandler<UnauthorizedExceptionHandler>();
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
@@ -30,19 +27,18 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-
 }
 
 app.UseExceptionHandler();
 
-app.UseExceptionHandler();
+app.UseCors("AllowOrigin");
 
 app.UseHttpsRedirection();
 
-app.MapIdentityApi<User>();
+app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapEndpoints();
 
 app.Run();

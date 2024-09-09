@@ -1,4 +1,4 @@
-﻿using Application.Abstraction.Repositories;
+﻿using Application.Abstractions.Repositories;
 using Infrastructure.Persistence.Context;
 using System;
 using System.Collections.Generic;

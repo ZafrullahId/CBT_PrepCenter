@@ -1,4 +1,4 @@
-namespace CBT_PrebCenter
+namespace CBT_PrepCenter
 {
     public class WeatherForecast
     {

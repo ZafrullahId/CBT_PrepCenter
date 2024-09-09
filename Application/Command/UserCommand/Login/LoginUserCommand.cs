@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Application.Command.UserCommand.Login
 {
-    public record LoginUserCommand(LoginUserRequestModel Request) : IRequest<AuthResponseDto>
+    public record LoginUserCommand(string Email, string Password) : IRequest<AuthResponseDto>
     {
     }
 }

@@ -35,6 +35,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseExceptionHandler();
 
+app.UseExceptionHandler();
+
 app.UseHttpsRedirection();
 
 app.MapIdentityApi<User>();

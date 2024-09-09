@@ -16,6 +16,10 @@ namespace Domain.Entity
         public string Email { get; private set; }
         public string Password { get; private set; }
         public Role Role { get; private set; }
+        public User()
+        {
+            
+        }
 
         private User(string firstName, string lastName, string email, string password, Role role)
         {

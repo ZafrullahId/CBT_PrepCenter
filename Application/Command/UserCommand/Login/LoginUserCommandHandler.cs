@@ -13,7 +13,7 @@ namespace Application.Command.UserCommand.Login
     {
         public async Task<AuthResponseDto> Handle(LoginUserCommand request, CancellationToken cancellationToken)
         {
-            var login = await userRepository.GetAsync(x => x.Email == request.Request.Email && x.Password == request.Request.Password,cancellationToken);
+            var login = await userRepository.GetAsync(x => x.Email == request.Email && x.Password == request.Password,cancellationToken);
             if (login is null)
             {
                 return new AuthResponseDto

@@ -9,7 +9,7 @@ namespace Application.Abstraction.Repositiories
 {
     public interface ISessionResultRepository
     {
-        Task CreateAsync(SessionResult result, CancellationToken cancellationToken);
-        Task<IReadOnlyList<SessionResult>> GetAsync(Guid sessionId, CancellationToken cancellationToken);
+        Task CreateAsync(SessionQuestion result, CancellationToken cancellationToken);
+        Task<IReadOnlyList<SessionQuestion>> GetAsync(Guid sessionId, CancellationToken cancellationToken);
     }
 }

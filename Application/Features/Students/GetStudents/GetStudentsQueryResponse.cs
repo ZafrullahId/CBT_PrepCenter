@@ -1,10 +1,8 @@
-﻿using Application.Shared;
+﻿using Application.Features.Students.GetStudent;
+using Application.Shared;
 
 namespace Application.Features.Students.GetStudents
 {
-    public record GetStudentsQueryResponse(
-    string FirstName,
-    string LastName,
-    string Email,
+    public record GetStudentsQueryResponse(List<GetStudentQueryResponse> Students,
     BaseResponse BaseResponse);
 }

@@ -2,5 +2,5 @@
 
 namespace Application.Features.Students.GetStudents
 {
-    public record GetStudentsQuery()  : IRequest<List<GetStudentsQueryResponse>>;
+    public record GetStudentsQuery()  : IRequest<GetStudentsQueryResponse>;
 }

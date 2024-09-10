@@ -10,9 +10,9 @@ namespace Application.Features.Students.GetStudent
         {
             var student = await _studentRepository.GetAsync(request.StudentId, cancellationToken);
 
-            if (student == null) { throw new StudentNotFoundException(student.Id.ToString()); }
-
-            return new GetStudentQueryResponse(
+            return student is null
+                ? throw new StudentNotFoundException(request.StudentId)
+                : new GetStudentQueryResponse(
                student.User.FirstName,
                student.User.LastName,
                student.User.Email,

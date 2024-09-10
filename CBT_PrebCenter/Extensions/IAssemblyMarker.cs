@@ -1,4 +1,4 @@
-﻿namespace CBT_PrepCenter.Extensions
+﻿namespace CBT.APIs.Extensions
 {
     internal interface IAssemblyMarker
     {

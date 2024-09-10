@@ -4,7 +4,7 @@ using Application.Abstractions;
 using MapsterMapper;
 using Mapster;
 
-namespace CBT_PrepCenter.Extensions
+namespace CBT.APIs.Extensions
 {
     public static class DependencyInjection
     {

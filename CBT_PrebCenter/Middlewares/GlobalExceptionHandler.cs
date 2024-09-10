@@ -3,7 +3,7 @@ using Domain.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CBT_PrepCenter.Middlewares
+namespace CBT.APIs.Middlewares
 {
     public sealed class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger) : IExceptionHandler
     {

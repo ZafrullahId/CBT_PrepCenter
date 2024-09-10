@@ -1,5 +1,5 @@
-using CBT_PrepCenter.Extensions;
-using CBT_PrepCenter.Middlewares;
+using CBT.APIs.Extensions;
+using CBT.APIs.Middlewares;
 using Infrastructure.Extensions;
 using System.Reflection;
 
@@ -12,6 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.ConfigureDbContext(builder.Configuration);
 builder.Services.AddJWTAuth(builder.Configuration);
+builder.Services.ConfigureMapster();
 builder.Services.AddSwaggerGen();
 builder.Services.ConfigureCors();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));

@@ -4,7 +4,7 @@ using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CBT_PrepCenter.Endpoints.Students.CreateStudent
+namespace CBT.APIs.Endpoints.Students.CreateStudent
 {
     public class CreateStudentEndpoint : IEndpoint
     {

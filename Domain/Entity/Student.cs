@@ -11,6 +11,7 @@ namespace Domain.Entity
     {
         private readonly List<Feedback> _feedbacks = new();
         public Guid UserId { get; private set; }
+        public User User { get; private set; }
         public IReadOnlyCollection<Feedback> Feedbacks => _feedbacks;
         public IEnumerable<CbtSession> Sessions { get; set; } = [];
 

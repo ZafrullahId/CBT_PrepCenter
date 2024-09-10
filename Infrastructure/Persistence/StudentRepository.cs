@@ -18,7 +18,7 @@ namespace Infrastructure.Persistence
         }
         public async Task<Student?> GetAsync(Guid userId, CancellationToken cancellationToken)
         {
-            return await context.Students.Where(x => x.UserId == userId).FirstOrDefaultAsync(cancellationToken);
+            return await context.Students.Where(x => x.UserId == userId).Include(x=>x.User).FirstOrDefaultAsync(cancellationToken);
         }
         public async Task<IReadOnlyList<Student>> GetAllAsync(CancellationToken cancellationToken)
         {

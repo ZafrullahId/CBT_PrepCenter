@@ -9,8 +9,8 @@ namespace CBT_PrepCenter.Endpoints.Students.GetStudents
     {
         public void MapEndpoint(IEndpointRouteBuilder app)
         {
-            app.MapGet("/articles/", async (
-                    [AsParameters] GetStudentsRequest request,
+            app.MapGet("/students/", async (
+                     GetStudentsRequest request,
                     IMapper mapper,
                     IMediator mediator,
                     CancellationToken cancellationToken) =>

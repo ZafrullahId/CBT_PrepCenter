@@ -7,7 +7,7 @@ namespace Application.Features.Students.GetStudents
     {
         public async Task<List<GetStudentsQueryResponse>> Handle(GetStudentsQuery request, CancellationToken cancellationToken)
         {
-            var stud = await _studentRepository.GetAllAsync(cancellationToken);
+            var students = await _studentRepository.GetAllAsync(cancellationToken);
 
             return new List<GetStudentsQueryResponse>().ToList();
         }

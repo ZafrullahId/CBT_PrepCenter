@@ -1,25 +1,25 @@
 ﻿using Application.Abstractions;
-using Application.Features.Students.GetStudent;
+using Application.Features.FeedBack.CreateFeedBack;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CBT_PrepCenter.Endpoints.Students.GetStudent
+namespace CBT.APIs.Endpoints.FeedBack.CreateFeedback
 {
-    public class GetStudentEndpoint : IEndpoint
+    public class CreateFeedbackEndpoint : IEndpoint
     {
         public void MapEndpoint(IEndpointRouteBuilder app)
         {
-            app.MapGet("/students/{student-id}", async (
-                    [FromRoute] GetStudentRequest request,
+            app.MapPost("/feedback/", async (
+                    [FromBody] CreateFeedbackRequest request,
                     IMapper mapper,
                     IMediator mediator,
                     CancellationToken cancellationToken) =>
             {
-                var command = mapper.Map<GetStudentQuery>(request);
+                var command = mapper.Map<CreateFeedbackCommand>(request);
                 var response = await mediator.Send(command, cancellationToken);
 
-                return mapper.Map<GetStudentResponse>(response);
+                return mapper.Map<CreateFeedbackResponse>(response);
             });
         }
     }

@@ -20,5 +20,10 @@ namespace Infrastructure.Persistence
         {
             return await cBTDbContext.Feedbacks.ToListAsync(cancellationToken);
         }
+
+        public async Task<Feedback?> GetAsync(Guid feedbackId, CancellationToken cancellationToken)
+        {
+            return await cBTDbContext.Feedbacks.Where(x => x.Id == feedbackId).FirstOrDefaultAsync(cancellationToken);
+        }
     }
 }

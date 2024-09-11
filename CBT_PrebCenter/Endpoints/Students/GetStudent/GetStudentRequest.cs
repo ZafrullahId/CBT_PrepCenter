@@ -2,5 +2,5 @@
 
 namespace CBT_PrepCenter.Endpoints.Students.GetStudent
 {
-    public record GetStudentRequest([FromRoute(Name = "student-id")] string StudentId);
+    public record GetStudentRequest([FromRoute(Name = "student-id")] Guid StudentId);
 }

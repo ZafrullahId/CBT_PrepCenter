@@ -15,7 +15,7 @@ builder.Services.AddJWTAuth(builder.Configuration);
 builder.Services.ConfigureMapster();
 builder.Services.AddSwaggerGen();
 builder.Services.ConfigureCors();
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+builder.Services.AddMediatR();
 builder.Services.AddEndpoints();
 builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();

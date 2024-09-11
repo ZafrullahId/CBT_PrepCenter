@@ -1,10 +1,10 @@
-﻿using Application.Exceptions;
+﻿using Domain.Exceptions;
 using System.Net;
 
 namespace Application.Features.Students.CreateStudent
 {
     public sealed class StudentAlreadyExistException(string email, HttpStatusCode statusCode = HttpStatusCode.BadRequest) 
-        : BaseException(string.Format(_messages, email), statusCode)
+        : DomainException(string.Format(_messages, email), statusCode)
     {
         private const string _messages = "Student with The `{0}` already exists.";
     }

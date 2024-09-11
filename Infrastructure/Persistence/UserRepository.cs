@@ -27,7 +27,7 @@ namespace Infrastructure.Persistence
 
         public async Task<User?> LoginAsync(User user, CancellationToken cancellationToken)
         {
-            return await context.Users.Where(x => x.Email == user.Email &&  x.Password == user.Password).FirstOrDefaultAsync(cancellationToken);
+            return await context.Users.Where(x => x.Email == user.Email &&  x.PasswordHash == user.PasswordHash).FirstOrDefaultAsync(cancellationToken);
         }
 
 

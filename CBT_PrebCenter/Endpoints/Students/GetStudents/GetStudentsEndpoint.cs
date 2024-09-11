@@ -10,12 +10,11 @@ namespace CBT_PrepCenter.Endpoints.Students.GetStudents
         public void MapEndpoint(IEndpointRouteBuilder app)
         {
             app.MapGet("/students/", async (
-                     GetStudentsRequest request,
                     IMapper mapper,
                     IMediator mediator,
                     CancellationToken cancellationToken) =>
             {
-                var command = mapper.Map<GetStudentsQuery>(request);
+                var command = new GetStudentsQuery();
                 var result = await mediator.Send(command, cancellationToken);
 
                 return mapper.Map<IEnumerable<GetStudentsQuery>>(result);

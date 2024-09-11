@@ -1,4 +1,4 @@
-﻿using Application.Shared;
+﻿using CBT.APIs.Shared;
 
 namespace CBT_PrepCenter.Endpoints.Students.GetStudent
 {
@@ -7,5 +7,5 @@ namespace CBT_PrepCenter.Endpoints.Students.GetStudent
         string LastName,
         string Email,
         string Password,
-        BaseResponse BaseResponse);
+        BaseApiResponse BaseResponse);
 }

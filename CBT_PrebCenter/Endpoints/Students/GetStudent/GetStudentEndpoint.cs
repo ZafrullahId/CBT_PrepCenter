@@ -1,6 +1,5 @@
 ﻿using Application.Abstractions;
 using Application.Features.Students.GetStudent;
-using CBT_PrepCenter.Endpoints.Students.CreateStudent;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -11,8 +10,8 @@ namespace CBT_PrepCenter.Endpoints.Students.GetStudent
     {
         public void MapEndpoint(IEndpointRouteBuilder app)
         {
-            app.MapGet("/students/{student-id}", async (
-                    [FromRoute] GetStudentRequest request,
+            app.MapGet("/students/{student-id:guid}", async (
+                    [AsParameters] GetStudentRequest request,
                     IMapper mapper,
                     IMediator mediator,
                     CancellationToken cancellationToken) =>

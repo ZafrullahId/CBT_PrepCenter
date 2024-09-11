@@ -1,6 +1,4 @@
-﻿using Application.Exceptions;
-using Infrastructure.Jwt.Exceptions;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -49,12 +47,11 @@ namespace Infrastructure.Jwt
                     context.HandleResponse();
                     if (!context.Response.HasStarted)
                     {
-                        throw new UnauthorizedException("Authentication Failed.");
+                        throw new UnauthorizedAccessException("You are not authorized to access this resource.");
                     }
 
                     return Task.CompletedTask;
                 },
-                OnForbidden = _ => throw new ForbiddenException("You are not authorized to access this resource."),
                 OnMessageReceived = context =>
                 {
                     var accessToken = context.Request.Headers.Authorization;

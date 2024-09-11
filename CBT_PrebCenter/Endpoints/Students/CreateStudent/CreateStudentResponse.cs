@@ -1,5 +1,4 @@
-﻿
-using CBT.APIs.Endpoints.Shared;
+﻿using CBT.APIs.Shared;
 
 namespace CBT.APIs.Endpoints.Students.CreateStudent
 {
@@ -8,6 +7,6 @@ namespace CBT.APIs.Endpoints.Students.CreateStudent
         string LastName,
         string Email,
         string Password,
-        BaseResponse BaseResponse);
+        BaseApiResponse BaseResponse);
    
 }

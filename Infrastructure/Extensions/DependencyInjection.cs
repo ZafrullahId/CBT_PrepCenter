@@ -14,7 +14,7 @@ using Microsoft.Extensions.Options;
 
 namespace Infrastructure.Extensions
 {
-    public static class ServiceCollectionExtension
+    public static class DependencyInjection
     {
         public static IServiceCollection AddJWTAuth(this IServiceCollection services, IConfiguration config)
         {

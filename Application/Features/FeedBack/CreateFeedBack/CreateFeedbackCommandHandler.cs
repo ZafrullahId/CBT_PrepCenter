@@ -11,7 +11,7 @@ namespace Application.Features.FeedBack.CreateFeedBack
         {
             var studentId = await _studentRepository.GetAsync(request.StudentId, cancellationToken);
 
-            var feed = new Feedback(request.StudentId, request.Comment);
+            var feed = Feedback.Create(request.StudentId, request.Comment);
 
             await _feedRepository.CreateAsync(feed, cancellationToken);
 

@@ -11,7 +11,7 @@ namespace Application.Features.FeedBack.GetFeedBack
         {
             var feedId = await _feedbackRepository.GetAsync(request.FeedbackId, cancellationToken);
 
-            if (feedId == null) { throw new NotFoundException(feedId.Id.ToString()); }
+            if (feedId == null) { throw new FeedbackNotFoundException(feedId.Id); }
 
             return new GetFeedbackQueryResponse(
                feedId.Comment,

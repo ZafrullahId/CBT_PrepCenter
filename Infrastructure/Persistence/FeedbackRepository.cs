@@ -21,6 +21,11 @@ namespace Infrastructure.Persistence
             return await cBTDbContext.Feedbacks.ToListAsync(cancellationToken);
         }
 
+        public async Task<IReadOnlyList<Feedback>> GetAllAsyncId(Guid StudentId, CancellationToken cancellationToken)
+        {
+            return await cBTDbContext.Feedbacks.Where(x => x.StudentId == StudentId).Include(x=>x.Students).ToListAsync(cancellationToken);
+        }
+
         public async Task<Feedback?> GetAsync(Guid feedbackId, CancellationToken cancellationToken)
         {
             return await cBTDbContext.Feedbacks.Where(x => x.Id == feedbackId).FirstOrDefaultAsync(cancellationToken);

@@ -1,4 +1,5 @@
 ﻿using Domain.Common;
+using Domain.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,16 @@ namespace Domain.Entity
     {
         public string Comment { get; set; } = default!;
         public Guid? StudentId { get; set; }
+        public Student Students { get; set; }
         public Feedback(Guid studentId, string comment)
         {
             StudentId = studentId;
             Comment = comment;
+        }
+        public static Feedback Create(Guid studentId, string comment)
+        {
+            var feedBack = new Feedback(studentId,comment);
+            return feedBack;
         }
     }
 }

@@ -11,5 +11,7 @@ namespace Application.Abstractions.Repositories
     {
         Task CreateAsync(Feedback feedback, CancellationToken cancellationToken);
         Task<IReadOnlyList<Feedback>> GetAllAsync(CancellationToken cancellationToken);
+        Task<Feedback?> GetAsync(Guid feedbackId, CancellationToken cancellationToken);
+        Task<IReadOnlyList<Feedback>> GetAllAsyncId(Guid StudentId, CancellationToken cancellationToken);
     }
 }

@@ -1,13 +1,8 @@
 ﻿namespace Application.Shared
 {
-    public class BaseResponse
+    public class BaseResponse(string message, bool success)
     {
-        public string Message { get; set; }
-        public bool Success { get; set; }
-        public BaseResponse(string message, bool success)
-        {
-            Message = message;
-            Success = success;
-        }
+        public string Message { get; set; } = message;
+        public bool Success { get; set; } = success;
     }
 }

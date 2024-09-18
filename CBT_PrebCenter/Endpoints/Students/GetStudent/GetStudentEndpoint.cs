@@ -1,5 +1,6 @@
 ﻿using Application.Abstractions;
 using Application.Features.Students.GetStudent;
+using CBT.APIs.Endpoints;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +21,7 @@ namespace CBT_PrepCenter.Endpoints.Students.GetStudent
                 var response = await mediator.Send(command, cancellationToken);
 
                 return mapper.Map<GetStudentResponse>(response);
-            });
+            }).WithTags(EndpointSchema.Student);
         }
     }
 }

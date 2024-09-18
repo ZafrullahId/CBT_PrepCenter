@@ -15,6 +15,7 @@ namespace Application.Features.Students.GetStudents
                 return new GetStudentsQueryResponse(
                     _mapper.Map<List<GetStudentQueryResponse>>(students.Select(x => x.User).ToList()),
                     new Shared.BaseResponse("Students Successfully Retrieved", true));
+
             return new GetStudentsQueryResponse([], new Shared.BaseResponse("No Student Yet", false));
         }
     }

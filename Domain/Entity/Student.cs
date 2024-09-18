@@ -11,17 +11,18 @@ namespace Domain.Entity
     {
         private readonly List<Feedback> _feedbacks = new();
         public Guid UserId { get; private set; }
-        public User User { get; private set; }
+        public User? User { get; private set; }
         public IReadOnlyCollection<Feedback> Feedbacks => _feedbacks;
-        public IEnumerable<CbtSession> Sessions { get; set; } = [];
+        public IEnumerable<CbtSession> Sessions { get; set; } = new List<CbtSession>();
 
-        private Student(User user)
+        private Student(Guid userId)
         {
-            UserId = user.Id;
+            UserId = userId;
         }
         public static Student Create(User user)
         {
-            var student = new Student(user);
+            var student = new Student(user.Id);
+            student.User = user;
             return student;
         }
         public Feedback AddFeedBack(Guid studentId, string comment)

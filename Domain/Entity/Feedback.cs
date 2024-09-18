@@ -12,7 +12,7 @@ namespace Domain.Entity
     {
         public string Comment { get; set; } = default!;
         public Guid? StudentId { get; set; }
-        public Student Students { get; set; }
+        public Student? Student { get; set; }
         public Feedback(Guid studentId, string comment)
         {
             StudentId = studentId;

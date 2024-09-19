@@ -42,7 +42,7 @@ namespace Application.Features.GoogleAuth
                 throw new NotFoundException($"{ex.Message}");
             }
             var dbUser = await _userRepository.GetAsync(u => u.Email == payload.Email, cancellationToken);
-            if (dbUser == null)
+            if (dbUser is null)
             {
                 var newUser = _mapper.Map<User>(payload);
                 var user = User.Create(

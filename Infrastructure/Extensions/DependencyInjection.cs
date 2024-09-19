@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Application.Abstractions;
+using Application.Abstractions.Repositories;
+using Infrastructure.Authentication;
 using Infrastructure.Jwt;
+using Infrastructure.Persistence;
 using Infrastructure.Persistence.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,5 +43,19 @@ namespace Infrastructure.Extensions
           IConfiguration configuration) =>
           services.AddDbContext<CBTDbContext>(opts =>
               opts.UseSqlServer(configuration.GetConnectionString("sqlConnection")));
+
+        public static IServiceCollection ConfigureInfrastructureLayer(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ITokenProvider, TokenProvider>();
+            services.AddScoped<IPasswordHasher, PasswordHasher>();
+            services.AddScoped<IStudentRepository, StudentRepository>();
+            services.AddScoped<ISessionRepository, SessionRepository>();
+            services.AddScoped<IFeedbackRepository, FeedbackRepository>();
+            services.AddScoped<IUnitOfWorkRepository, UnitOfWorkRepository>();
+            services.AddScoped<ISessionResultRepository, SessionResultRepository>();
+
+            return services;
+        }
     }
 }

@@ -16,12 +16,8 @@ namespace Domain.Entity
         public string Email { get; private set; }
         public string PasswordHash { get; private set; }
         public Role Role { get; private set; }
-        public User()
-        {
-            
-        }
 
-        private User(string firstName, string lastName, string email, string password, Role role)
+        private User(string firstName, string lastName, string email, string passwordHash, Role role)
         {
             if (string.IsNullOrEmpty(firstName))
             {
@@ -38,15 +34,15 @@ namespace Domain.Entity
                 throw new ArgumentException($"'{nameof(email)}' cannot be null or empty.", nameof(email));
             }
 
-            if (string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(passwordHash))
             {
-                throw new ArgumentException($"'{nameof(password)}' cannot be null or empty.", nameof(password));
+                throw new ArgumentException($"'{nameof(passwordHash)}' cannot be null or empty.", nameof(passwordHash));
             }
 
             FirstName = firstName;
             LastName = lastName;
             Email = email;
-            PasswordHash = password;
+            PasswordHash = passwordHash;
             Role = role;
         }
 

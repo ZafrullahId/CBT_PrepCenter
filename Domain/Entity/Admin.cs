@@ -10,7 +10,8 @@ namespace Domain.Entity
     public class Admin : AuditableEntity
     {
         public Guid UserId { get; private set; }
-        public Admin(Guid userId)
+        public User? User { get; private set; }
+        private Admin(Guid userId)
         {
             UserId = userId;
         }

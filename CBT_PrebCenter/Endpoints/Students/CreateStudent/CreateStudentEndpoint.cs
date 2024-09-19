@@ -20,7 +20,7 @@ namespace CBT.APIs.Endpoints.Students.CreateStudent
                 var response = await mediator.Send(command, cancellationToken);
 
                 return mapper.Map<CreateStudentResponse>(response);
-            });
+            }).WithTags(EndpointSchema.Student);
         }
     }
 }

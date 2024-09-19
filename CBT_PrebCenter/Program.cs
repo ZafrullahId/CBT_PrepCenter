@@ -1,7 +1,7 @@
 using CBT.APIs.Extensions;
 using CBT.APIs.Middlewares;
 using Infrastructure.Extensions;
-using System.Reflection;
+using Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,12 +10,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.ConfigureDbContext(builder.Configuration);
+builder.Services.ConfigureValidator();
 builder.Services.AddJWTAuth(builder.Configuration);
+builder.Services.ConfigureDbContext(builder.Configuration);
+builder.Services.ConfigureApplicationLayer(builder.Configuration);
+builder.Services.ConfigureInfrastructureLayer(builder.Configuration);
 builder.Services.ConfigureMapster();
 builder.Services.AddSwaggerGen();
 builder.Services.ConfigureCors();
-builder.Services.AddMediatR();
 builder.Services.AddEndpoints();
 builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();

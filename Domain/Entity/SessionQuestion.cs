@@ -10,7 +10,7 @@ namespace Domain.Entity
     public class SessionQuestion : AuditableEntity
     {
         private readonly List<Option> _options = new();
-        public SessionQuestion(Guid cbtSessionId, char chosenOption, char? correctOption, string question)
+        private SessionQuestion(Guid cbtSessionId, char chosenOption, char? correctOption, string question)
         {
             CbtSessionId = cbtSessionId;
             ChosenOption = chosenOption;
@@ -20,7 +20,7 @@ namespace Domain.Entity
         public Guid CbtSessionId { get; private set; }
         public char ChosenOption { get; private set; }
         public char? CorrectOption { get; private set; }
-        public CbtSession CbtSession { get; private set; }
+        public CbtSession? CbtSession { get; private set; }
         public string Question { get; private set; } = default!;
         public IReadOnlyCollection<Option> Options => _options;
         public static SessionQuestion Create(Guid cbtSessionId, char chosenOption, char? correctOption, string question)

@@ -3,7 +3,7 @@ using System.Reflection;
 using Application.Abstractions;
 using MapsterMapper;
 using Mapster;
-using Infrastructure.Persistence;
+using FluentValidation;
 
 namespace CBT.APIs.Extensions
 {
@@ -18,16 +18,6 @@ namespace CBT.APIs.Extensions
             services.AddSingleton(typeAdapterConfig);
             services.AddScoped<IMapper, ServiceMapper>();
 
-            return services;
-        }
-        public static IServiceCollection AddMediatR(this IServiceCollection services)
-        {
-            services.AddMediatR(cfg =>
-            {
-                cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
-                cfg.AddOpenBehavior(typeof(UnitOfWorkBehaviour<,>));
-
-            });
             return services;
         }
         public static IServiceCollection ConfigureCors(this IServiceCollection services)
@@ -71,6 +61,12 @@ namespace CBT.APIs.Extensions
             }
 
             return app;
+        }
+        public static IServiceCollection ConfigureValidator(this IServiceCollection services)
+        {
+            services.AddValidatorsFromAssemblies(Assemblies);
+
+            return services;
         }
     }
 }

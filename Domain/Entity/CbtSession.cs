@@ -12,14 +12,16 @@ namespace Domain.Entity
     {
         public double Score { get; private set; }
         public Guid StudentId { get; private set; }
+        public Student? Student { get; private set; }
         // In progress field
+        // public bool InProgress
         // Current question in progress
         public TimeSpan Duration { get; private set; }
         public int NumberOfQuestion { get; private set; }
         public int NumberOfWrongAnswers { get; private set; }
         public int NumberOfCorrectAnswers { get; private set; }
-        public SessionQuestion SessionQuestion { get; private set; }
-        public CbtSession(double score, TimeSpan duration, int numberOfQuestion, int numberOfWrongAnswers, int numberOfCorrectAnswers)
+        public SessionQuestion? SessionQuestion { get; private set; }
+        private CbtSession(double score, TimeSpan duration, int numberOfQuestion, int numberOfWrongAnswers, int numberOfCorrectAnswers)
         {
             Score = score;
             Duration = duration;

@@ -16,7 +16,7 @@ namespace CBT.APIs.Endpoints.GoogleAuth
                     IMediator mediator,
                     CancellationToken cancellationToken) =>
             {
-                var command = mapper.Map<GoogleLoginCommand>(request);
+                var command = mapper.Map<GoogleAuthCommand>(request);
                 var response = await mediator.Send(command, cancellationToken);
 
                 return mapper.Map< GoogleAuthResponseEndpoint> (response);

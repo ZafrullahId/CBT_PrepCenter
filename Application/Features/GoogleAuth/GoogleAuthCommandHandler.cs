@@ -10,7 +10,7 @@ using MediatR;
 
 namespace Application.Features.GoogleAuth
 {
-    public class GoogleLoginCommandHandler : IRequestHandler<GoogleLoginCommand, GoogleLoginResponse>
+    public class GoogleAuthCommandHandler : IRequestHandler<GoogleAuthCommand, GoogleAuthResponse>
     {
         private readonly IUserRepository _userRepository;
         private readonly ITokenProvider _tokenProvider;
@@ -19,7 +19,7 @@ namespace Application.Features.GoogleAuth
         private readonly IPasswordHasher _passwordHasher;
         private readonly IMapper _mapper;
 
-        public GoogleLoginCommandHandler(IUserRepository userRepository, ITokenProvider tokenProvider,
+        public GoogleAuthCommandHandler(IUserRepository userRepository, ITokenProvider tokenProvider,
            IStudentRepository studentRepository, IGoogleAuthService googleAuthService, IPasswordHasher passwordHasher, IMapper mapper)
         {
             _userRepository = userRepository;
@@ -30,7 +30,7 @@ namespace Application.Features.GoogleAuth
             _mapper = mapper;
         }
 
-        public async Task<GoogleLoginResponse> Handle(GoogleLoginCommand request, CancellationToken cancellationToken)
+        public async Task<GoogleAuthResponse> Handle(GoogleAuthCommand request, CancellationToken cancellationToken)
         {
             GoogleJsonWebSignature.Payload payload;
             try
@@ -39,7 +39,7 @@ namespace Application.Features.GoogleAuth
             }
             catch (InvalidJwtException ex)
             {
-                return new GoogleLoginResponse(ex.Message, "", new BaseResponse("Invalid Google token.", false));
+                throw new NotFoundException($"{ex.Message}");
             }
             var dbUser = await _userRepository.GetAsync(u => u.Email == payload.Email, cancellationToken);
             if (dbUser == null)
@@ -58,7 +58,7 @@ namespace Application.Features.GoogleAuth
 
                 var (Token, RefreshToken) = _tokenProvider.Create(user);
 
-                return new GoogleLoginResponse(
+                return new GoogleAuthResponse(
                 Token,
                 RefreshToken,
                 new BaseResponse(
@@ -68,7 +68,7 @@ namespace Application.Features.GoogleAuth
 
             var (Tokendb, RefreshTokendb) = _tokenProvider.Create(dbUser);
 
-            return new GoogleLoginResponse(
+            return new GoogleAuthResponse(
                 Tokendb,
                  RefreshTokendb,
                 new BaseResponse(

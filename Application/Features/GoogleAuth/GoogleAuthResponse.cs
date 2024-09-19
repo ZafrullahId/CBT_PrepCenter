@@ -1,13 +1,8 @@
 ﻿using Application.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Features.GoogleAuth
 {
-    public record GoogleLoginResponse(
+    public record GoogleAuthResponse(
         string Token, 
         string RefreshToken,
         BaseResponse BaseResponse);

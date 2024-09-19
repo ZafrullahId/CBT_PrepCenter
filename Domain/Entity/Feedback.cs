@@ -9,10 +9,10 @@ namespace Domain.Entity
 {
     public class Feedback : AuditableEntity
     {
-        public string Comment { get; set; } = default!;
-        public Guid StudentId { get; set; }
+        public string Comment { get; internal set; } = default!;
+        public Guid StudentId { get; internal set; }
         public Student? Student { get; set; }
-        public Feedback(Guid studentId, string comment)
+        internal Feedback(Guid studentId, string comment)
         {
             StudentId = studentId;
             Comment = comment;

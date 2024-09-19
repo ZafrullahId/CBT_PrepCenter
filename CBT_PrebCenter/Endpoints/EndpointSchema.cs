@@ -4,5 +4,6 @@
     {
         public const string Student = "Students";
         public const string Auth = "Tokens";
+        public const string Question = "Questions";
     }
 }

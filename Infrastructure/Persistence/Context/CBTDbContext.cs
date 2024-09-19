@@ -30,7 +30,9 @@ namespace Infrastructure.Persistence.Context
         public DbSet<Student> Students { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<CbtSession> CbtSessions { get; set; }
-        public DbSet<SessionQuestion> SessionResults { get; set; }
+        public DbSet<FreeOption> FreeOptions { get; set; }
+        public DbSet<FreeQuestion> FreeQuestions { get; set; }
+        public DbSet<SessionQuestion> SessionQuestions { get; set; }
 
         
     }

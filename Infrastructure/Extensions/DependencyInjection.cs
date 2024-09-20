@@ -46,14 +46,15 @@ namespace Infrastructure.Extensions
 
         public static IServiceCollection ConfigureInfrastructureLayer(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ITokenProvider, TokenProvider>();
             services.AddScoped<IPasswordHasher, PasswordHasher>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IStudentRepository, StudentRepository>();
-            services.AddScoped<ISessionRepository, SessionRepository>();
             services.AddScoped<IFeedbackRepository, FeedbackRepository>();
             services.AddScoped<IUnitOfWorkRepository, UnitOfWorkRepository>();
-            services.AddScoped<ISessionResultRepository, SessionResultRepository>();
+            services.AddScoped<ICbtSessionRepository, CbtSessionRepository>();
+            services.AddScoped<IFreeQuestionRepository, FreeQuestionRepository>();
+            services.AddScoped<ISessionQuestionRepository, SessionQuestionRepository>();
 
             return services;
         }

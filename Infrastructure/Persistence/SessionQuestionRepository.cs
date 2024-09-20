@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Persistence
 {
-    public class SessionResultRepository(CBTDbContext context)  :  ISessionResultRepository
+    public class SessionQuestionRepository(CBTDbContext context)  :  ISessionQuestionRepository
     {
         public async Task CreateAsync(SessionQuestion result, CancellationToken cancellationToken)
         {
-            await context.SessionResults.AddAsync(result, cancellationToken);
+            await context.SessionQuestions.AddAsync(result, cancellationToken);
         }
         public async Task<IReadOnlyList<SessionQuestion>> GetAsync(Guid sessionId, CancellationToken cancellationToken)
         {
-            return await context.SessionResults.Where(x => x.CbtSessionId == sessionId).ToListAsync(cancellationToken);
+            return await context.SessionQuestions.Where(x => x.CbtSessionId == sessionId).ToListAsync(cancellationToken);
         }
     }
 }

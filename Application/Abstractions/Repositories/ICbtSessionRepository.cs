@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Application.Abstractions.Repositories
 {
-    public interface ISessionRepository
+    public interface ICbtSessionRepository
     {
         Task CreateAsync(CbtSession cbtSession, CancellationToken cancellationToken);
         Task<IReadOnlyList<CbtSession>> GetAllAsync(Guid studentId, CancellationToken cancellationToken);

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Persistence
 {
-    public class SessionRepository(CBTDbContext context) : ISessionRepository
+    public class CbtSessionRepository(CBTDbContext context) : ICbtSessionRepository
     {
         public async Task CreateAsync(CbtSession cbtSession, CancellationToken cancellationToken)
         {

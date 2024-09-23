@@ -1,5 +1,6 @@
 ﻿using Application.Abstractions;
 using Application.Features.Students.CreateStudent;
+using CBT.APIs.Filters;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +21,8 @@ namespace CBT.APIs.Endpoints.Students.CreateStudent
                 var response = await mediator.Send(command, cancellationToken);
 
                 return mapper.Map<CreateStudentResponse>(response);
-            }).WithTags(EndpointSchema.Student);
+            }).Validator< CreateStudentRequest>()
+            .WithTags(EndpointSchema.Student);
         }
     }
 }

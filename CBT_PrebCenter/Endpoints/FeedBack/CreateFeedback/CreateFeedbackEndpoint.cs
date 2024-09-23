@@ -1,5 +1,6 @@
 ﻿using Application.Abstractions;
 using Application.Features.FeedBack.CreateFeedBack;
+using CBT.APIs.Filters;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +21,8 @@ namespace CBT.APIs.Endpoints.FeedBack.CreateFeedback
                 var response = await mediator.Send(command, cancellationToken);
 
                 return mapper.Map<CreateFeedbackResponse>(response);
-            });
+            }).Validator<CreateFeedbackRequest>()
+            .WithTags(EndpointSchema.Feedback);
         }
     }
 }

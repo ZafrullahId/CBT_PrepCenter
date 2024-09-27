@@ -3,6 +3,7 @@ using CBT.APIs.Middlewares;
 using Infrastructure.Extensions;
 using Application;
 using Application.Handlers;
+using Infrastructure.BackgroundJob;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,7 @@ builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 builder.Services.AddTransient<AuthenticationDelegatingHandler>();
+builder.Services.AddHostedService<QuestionBackgroundService>();
 
 var app = builder.Build();
 

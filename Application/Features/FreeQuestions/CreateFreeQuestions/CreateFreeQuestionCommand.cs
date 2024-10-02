@@ -1,8 +1,7 @@
-﻿using Application.Features.Students.CreateStudent;
-using MediatR;
+﻿using MediatR;
 using Newtonsoft.Json;
 
-namespace Application.Features.FreeQuestions.CreateFreeQuestions
+namespace CBTPreparation.Application.Features.FreeQuestions.CreateFreeQuestions
 {
     public class CreateFreeQuestionDataCommandRequest
     {

@@ -1,6 +1,6 @@
-﻿﻿using System;
+﻿using System;
 
-namespace Domain.Common
+namespace CBTPreparation.BuildingBlocks.Domain
 {
     public interface IAuditableEntity
     {

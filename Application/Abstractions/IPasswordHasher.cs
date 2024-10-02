@@ -1,4 +1,4 @@
-﻿namespace Application.Abstractions
+﻿namespace CBTPreparation.Application.Abstractions
 {
     public interface IPasswordHasher
     {

@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
 using Microsoft.IdentityModel.JsonWebTokens;
 
-namespace Infrastructure.Authentication;
+namespace CBTPreparation.Infrastructure.Authentication;
 
 internal static class ClaimsPrincipalExtensions
 {

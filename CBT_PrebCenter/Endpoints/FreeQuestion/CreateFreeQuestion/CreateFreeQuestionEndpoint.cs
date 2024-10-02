@@ -1,12 +1,10 @@
-﻿using Application.Abstractions;
-using Application.Features.FreeQuestions.CreateFreeQuestions;
-using Application.Features.Students.CreateStudent;
-using CBT.APIs.Endpoints.Students.CreateStudent;
+﻿using CBTPreparation.Application.Features.FreeQuestions.CreateFreeQuestions;
+using CBTPreparation_Application.Abstractions;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CBT.APIs.Endpoints.FreeQuestion.CreateFreeQuestion
+namespace CBTPreparation.APIs.Endpoints.FreeQuestion.CreateFreeQuestion
 {
     public class CreateFreeQuestionEndpoint : IEndpoint
     {

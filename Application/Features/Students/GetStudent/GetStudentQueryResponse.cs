@@ -1,6 +1,6 @@
-﻿using Application.Shared;
+﻿using CBTPreparation.Application.Shared;
 
-namespace Application.Features.Students.GetStudent
+namespace CBTPreparation.Application.Features.Students.GetStudent
 {
     public record GetStudentQueryResponse(
     string FirstName,

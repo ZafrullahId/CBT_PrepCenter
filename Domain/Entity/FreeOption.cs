@@ -1,24 +1,22 @@
-﻿using Domain.Common;
+﻿using CBTPreparation.BuildingBlocks.Domain;
+using CBTPreparation.Domain.Entity;
 
 namespace Domain.Entity
 {
     public class FreeOption : Option
     {
-        public Guid FreeQuestionId { get; set; }
-        public FreeQuestion? FreeQuestion { get; set; }
-
-        internal FreeOption(Guid freeQuestionId,
-                            string optionContent,
+        internal FreeOption(string optionContent,
                             char optionAlpha,
                             bool isCorrect,
                             string? imageUrl = null) : base(optionContent, optionAlpha, isCorrect, imageUrl)
         {
-            FreeQuestionId = freeQuestionId;
-            OptionContent = optionContent;
-            OptionAlpha = optionAlpha;
-            IsCorrect = isCorrect;
-            ImageUrl = imageUrl;
         }
 
+        public override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return OptionContent;
+            yield return OptionAlpha;
+            yield return IsCorrect;
+        }
     }
 }

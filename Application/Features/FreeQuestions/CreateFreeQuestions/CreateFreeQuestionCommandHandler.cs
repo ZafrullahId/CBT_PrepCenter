@@ -1,11 +1,11 @@
-﻿using Application.Abstractions.Repositories;
-using Application.Abstractions.Service;
-using Application.Shared;
+﻿using CBTPreparation.Application.Abstractions.Repositories;
+using CBTPreparation.Application.Abstractions.Service;
+using CBTPreparation.Application.Shared;
 using Domain.Entity;
 using MapsterMapper;
 using MediatR;
 
-namespace Application.Features.FreeQuestions.CreateFreeQuestions
+namespace CBTPreparation.Application.Features.FreeQuestions.CreateFreeQuestions
 {
     public class CreateFreeQuestionCommandHandler(IGetApiQuestionService _apiQuestionService, IFreeQuestionRepository _freeQuestionRepository, IMapper _mapper) : IRequestHandler<CreateFreeQuestionCommand, CreateFreeQuestionCommandResponse>
     {

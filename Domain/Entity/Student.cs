@@ -1,4 +1,5 @@
-﻿using Domain.Common;
+﻿using Blogger.BuildingBlocks.Domain;
+using CBTPreparation.Domain.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,27 +8,43 @@ using System.Threading.Tasks;
 
 namespace Domain.Entity
 {
-    public class Student : AuditableEntity
+    public class Student : Entity<StudentId>
     {
         private readonly List<Feedback> _feedbacks = new();
-        public Guid UserId { get; private set; }
-        public User? User { get; private set; }
+        private readonly List<Course> _courses = new();
+        public int UnusedTrials { get; init; }
+        public Department? Department { get; private set; }
+        public IReadOnlyCollection<Course> Courses => _courses;
         public IReadOnlyCollection<Feedback> Feedbacks => _feedbacks;
-        public IEnumerable<CbtSession> Sessions { get; set; } = new List<CbtSession>();
 
-        private Student(Guid userId)
+        private Student(StudentId studentId, int unusedTrials = 3) : base(studentId)
         {
-            UserId = userId;
+            UnusedTrials = unusedTrials;
         }
-        public static Student Create(User user)
+        public static Student Create()
         {
-            var student = new Student(user.Id);
-            student.User = user;
+            var student = new Student(StudentId.CreateUniqueId());
             return student;
         }
-        public Feedback AddFeedBack(Guid studentId, string comment)
+        public void Update(string departmentName, IReadOnlyList<Course> courses)
         {
-            var feedBack = new Feedback(studentId, comment);
+            ArgumentOutOfRangeException.ThrowIfZero(courses.Count);
+            ArgumentOutOfRangeException.ThrowIfGreaterThan(courses.Count, Constant.MaximumNumberOfCouse);
+            Department = Department.Assign(departmentName);
+            AddCourses(courses);
+
+        }
+        public void AddCourses(IReadOnlyCollection<Course> courses)
+        {
+            _courses.Clear();
+
+            _courses.AddRange(courses);
+        }
+        public Feedback AddFeedBack(string comment)
+        {
+            var feedBack = new Feedback(FeedbackId.CreateUniqueId(),
+                                        Id,
+                                        comment);
             _feedbacks.Add(feedBack);
             return feedBack;
         }

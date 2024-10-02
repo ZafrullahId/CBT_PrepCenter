@@ -1,43 +1,28 @@
-﻿using Domain.Common;
-using Domain.Enum;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Blogger.BuildingBlocks.Domain;
+using CBTPreparation.Domain.Entity;
+using System.ComponentModel.Design;
 
 namespace Domain.Entity
 {
-    public class User : AuditableEntity
+    public class User : Entity<UserId>
     {
         public string FirstName { get; private set; }
-        public string LastName { get; private set;}
+        public string LastName { get; private set; }
         public string Email { get; private set; }
         public string PasswordHash { get; private set; }
         public Role Role { get; private set; }
 
-        private User(string firstName, string lastName, string email, string passwordHash, Role role)
+        private User(UserId id,
+                     string firstName,
+                     string lastName,
+                     string email,
+                     string passwordHash,
+                     Role role) : base(id)
         {
-            if (string.IsNullOrEmpty(firstName))
-            {
-                throw new ArgumentException($"'{nameof(firstName)}' cannot be null or empty.", nameof(firstName));
-            }
-
-            if (string.IsNullOrEmpty(lastName))
-            {
-                throw new ArgumentException($"'{nameof(lastName)}' cannot be null or empty.", nameof(lastName));
-            }
-
-            if (string.IsNullOrEmpty(email))
-            {
-                throw new ArgumentException($"'{nameof(email)}' cannot be null or empty.", nameof(email));
-            }
-
-            if (string.IsNullOrEmpty(passwordHash))
-            {
-                throw new ArgumentException($"'{nameof(passwordHash)}' cannot be null or empty.", nameof(passwordHash));
-            }
+            ArgumentException.ThrowIfNullOrWhiteSpace(firstName);
+            ArgumentException.ThrowIfNullOrWhiteSpace(lastName);
+            ArgumentException.ThrowIfNullOrWhiteSpace(email);
+            ArgumentException.ThrowIfNullOrWhiteSpace(passwordHash);
 
             FirstName = firstName;
             LastName = lastName;
@@ -46,9 +31,14 @@ namespace Domain.Entity
             Role = role;
         }
 
-        public static User Create(string firstName, string lastName, string email, string password, Role role)
+        public static User Create(string firstName, string lastName, string email, string password, string role)
         {
-            var user = new User(firstName, lastName, email, password, role);
+            var user = new User(UserId.CreateUniqueId(),
+                                firstName,
+                                lastName,
+                                email,
+                                password,
+                                Role.Assign(role));
             return user;
         }
     }

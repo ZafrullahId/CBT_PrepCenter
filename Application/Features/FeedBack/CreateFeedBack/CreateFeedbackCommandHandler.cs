@@ -1,9 +1,9 @@
-﻿using Application.Abstractions.Repositories;
-using Application.Shared;
+﻿using CBTPreparation.Application.Abstractions.Repositories;
+using CBTPreparation.Application.Shared;
 using Domain.Entity;
 using MediatR;
 
-namespace Application.Features.FeedBack.CreateFeedBack
+namespace CBTPreparation.Application.Features.FeedBack.CreateFeedBack
 {
     public class CreateFeedbackCommandHandler(IStudentRepository _studentRepository, IFeedbackRepository _feedRepository, IUnitOfWorkRepository _unitOfWorkRepository) : IRequestHandler<CreateFeedbackCommand, CreateFeedbackCommandResponse>
     {
@@ -18,7 +18,7 @@ namespace Application.Features.FeedBack.CreateFeedBack
             await _unitOfWorkRepository.SaveChangesAsync(cancellationToken);
 
             return new CreateFeedbackCommandResponse(
-                feed.StudentId.GetValueOrDefault(),
+                feed.StudentId,
                 feed.Comment,
                 new BaseResponse(
                 "FeedBack Successfully Created",

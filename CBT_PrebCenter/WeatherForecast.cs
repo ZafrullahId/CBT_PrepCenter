@@ -1,4 +1,4 @@
-namespace CBT.APIs
+namespace CBTPreparation.APIs
 {
     public class WeatherForecast
     {

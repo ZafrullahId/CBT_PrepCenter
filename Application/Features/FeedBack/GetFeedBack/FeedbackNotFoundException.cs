@@ -1,7 +1,7 @@
 ﻿using System.Net;
-using Domain.Exceptions;
+using CBTPreparation.BuildingBlocks.Domain.Exceptions;
 
-namespace Application.Features.FeedBack.GetFeedBack
+namespace CBTPreparation.Application.Features.FeedBack.GetFeedBack
 {
     internal class FeedbackNotFoundException(Guid feedbackId, HttpStatusCode statusCode = HttpStatusCode.BadRequest)
         : DomainException(string.Format(_messages, feedbackId), statusCode)

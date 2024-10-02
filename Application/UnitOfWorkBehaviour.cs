@@ -1,7 +1,7 @@
-﻿using Application.Abstractions.Repositories;
+﻿using CBTPreparation.Application.Abstractions.Repositories;
 using MediatR;
 
-namespace Infrastructure.Persistence
+namespace CBTPreparation_Infrastructure.Persistence
 {
     public sealed class UnitOfWorkBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
     {

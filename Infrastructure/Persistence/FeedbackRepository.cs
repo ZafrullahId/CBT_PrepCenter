@@ -1,14 +1,9 @@
-﻿using Application.Abstractions.Repositories;
+﻿using CBTPreparation.Application.Abstractions.Repositories;
+using CBTPreparation.Infrastructure.Persistence.Context;
 using Domain.Entity;
-using Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Infrastructure.Persistence
+namespace CBTPreparation.Infrastructure.Persistence
 {
     public class FeedbackRepository(CBTDbContext cBTDbContext) : IFeedbackRepository
     {
@@ -23,7 +18,7 @@ namespace Infrastructure.Persistence
 
         public async Task<IReadOnlyList<Feedback>> GetAllAsyncId(Guid StudentId, CancellationToken cancellationToken)
         {
-            return await cBTDbContext.Feedbacks.Where(x => x.StudentId == StudentId).Include(x=>x.Students).ToListAsync(cancellationToken);
+            return await cBTDbContext.Feedbacks.Where(x => x.StudentId == StudentId).Include(x => x.Student).ToListAsync(cancellationToken);
         }
 
         public async Task<Feedback?> GetAsync(Guid feedbackId, CancellationToken cancellationToken)

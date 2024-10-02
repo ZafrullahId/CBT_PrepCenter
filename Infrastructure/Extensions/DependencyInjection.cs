@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Application.Abstractions;
-using Application.Abstractions.Repositories;
-using Infrastructure.Authentication;
-using Infrastructure.Jwt;
-using Infrastructure.Persistence;
-using Infrastructure.Persistence.Context;
+﻿using CBTPreparation.Application.Abstractions;
+using CBTPreparation.Application.Abstractions.Repositories;
+using CBTPreparation.Infrastructure.Authentication;
+using CBTPreparation.Infrastructure.Jwt;
+using CBTPreparation.Infrastructure.Persistence;
+using CBTPreparation.Infrastructure.Persistence.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
 
-namespace Infrastructure.Extensions
+namespace CBTPreparation_Infrastructure.Extensions
 {
     public static class DependencyInjection
     {

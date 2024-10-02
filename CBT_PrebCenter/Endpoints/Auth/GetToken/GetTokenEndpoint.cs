@@ -1,12 +1,11 @@
-﻿using Application.Abstractions;
-using Application.Features.Auth.GetAuth;
-using CBT.APIs.Filters;
-using CBT_PrepCenter.Endpoints.Students.GetStudent;
+﻿using CBTPreparation_Application.Abstractions;
+using CBTPreparation.APIs.Filters;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using CBTPreparation.Application.Features.Auth.GetAuth;
 
-namespace CBT.APIs.Endpoints.Auth.GetToken
+namespace CBTPreparation.APIs.Endpoints.Auth.GetRefreshToken
 {
     public class GetTokenEndpoint : IEndpoint
     {

@@ -1,9 +1,9 @@
-﻿using Application.Shared;
+﻿using CBTPreparation.APIs.Shared;
 
-namespace CBT.APIs.Endpoints.GoogleAuth
+namespace CBTPreparation.APIs.Endpoints.GoogleAuth
 {
     public record GoogleAuthResponseEndpoint(
         string Token,
         string RefreshToken,
-        BaseResponse BaseResponse);
+        BaseApiResponse BaseResponse);
 }

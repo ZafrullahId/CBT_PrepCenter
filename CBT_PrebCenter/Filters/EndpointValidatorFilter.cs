@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using System.Net;
 
-namespace CBT.APIs.Filters;
+namespace CBTPreparation.APIs.Filters;
 
 public class EndpointValidatorFilter<T> : IEndpointFilter
 {

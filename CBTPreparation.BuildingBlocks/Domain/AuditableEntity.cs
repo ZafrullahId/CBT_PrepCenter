@@ -1,10 +1,9 @@
-﻿using System;
-namespace Domain.Common
+﻿namespace CBTPreparation.BuildingBlocks.Domain
 {
-    public class AuditableEntity : BaseEntity, IAuditableEntity, ISoftDelete
+    public class AuditableEntity : IAuditableEntity, ISoftDelete
     {
         public Guid CreatedBy { get; set; }
-        public DateTime CreatedOn { get; private set; }
+        public DateTime CreatedOn { get; private set; } = DateTime.UtcNow;
         public Guid LastModifiedBy { get; set; }
         public DateTime? LastModifiedOn { get; set; }
         public DateTime? DeletedOn { get; set; }

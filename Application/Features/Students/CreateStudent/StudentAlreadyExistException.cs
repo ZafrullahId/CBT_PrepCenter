@@ -1,7 +1,7 @@
-﻿using Domain.Exceptions;
+﻿using CBTPreparation.BuildingBlocks.Domain.Exceptions;
 using System.Net;
 
-namespace Application.Features.Students.CreateStudent
+namespace CBTPreparation.Application.Features.Students.CreateStudent
 {
     public sealed class StudentAlreadyExistException(string email, HttpStatusCode statusCode = HttpStatusCode.BadRequest) 
         : DomainException(string.Format(_messages, email), statusCode)

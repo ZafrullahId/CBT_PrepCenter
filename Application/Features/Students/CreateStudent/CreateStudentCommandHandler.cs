@@ -1,11 +1,11 @@
-﻿using Application.Abstractions;
-using Application.Abstractions.Repositories;
-using Application.Shared;
+﻿using CBTPreparation.Application.Abstractions;
+using CBTPreparation.Application.Abstractions.Repositories;
+using CBTPreparation.Application.Shared;
 using Domain.Entity;
 using Domain.Enum;
 using MediatR;
 
-namespace Application.Features.Students.CreateStudent
+namespace CBTPreparation.Application.Features.Students.CreateStudent
 {
     public class CreateStudentCommandHandler(IStudentRepository _studentRepository, IUserRepository _userRepository, IPasswordHasher _passwordHasher) : IRequestHandler<CreateStudentCommand, CreateStudentCommandResponse>
     {

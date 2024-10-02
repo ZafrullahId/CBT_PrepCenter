@@ -1,4 +1,4 @@
-﻿namespace Application.Abstractions
+﻿namespace CBTPreparation_Application.Abstractions
 {
     internal interface IEndpoint
     {

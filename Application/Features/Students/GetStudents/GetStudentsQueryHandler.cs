@@ -1,9 +1,9 @@
-﻿using Application.Abstractions.Repositories;
-using Application.Features.Students.GetStudent;
+﻿using CBTPreparation.Application.Abstractions.Repositories;
+using CBTPreparation.Application.Features.Students.GetStudent;
 using MapsterMapper;
 using MediatR;
 
-namespace Application.Features.Students.GetStudents
+namespace CBTPreparation.Application.Features.Students.GetStudents
 {
     public class GetStudentsQueryHandler(IStudentRepository _studentRepository, IMapper _mapper) : IRequestHandler<GetStudentsQuery, GetStudentsQueryResponse>
     {

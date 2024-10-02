@@ -1,13 +1,13 @@
 ﻿using System.Security.Claims;
 using System.Text;
 using Domain.Entity;
-using Infrastructure.Jwt;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
-using Application.Abstractions;
+using CBTPreparation.Application.Abstractions;
+using CBTPreparation.Infrastructure.Jwt;
 
-namespace Infrastructure.Authentication;
+namespace CBTPreparation.Infrastructure.Authentication;
 
 internal sealed class TokenProvider(IOptions<JwtSettings> jwtSettings) : ITokenProvider
 {

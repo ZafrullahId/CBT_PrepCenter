@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Domain.Common
+namespace CBTPreparation.BuildingBlocks.Domain
 {
     public abstract class BaseEntity
     {

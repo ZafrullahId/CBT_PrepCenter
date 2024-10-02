@@ -1,15 +1,10 @@
-﻿using Application.Abstractions.Repositories;
+﻿using CBTPreparation.Application.Abstractions.Repositories;
+using CBTPreparation.Infrastructure.Persistence.Context;
 using Domain.Entity;
-using Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Infrastructure.Persistence
+namespace CBTPreparation.Infrastructure.Persistence
 {
     public class UserRepository(CBTDbContext context) : IUserRepository
     {

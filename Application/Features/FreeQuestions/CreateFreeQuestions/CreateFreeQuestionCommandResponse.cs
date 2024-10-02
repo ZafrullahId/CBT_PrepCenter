@@ -1,6 +1,6 @@
-﻿using Application.Shared;
+﻿using CBTPreparation.Application.Shared;
 
-namespace Application.Features.FreeQuestions.CreateFreeQuestions
+namespace CBTPreparation.Application.Features.FreeQuestions.CreateFreeQuestions
 {
     public record CreateFreeQuestionCommandResponse(List<CreateFreeQuestionDataCommandResponse> FreeQuestionDataCommandResponses, BaseResponse BaseResponse);
     public record CreateFreeQuestionDataCommandResponse(Guid QuestionId,

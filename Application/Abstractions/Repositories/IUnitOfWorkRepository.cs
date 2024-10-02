@@ -1,4 +1,4 @@
-﻿namespace Application.Abstractions.Repositories
+﻿namespace CBTPreparation.Application.Abstractions.Repositories
 {
     public interface IUnitOfWorkRepository
     {

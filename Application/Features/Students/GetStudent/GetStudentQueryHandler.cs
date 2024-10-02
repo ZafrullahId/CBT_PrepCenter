@@ -1,8 +1,8 @@
-﻿using Application.Abstractions.Repositories;
-using Application.Shared;
+﻿using CBTPreparation.Application.Abstractions.Repositories;
+using CBTPreparation.Application.Shared;
 using MediatR;
 
-namespace Application.Features.Students.GetStudent
+namespace CBTPreparation.Application.Features.Students.GetStudent
 {
     public class GetStudentQueryHandler(IStudentRepository _studentRepository) : IRequestHandler<GetStudentQuery, GetStudentQueryResponse>
     {
@@ -17,7 +17,7 @@ namespace Application.Features.Students.GetStudent
                student.User.LastName,
                student.User.Email,
                 new BaseResponse(
-                "Student Retrived Successfully",
+                "Student Retrieved Successfully",
                 true));
         }
     }

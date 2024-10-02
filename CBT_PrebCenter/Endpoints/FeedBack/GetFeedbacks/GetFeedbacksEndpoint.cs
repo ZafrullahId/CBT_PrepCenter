@@ -1,10 +1,9 @@
-﻿using Application.Abstractions;
-using Application.Features.FeedBack.GetsFeedBack;
-using CBT_PrepCenter.Endpoints.Students.GetStudents;
+﻿using CBTPreparation.Application.Features.FeedBack.GetsFeedBack;
+using CBTPreparation_Application.Abstractions;
 using MapsterMapper;
 using MediatR;
 
-namespace CBT.APIs.Endpoints.FeedBack.GetFeedbacks
+namespace CBTPreparation.APIs.Endpoints.FeedBack.GetFeedbacks
 {
     public class GetFeedbacksEndpoint : IEndpoint
     {

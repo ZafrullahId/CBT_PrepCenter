@@ -1,4 +1,4 @@
-﻿namespace Application.Shared
+﻿namespace CBTPreparation.Application.Shared
 {
     public class BaseResponse(string message, bool success)
     {

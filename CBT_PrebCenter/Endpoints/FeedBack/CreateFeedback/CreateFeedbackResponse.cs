@@ -1,4 +1,6 @@
-﻿namespace CBT.APIs.Endpoints.FeedBack.CreateFeedback
+﻿using CBTPreparation.APIs.Shared;
+
+namespace CBTPreparation.APIs.Endpoints.FeedBack.CreateFeedback
 {
-    public record CreateFeedbackResponse(string Comment);
+    public record CreateFeedbackResponse(string Comment, BaseApiResponse BaseApiResponse);
 }

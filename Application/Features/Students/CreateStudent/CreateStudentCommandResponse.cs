@@ -1,6 +1,6 @@
-﻿using Application.Shared;
+﻿using CBTPreparation.Application.Shared;
 
-namespace Application.Features.Students.CreateStudent
+namespace CBTPreparation.Application.Features.Students.CreateStudent
 {
     public record CreateStudentCommandResponse(
         Guid StudentId,

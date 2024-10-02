@@ -1,11 +1,12 @@
-﻿using Application.Abstractions;
-using Application.Features.Auth.GetAuth;
-using CBT.APIs.Filters;
+﻿using CBTPreparation_Application.Abstractions;
+using CBTPreparation.APIs.Filters;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using CBTPreparation.Application.Features.Auth.GetAuth;
+using CBTPreparation.APIs.Endpoints.Auth.GetRefreshToken;
 
-namespace CBT.APIs.Endpoints.Auth.GetToken
+namespace CBTPreparation.APIs.Endpoints.Auth.UpdateToken
 {
     public class GetRefreshTokenEndpoint : IEndpoint
     {

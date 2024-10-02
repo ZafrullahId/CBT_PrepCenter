@@ -1,7 +1,7 @@
-﻿using Application.Features.FreeQuestions.CreateFreeQuestions;
+﻿using CBTPreparation.Application.Features.FreeQuestions.CreateFreeQuestions;
 using Refit;
 
-namespace Application.Abstractions.Service
+namespace CBTPreparation.Application.Abstractions.Service
 {
     public interface IGetApiQuestionService
     {

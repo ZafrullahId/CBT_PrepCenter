@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Application.Features.FeedBack.GetsFeedBack
+namespace CBTPreparation.Application.Features.FeedBack.GetsFeedBack
 {
     public record GetFeedbacksQuery : IRequest<List<GetFeedbacksQueryResponse>>;
 }

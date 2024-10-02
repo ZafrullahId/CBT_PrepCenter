@@ -1,4 +1,4 @@
-﻿using CBT.APIs.Shared;
+﻿using CBTPreparation.APIs.Shared;
 
 namespace CBT_PrepCenter.Endpoints.Students.GetStudent
 {

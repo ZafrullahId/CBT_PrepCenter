@@ -1,8 +1,9 @@
-﻿using Application.Abstractions.Repositories;
+﻿using CBTPreparation.Application.Abstractions.Repositories;
+using CBTPreparation.Application.Shared;
 using MapsterMapper;
 using MediatR;
 
-namespace Application.Features.FeedBack.GetFeedBacksId
+namespace CBTPreparation.Application.Features.FeedBack.GetFeedBacksId
 {
     public class GetFeedbacksQueryHandler : IRequestHandler<GetFeedbacksIdQuery, List<GetFeedbacksIdQueryResponse>>
     {
@@ -27,7 +28,7 @@ namespace Application.Features.FeedBack.GetFeedBacksId
 
             return new List<GetFeedbacksIdQueryResponse>
             {
-                new GetFeedbacksIdQueryResponse(string.Empty, new Shared.BaseResponse("No Student Feedback Yet", false))
+                new GetFeedbacksIdQueryResponse(string.Empty, new BaseResponse("No Student Feedback Yet", false))
             };
         }
     }

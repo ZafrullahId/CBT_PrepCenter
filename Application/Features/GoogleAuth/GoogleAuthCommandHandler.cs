@@ -1,6 +1,6 @@
-﻿using Application.Abstractions;
-using Application.Abstractions.Repositories;
-using Application.Shared;
+﻿using CBTPreparation.Application.Abstractions;
+using CBTPreparation.Application.Abstractions.Repositories;
+using CBTPreparation.Application.Shared;
 using Domain.Entity;
 using Domain.Enum;
 using Google.Apis.Auth;
@@ -8,7 +8,7 @@ using MapsterMapper;
 using MediatR;
 
 
-namespace Application.Features.GoogleAuth
+namespace CBTPreparation.Application.Features.GoogleAuth
 {
     public class GoogleAuthCommandHandler : IRequestHandler<GoogleAuthCommand, GoogleAuthResponse>
     {
@@ -39,7 +39,7 @@ namespace Application.Features.GoogleAuth
             }
             catch (InvalidJwtException ex)
             {
-                throw new NotFoundException($"{ex.Message}");
+                throw new GoogleTokenIdNotFoundException($"{ex.Message}");
             }
             var dbUser = await _userRepository.GetAsync(u => u.Email == payload.Email, cancellationToken);
             if (dbUser is null)

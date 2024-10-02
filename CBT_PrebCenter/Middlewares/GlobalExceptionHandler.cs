@@ -1,18 +1,18 @@
-﻿using Domain.Exceptions;
+﻿using CBTPreparation.BuildingBlocks.Domain.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CBT.APIs.Middlewares
+namespace CBTPreparation.APIs.Middlewares
 {
     public sealed class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger) : IExceptionHandler
     {
         public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
         {
+            logger.LogError("Exception occurred: {Message} \n {InnerMessage}", exception.Message, exception.InnerException?.Message);
             var problemDetails = CreateProblemDetailFromException(exception);
             problemDetails.Instance = httpContext.Request.Path;
 
-            logger.LogError("{ProblemDetailsTitle}", problemDetails.Detail);
-            problemDetails.Status = httpContext.Response.StatusCode;
+            httpContext.Response.StatusCode = problemDetails.Status!.Value;
             await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken).ConfigureAwait(false);
             return true;
         }
@@ -30,7 +30,7 @@ namespace CBT.APIs.Middlewares
                 {
                     Status = StatusCodes.Status500InternalServerError,
                     Title = "Server error",
-                    Detail = exception.Message,
+                    Detail = "Server Error",
 
                 };
         }

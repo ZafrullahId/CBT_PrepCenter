@@ -1,6 +1,6 @@
-﻿using Application.Shared;
+﻿using CBTPreparation.APIs.Shared;
 
-namespace CBT.APIs.Endpoints.Auth.GetToken
+namespace CBTPreparation.APIs.Endpoints.Auth.GetRefreshToken
 {
-    public record GetTokenResponse(string Token, string RefreshToken, BaseResponse BaseResponse);
+    public record GetTokenResponse(string Token, string RefreshToken, BaseApiResponse BaseResponse);
 }

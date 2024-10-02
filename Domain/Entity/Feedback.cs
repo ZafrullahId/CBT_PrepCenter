@@ -1,26 +1,23 @@
-﻿using Domain.Common;
-using Domain.Enum;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Blogger.BuildingBlocks.Domain;
 
 namespace Domain.Entity
 {
-    public class Feedback : AuditableEntity
+    public class Feedback : Entity<FeedbackId>
     {
         public string Comment { get; internal set; } = default!;
-        public Guid StudentId { get; internal set; }
-        public Student? Student { get; set; }
-        internal Feedback(Guid studentId, string comment)
+        public StudentId StudentId { get; internal set; }
+        internal Feedback(FeedbackId feedbackId,
+                          StudentId studentId,
+                          string comment) : base(feedbackId)
         {
-            StudentId = studentId;
             Comment = comment;
+            StudentId = studentId;
         }
-        public static Feedback Create(Guid studentId, string comment)
+        public static Feedback Create(string comment, StudentId studentId)
         {
-            var feedBack = new Feedback(studentId,comment);
+            var feedBack = new Feedback(FeedbackId.CreateUniqueId(),
+                                        studentId,
+                                        comment);
             return feedBack;
         }
     }

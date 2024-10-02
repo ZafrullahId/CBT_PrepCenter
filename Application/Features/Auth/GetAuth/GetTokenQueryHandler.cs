@@ -1,10 +1,10 @@
-﻿using Application.Abstractions;
-using Application.Abstractions.Repositories;
-using Application.Shared;
+﻿using CBTPreparation.Application.Abstractions;
+using CBTPreparation.Application.Abstractions.Repositories;
+using CBTPreparation.Application.Shared;
 using MediatR;
 
 
-namespace Application.Features.Auth.GetAuth
+namespace CBTPreparation.Application.Features.Auth.GetAuth
 {
     public class GetTokenQueryHandler(IUserRepository userRepository, IPasswordHasher _passwordHasher, ITokenProvider tokenProvider) : IRequestHandler<GetTokenQuery, GetTokenQueryResponse>
     {

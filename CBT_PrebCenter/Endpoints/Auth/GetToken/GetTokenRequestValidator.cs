@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
-using Microsoft.Extensions.Localization;
 
-namespace CBT.APIs.Endpoints.Auth.GetToken
+namespace CBTPreparation.APIs.Endpoints.Auth.GetRefreshToken
 {
     public class GetTokenRequestValidator : AbstractValidator<GetTokenRequest>
     {

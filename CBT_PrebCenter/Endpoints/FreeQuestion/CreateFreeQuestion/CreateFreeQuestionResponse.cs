@@ -1,8 +1,8 @@
-﻿using Application.Shared;
+﻿using CBTPreparation.APIs.Shared;
 
-namespace CBT.APIs.Endpoints.FreeQuestion.CreateFreeQuestion
+namespace CBTPreparation.APIs.Endpoints.FreeQuestion.CreateFreeQuestion
 {
-    public record CreateFreeQuestionResponse(List<CreateFreeQuestionDataResponse> FreeQuestionDataCommandResponses, BaseResponse BaseResponse);
+    public record CreateFreeQuestionResponse(List<CreateFreeQuestionDataResponse> FreeQuestionDataCommandResponses, BaseApiResponse BaseResponse);
     public record CreateFreeQuestionDataResponse(Guid QuestionId,
                                                         string SubjectName,
                                                         string QuestionContent,

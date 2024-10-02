@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Infrastructure.Migrations
+namespace CBTPreparation_Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class identity1 : Migration

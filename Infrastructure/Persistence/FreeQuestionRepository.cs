@@ -1,8 +1,8 @@
-﻿using Application.Abstractions.Repositories;
-using Domain.Entity;
-using Infrastructure.Persistence.Context;
+﻿using Domain.Entity;
+using CBTPreparation.Application.Abstractions.Repositories;
+using CBTPreparation.Infrastructure.Persistence.Context;
 
-namespace Infrastructure.Persistence
+namespace CBTPreparation.Infrastructure.Persistence
 {
     public class FreeQuestionRepository(CBTDbContext context)  : IFreeQuestionRepository
     {

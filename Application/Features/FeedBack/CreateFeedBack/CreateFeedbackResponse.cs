@@ -1,6 +1,6 @@
-﻿using Application.Shared;
+﻿using CBTPreparation.Application.Shared;
 
-namespace Application.Features.FeedBack.CreateFeedBack
+namespace CBTPreparation.Application.Features.FeedBack.CreateFeedBack
 {
     public record CreateFeedbackCommandResponse(
        Guid StudentId,

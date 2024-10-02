@@ -1,43 +1,61 @@
-﻿using Domain.Common;
-using Domain.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CBTPreparation.BuildingBlocks.Domain.Exceptions;
+using Blogger.BuildingBlocks.Domain;
 
 namespace Domain.Entity
 {
-    public class CbtSession : AuditableEntity
+    public class CbtSession : Entity<CbtSessionId>
     {
         public double Score { get; private set; }
-        public Guid StudentId { get; private set; }
-        public Student? Student { get; private set; }
-        public bool InProgress { get; private set; }
-        public int CurrentQuestionNumberInProgress { get; private set; }
+        public StudentId StudentId { get; private set; }
+        public bool InProgress { get; private set; } = true;
         public TimeSpan Duration { get; private set; }
         public int NumberOfQuestion { get; private set; }
+        public int NumberOfQuestionAttempted { get; private set; }
         public int NumberOfWrongAnswers { get; private set; }
         public int NumberOfCorrectAnswers { get; private set; }
-        public SessionQuestion? SessionQuestion { get; private set; }
-        private CbtSession(double score, TimeSpan duration, int numberOfQuestion, int numberOfWrongAnswers, int numberOfCorrectAnswers)
+        public int CurrentQuestionNumberInProgress { get; private set; } = 0;
+        private readonly IList<SessionQuestion> _sessionQuestions = null!;
+        public IReadOnlyCollection<SessionQuestion> SessionQuestions => [.. _sessionQuestions];
+        private CbtSession(CbtSessionId cbtSessionId,
+                           StudentId studentId,
+                           double score,
+                           TimeSpan duration,
+                           int numberOfQuestionAttempted,
+                           int numberOfQuestion,
+                           int numberOfWrongAnswers,
+                           int numberOfCorrectAnswers) : base(cbtSessionId)
         {
             Score = score;
             Duration = duration;
+            StudentId = studentId;
             NumberOfQuestion = numberOfQuestion;
             NumberOfWrongAnswers = numberOfWrongAnswers;
             NumberOfCorrectAnswers = numberOfCorrectAnswers;
+            NumberOfQuestionAttempted = numberOfQuestionAttempted;
         }
-        public static CbtSession Create(double score, TimeSpan duration, int numberOfQuestion, int numberOfWrongAnswers, int numberOfCorrectAnswers)
+        public static CbtSession Create(double score,
+                                        StudentId studentId,
+                                        TimeSpan duration,
+                                        int numberOfQuestionAttempted,
+                                        int numberOfQuestion,
+                                        int numberOfWrongAnswers,
+                                        int numberOfCorrectAnswers)
         {
             // check if numberOfWrongAnswers or numberOfCorrectAnswers > numberOfQuestion
             if (numberOfCorrectAnswers > numberOfQuestion || numberOfWrongAnswers > numberOfQuestion)
             {
-                throw new NumberOfQuestionIsLessException("Number Of questions cannot be less than number numberOfCorrectAnswers or numberOfWrongAnswers");
+                throw new NumberOfQuestionIsLessException(numberOfQuestion, numberOfCorrectAnswers, numberOfWrongAnswers);
             }
-            var session = new CbtSession(score, duration, numberOfQuestion, numberOfWrongAnswers, numberOfCorrectAnswers);
+            var session = new CbtSession(CbtSessionId.CreateUniqueId(),
+                                         studentId,
+                                         score,
+                                         duration,
+                                         numberOfQuestionAttempted,
+                                         numberOfQuestion,
+                                         numberOfWrongAnswers,
+                                         numberOfCorrectAnswers);
             return session;
         }
-        
+
     }
 }

@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection.Extensions;
 using System.Reflection;
-using Application.Abstractions;
+using CBTPreparation_Application.Abstractions;
 using MapsterMapper;
 using Mapster;
 using FluentValidation;
 
-namespace CBT.APIs.Extensions
+namespace CBTPreparation.APIs.Extensions
 {
     public static class DependencyInjection
     {

@@ -1,9 +1,8 @@
-﻿using Application.Abstractions.Repositories;
-using Application.Exceptions;
-using Application.Shared;
+﻿using CBTPreparation.Application.Abstractions.Repositories;
+using CBTPreparation.Application.Shared;
 using MediatR;
 
-namespace Application.Features.FeedBack.GetFeedBack
+namespace CBTPreparation.Application.Features.FeedBack.GetFeedBack
 {
     public class GetFeedbackQueryHandler(IFeedbackRepository _feedbackRepository) : IRequestHandler<GetFeedbackQuery, GetFeedbackQueryResponse>
     {
@@ -16,7 +15,7 @@ namespace Application.Features.FeedBack.GetFeedBack
             return new GetFeedbackQueryResponse(
                feedId.Comment,
                 new BaseResponse(
-                "Comment Retrived Successfully",
+                "Comment Retrieved Successfully",
                 true));
         }
     }

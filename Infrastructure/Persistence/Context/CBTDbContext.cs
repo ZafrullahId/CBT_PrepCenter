@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Persistence.Context
+namespace CBTPreparation.Infrastructure.Persistence.Context
 {
     public class CBTDbContext(DbContextOptions<CBTDbContext> options) : DbContext(options)
     {

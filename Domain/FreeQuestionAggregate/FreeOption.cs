@@ -1,7 +1,7 @@
 ﻿using CBTPreparation.BuildingBlocks.Domain;
-using CBTPreparation.Domain.Entity;
+using CBTPreparation.Domain.Common;
 
-namespace Domain.Entity
+namespace CBTPreparation.Domain.FreeQuestionAggregate
 {
     public class FreeOption : Option
     {

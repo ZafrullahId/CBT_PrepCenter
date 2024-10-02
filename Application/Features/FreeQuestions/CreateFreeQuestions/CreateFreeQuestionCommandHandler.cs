@@ -1,7 +1,7 @@
 ﻿using CBTPreparation.Application.Abstractions.Repositories;
 using CBTPreparation.Application.Abstractions.Service;
 using CBTPreparation.Application.Shared;
-using Domain.Entity;
+using CBTPreparation.Domain.FreeQuestionAggregate;
 using MapsterMapper;
 using MediatR;
 

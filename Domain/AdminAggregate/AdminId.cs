@@ -1,6 +1,6 @@
 ﻿using CBTPreparation.BuildingBlocks.Domain;
 
-namespace CBTPreparation.Domain.Entity
+namespace CBTPreparation.Domain.AdminAggregate
 {
     public class AdminId : ValueObject<AdminId>
     {

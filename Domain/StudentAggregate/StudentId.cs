@@ -1,6 +1,7 @@
 ﻿using CBTPreparation.BuildingBlocks.Domain;
+using CBTPreparation.Domain.UserAggregate;
 
-namespace Domain.Entity
+namespace CBTPreparation.Domain.StudentAggregate
 {
     public sealed class StudentId : ValueObject<UserId>
     {

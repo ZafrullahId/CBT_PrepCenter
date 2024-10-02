@@ -1,11 +1,11 @@
 ﻿using System.Security.Claims;
 using System.Text;
-using Domain.Entity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 using CBTPreparation.Application.Abstractions;
 using CBTPreparation.Infrastructure.Jwt;
+using CBTPreparation.Domain.UserAggregate;
 
 namespace CBTPreparation.Infrastructure.Authentication;
 

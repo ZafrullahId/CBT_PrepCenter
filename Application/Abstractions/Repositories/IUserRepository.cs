@@ -1,4 +1,4 @@
-﻿using Domain.Entity;
+﻿using CBTPreparation.Domain.UserAggregate;
 using System.Linq.Expressions;
 
 namespace CBTPreparation.Application.Abstractions.Repositories

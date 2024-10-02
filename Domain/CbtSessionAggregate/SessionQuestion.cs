@@ -1,6 +1,6 @@
 ﻿using Blogger.BuildingBlocks.Domain;
 
-namespace Domain.Entity
+namespace CBTPreparation.Domain.CbtSessionAggregate
 {
     public class SessionQuestion : Entity<SessionQuestionId>
     {

@@ -1,4 +1,4 @@
-﻿using Domain.Entity;
+﻿using CBTPreparation.Domain.UserAggregate;
 
 namespace CBTPreparation.Application.Abstractions
 {

@@ -1,4 +1,4 @@
-﻿using Domain.Entity;
+﻿using CBTPreparation.Domain.StudentAggregate;
 
 namespace CBTPreparation.Application.Abstractions.Repositories
 {

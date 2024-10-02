@@ -1,7 +1,7 @@
 ﻿using CBTPreparation.BuildingBlocks.Domain;
 using CBTPreparation.BuildingBlocks.Domain.Exceptions;
 
-namespace CBTPreparation.Domain.Entity
+namespace CBTPreparation.Domain.UserAggregate
 {
     public class Role : ValueObject<Role>
     {

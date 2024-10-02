@@ -1,7 +1,8 @@
 ﻿using CBTPreparation.Application.Abstractions;
 using CBTPreparation.Application.Abstractions.Repositories;
 using CBTPreparation.Application.Shared;
-using Domain.Entity;
+using CBTPreparation.Domain.StudentAggregate;
+using CBTPreparation.Domain.UserAggregate;
 using Domain.Enum;
 using MediatR;
 

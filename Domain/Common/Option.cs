@@ -1,7 +1,6 @@
-﻿
-using CBTPreparation.BuildingBlocks.Domain;
+﻿using CBTPreparation.BuildingBlocks.Domain;
 
-namespace CBTPreparation.Domain.Entity
+namespace CBTPreparation.Domain.Common
 {
     public abstract class Option : ValueObject<Option>
     {

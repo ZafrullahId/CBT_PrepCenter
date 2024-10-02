@@ -1,6 +1,7 @@
-﻿using Domain.Entity;
-using CBTPreparation.Application.Abstractions.Repositories;
+﻿using CBTPreparation.Application.Abstractions.Repositories;
 using CBTPreparation.Infrastructure.Persistence.Context;
+using CBTPreparation.Domain.CbtSessionAggregate;
+using CBTPreparation.Domain.FreeQuestionAggregate;
 
 namespace CBTPreparation.Infrastructure.Persistence
 {

@@ -1,6 +1,6 @@
 ﻿using CBTPreparation.Application.Abstractions.Repositories;
+using CBTPreparation.Domain.CbtSessionAggregate;
 using CBTPreparation.Infrastructure.Persistence.Context;
-using Domain.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace CBTPreparation.Infrastructure.Persistence

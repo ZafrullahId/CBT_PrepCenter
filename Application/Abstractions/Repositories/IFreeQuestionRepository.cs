@@ -1,4 +1,4 @@
-﻿using Domain.Entity;
+﻿using CBTPreparation.Domain.FreeQuestionAggregate;
 
 namespace CBTPreparation.Application.Abstractions.Repositories;
 public interface IFreeQuestionRepository

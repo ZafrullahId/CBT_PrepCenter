@@ -1,4 +1,4 @@
-﻿using Domain.Entity;
+﻿using CBTPreparation.Domain.StudentAggregate;
 using System;
 using System.Collections.Generic;
 using System.Linq;

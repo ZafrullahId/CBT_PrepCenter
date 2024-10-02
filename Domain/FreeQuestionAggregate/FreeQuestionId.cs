@@ -1,6 +1,6 @@
 ﻿using CBTPreparation.BuildingBlocks.Domain;
 
-namespace Domain.Entity
+namespace CBTPreparation.Domain.FreeQuestionAggregate
 {
     public class FreeQuestionId : ValueObject<FreeQuestionId>
     {

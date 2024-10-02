@@ -1,6 +1,6 @@
 ﻿using CBTPreparation.Application.Abstractions.Repositories;
 using CBTPreparation.Application.Shared;
-using Domain.Entity;
+using CBTPreparation.Domain.StudentAggregate;
 using MediatR;
 
 namespace CBTPreparation.Application.Features.FeedBack.CreateFeedBack

@@ -18,8 +18,4 @@
     <ProjectReference Include="..\CBTPreparation.BuildingBlocks\CBTPreparation.BuildingBlocks.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Common\" />
-  </ItemGroup>
-
 </Project>

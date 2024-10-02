@@ -1,4 +1,8 @@
-﻿using Domain.Entity;
+﻿using CBTPreparation.Domain.AdminAggregate;
+using CBTPreparation.Domain.CbtSessionAggregate;
+using CBTPreparation.Domain.FreeQuestionAggregate;
+using CBTPreparation.Domain.StudentAggregate;
+using CBTPreparation.Domain.UserAggregate;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

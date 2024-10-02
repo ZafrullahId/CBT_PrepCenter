@@ -1,6 +1,6 @@
 ﻿using CBTPreparation.Application.Abstractions.Repositories;
+using CBTPreparation.Domain.UserAggregate;
 using CBTPreparation.Infrastructure.Persistence.Context;
-using Domain.Entity;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 

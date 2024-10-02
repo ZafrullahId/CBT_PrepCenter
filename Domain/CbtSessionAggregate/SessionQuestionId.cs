@@ -1,6 +1,6 @@
 ﻿using CBTPreparation.BuildingBlocks.Domain;
 
-namespace Domain.Entity
+namespace CBTPreparation.Domain.CbtSessionAggregate
 {
     public class SessionQuestionId : ValueObject<SessionQuestionId>
     {

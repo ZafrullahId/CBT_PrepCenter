@@ -4,7 +4,7 @@ namespace CBTPreparation.Domain.CbtSessionAggregate
 {
     public class SessionQuestion : Entity<SessionQuestionId>
     {
-        private readonly List<PaidOption> _options = new();
+        private readonly List<PaidOption> _paidOptions = new();
         private SessionQuestion(SessionQuestionId sessionQuestionId,
                                 CbtSessionId cbtSessionId,
                                 char chosenOption,
@@ -17,10 +17,10 @@ namespace CBTPreparation.Domain.CbtSessionAggregate
             IsChosenOptionCorrect = isChosenOptionCorrect;
         }
         public CbtSessionId CbtSessionId { get; private set; }
-        public char ChosenOption { get; private set; }
+        public char? ChosenOption { get; private set; }
         public bool IsChosenOptionCorrect { get; private set; }
         public string Question { get; private set; } = default!;
-        public IReadOnlyCollection<PaidOption> PaidOptions => _options;
+        public IReadOnlyCollection<PaidOption> PaidOptions => _paidOptions;
         public static SessionQuestion Create(char chosenOption,
                                              CbtSessionId cbtSessionId,
                                              string question,
@@ -43,7 +43,7 @@ namespace CBTPreparation.Domain.CbtSessionAggregate
                                         optionContent,
                                         isCorrect,
                                         imageUrl);
-            _options.Add(option);
+            _paidOptions.Add(option);
             return option;
         }
     }

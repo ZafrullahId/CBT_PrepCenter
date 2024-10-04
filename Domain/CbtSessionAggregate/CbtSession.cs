@@ -14,7 +14,7 @@ public class CbtSession : AggregateRoot<CbtSessionId>
     public int NumberOfQuestionAttempted { get; private set; }
     public int NumberOfWrongAnswers { get; private set; }
     public int NumberOfCorrectAnswers { get; private set; }
-    public int CurrentQuestionNumberInProgress { get; private set; } = 0;
+    public int? CurrentQuestionNumberInProgress { get; private set; } = 0;
     private readonly IList<SessionQuestion> _sessionQuestions = null!;
     public IReadOnlyCollection<SessionQuestion> SessionQuestions => [.. _sessionQuestions];
     private CbtSession(CbtSessionId cbtSessionId,

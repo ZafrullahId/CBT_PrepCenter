@@ -50,7 +50,7 @@ public class FreeQuestion : AggregateRoot<FreeQuestionId>
                                 string? imageUrl = null)
     {
         // validation here
-        var option = new FreeOption(optionContent,
+        var option = FreeOption.Create(optionContent,
                                     optionAlpha,
                                     isCorrect,
                                     imageUrl);

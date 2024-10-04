@@ -18,5 +18,18 @@ namespace CBTPreparation.Domain.FreeQuestionAggregate
             yield return OptionAlpha;
             yield return IsCorrect;
         }
+
+        public static FreeOption Create(string optionContent,
+                                char optionAlpha,
+                                bool isCorrect,
+                                string? imageUrl = null)
+        {
+            var option = new FreeOption(optionContent,
+                                    optionAlpha,
+                                    isCorrect,
+                                    imageUrl);
+
+            return option;
+        }
     }
 }

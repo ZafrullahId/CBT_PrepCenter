@@ -1,4 +1,5 @@
 ﻿using CBTPreparation.BuildingBlocks.Domain;
+using CBTPreparation.BuildingBlocks.Domain.Exceptions;
 
 namespace CBTPreparation.Domain.UserAggregate;
 
@@ -17,9 +18,10 @@ public class User : AggregateRoot<UserId>
                  string passwordHash,
                  Role role) : base(id)
     {
+        InvalidEmailAddressException.Throw(email);
+        ArgumentException.ThrowIfNullOrWhiteSpace(email);
         ArgumentException.ThrowIfNullOrWhiteSpace(firstName);
         ArgumentException.ThrowIfNullOrWhiteSpace(lastName);
-        ArgumentException.ThrowIfNullOrWhiteSpace(email);
         ArgumentException.ThrowIfNullOrWhiteSpace(passwordHash);
 
         FirstName = firstName;

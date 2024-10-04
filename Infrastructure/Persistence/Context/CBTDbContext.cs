@@ -2,42 +2,27 @@
 using CBTPreparation.Domain.CbtSessionAggregate;
 using CBTPreparation.Domain.FreeQuestionAggregate;
 using CBTPreparation.Domain.StudentAggregate;
+using CBTPreparation.Domain.TrialTransactionAggregate;
 using CBTPreparation.Domain.UserAggregate;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CBTPreparation.Infrastructure.Persistence.Context
 {
     public class CBTDbContext(DbContextOptions<CBTDbContext> options) : DbContext(options)
     {
+        public DbSet<User> Users => Set<User>();
+        public DbSet<Admin> Admins => Set<Admin>();
+        public DbSet<Student> Students => Set<Student>();
+        public DbSet<CbtSession> CbtSessions => Set<CbtSession>();
+        public DbSet<FreeQuestion> FreeQuestions => Set<FreeQuestion>();
+        public DbSet<TrialTransaction> Transactions => Set<TrialTransaction>();
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //base.OnModelCreating(modelBuilder);
-            //modelBuilder.Entity<Student>(entity =>
-            //{
-            //    entity.HasMany(s => s.Subjects)
-            //          .WithMany(s => s.Students);
-            //});
-            //modelBuilder.Entity<User>(entity =>
-            //{
-            //    entity.HasKey(s => s.Id);
-            //});
+            modelBuilder.HasDefaultSchema(CBTDbContextSchema.DefaultSchema);
 
-            //modelBuilder.Entity<Subject>(entity =>
-            //{
-            //    entity.HasMany(s => s.Students)
-            //          .WithMany(s => s.Subjects);
-            //});
+            var infrastructureAssembly = typeof(IAssemblyMarker).Assembly;
+            modelBuilder.ApplyConfigurationsFromAssembly(infrastructureAssembly);
         }
-        public DbSet<User> Users { get; set; }
-        public DbSet<Admin> Admins { get; set; }
-        public DbSet<Student> Students { get; set; }
-        public DbSet<Feedback> Feedbacks { get; set; }
-        public DbSet<CbtSession> CbtSessions { get; set; }
-        public DbSet<FreeOption> FreeOptions { get; set; }
-        public DbSet<FreeQuestion> FreeQuestions { get; set; }
-        public DbSet<SessionQuestion> SessionQuestions { get; set; }
-
-        
     }
 }

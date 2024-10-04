@@ -13,7 +13,7 @@ namespace CBTPreparation.Domain.StudentAggregate
             Comment = comment;
             StudentId = studentId;
         }
-        public static Feedback Create(string comment, StudentId studentId)
+        public static Feedback Create(StudentId studentId, string comment)
         {
             var feedBack = new Feedback(FeedbackId.CreateUniqueId(),
                                         studentId,

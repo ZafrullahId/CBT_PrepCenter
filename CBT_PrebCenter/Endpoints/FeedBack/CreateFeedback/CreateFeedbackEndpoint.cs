@@ -1,11 +1,10 @@
-﻿using Application.Abstractions;
-using Application.Features.FeedBack.CreateFeedBack;
-using CBT.APIs.Filters;
+using CBTPreparation.Application.Features.FeedBack.CreateFeedBack;
+using CBTPreparation_Application.Abstractions;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CBT.APIs.Endpoints.FeedBack.CreateFeedback
+namespace CBTPreparation.APIs.Endpoints.FeedBack.CreateFeedback
 {
     public class CreateFeedbackEndpoint : IEndpoint
     {

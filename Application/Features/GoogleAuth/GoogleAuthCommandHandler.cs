@@ -1,14 +1,14 @@
-﻿using Application.Abstractions;
-using Application.Abstractions.Repositories;
-using Application.Shared;
-using Domain.Entity;
-using Domain.Enum;
+﻿using CBTPreparation.Application.Abstractions;
+using CBTPreparation.Application.Shared;
+using CBTPreparation.Domain.StudentAggregate;
+using CBTPreparation.Domain.UserAggregate;
+using Domain;
 using Google.Apis.Auth;
 using MapsterMapper;
 using MediatR;
 
 
-namespace Application.Features.GoogleAuth
+namespace CBTPreparation.Application.Features.GoogleAuth
 {
     public class GoogleAuthCommandHandler : IRequestHandler<GoogleAuthCommand, GoogleAuthResponse>
     {
@@ -16,18 +16,14 @@ namespace Application.Features.GoogleAuth
         private readonly ITokenProvider _tokenProvider;
         private readonly IStudentRepository _studentRepository;
         private readonly IGoogleAuthService _googleAuthService;
-        private readonly IPasswordHasher _passwordHasher;
-        private readonly IMapper _mapper;
 
         public GoogleAuthCommandHandler(IUserRepository userRepository, ITokenProvider tokenProvider,
-           IStudentRepository studentRepository, IGoogleAuthService googleAuthService, IPasswordHasher passwordHasher, IMapper mapper)
+           IStudentRepository studentRepository, IGoogleAuthService googleAuthService)
         {
             _userRepository = userRepository;
             _tokenProvider = tokenProvider;
             _studentRepository = studentRepository;
             _googleAuthService = googleAuthService;
-            _passwordHasher = passwordHasher;
-            _mapper = mapper;
         }
 
         public async Task<GoogleAuthResponse> Handle(GoogleAuthCommand request, CancellationToken cancellationToken)
@@ -39,41 +35,42 @@ namespace Application.Features.GoogleAuth
             }
             catch (InvalidJwtException ex)
             {
-                throw new NotFoundException($"{ex.Message}");
+                throw new GoogleTokenIdNotFoundException($"{ex.Message}");
             }
+
             var dbUser = await _userRepository.GetAsync(u => u.Email == payload.Email, cancellationToken);
+
             if (dbUser is null)
             {
-                var newUser = _mapper.Map<User>(payload);
                 var user = User.Create(
-                   newUser.FirstName,
-                   newUser.LastName,
-                   newUser.Email,
-                   _passwordHasher.Hash(newUser.PasswordHash),
-                   Role.Student);
+                   payload.GivenName,
+                   payload.FamilyName,
+                   payload.Email,
+                   true,
+                   Constants.RoleConstant.StudentRoleName);
 
-                var student = Student.Create(user);
+                var student = Student.Create(user.Id);
 
-                await _studentRepository.CreateAsync(student, cancellationToken);
+                await _studentRepository.CreateStudentAsync(student, cancellationToken);
 
-                var (Token, RefreshToken) = _tokenProvider.Create(user);
+                var (NewUserToken, NewUserRefreshToken) = _tokenProvider.Create(user);
 
                 return new GoogleAuthResponse(
-                Token,
-                RefreshToken,
-                new BaseResponse(
-                "Student Successfully Login",
-                true));
+                                NewUserToken,
+                                NewUserRefreshToken,
+                                new BaseResponse(
+                                "Student Successfully Login",
+                                true));
             }
 
-            var (Tokendb, RefreshTokendb) = _tokenProvider.Create(dbUser);
+            var (Token, RefreshToken) = _tokenProvider.Create(dbUser);
 
             return new GoogleAuthResponse(
-                Tokendb,
-                 RefreshTokendb,
-                new BaseResponse(
-                "Student Successfully Login",
-                true));
+                            Token,
+                            RefreshToken,
+                            new BaseResponse(
+                            "Student Successfully Login",
+                            true));
 
 
         }

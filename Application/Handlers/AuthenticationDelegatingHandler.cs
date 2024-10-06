@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
 
-namespace Application.Handlers
+namespace CBTPreparation.Application.Handlers
 {
     public class AuthenticationDelegatingHandler(IConfiguration configuration)
     : DelegatingHandler

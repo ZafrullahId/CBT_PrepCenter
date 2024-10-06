@@ -1,8 +1,8 @@
-﻿using Application.Abstractions;
-using Application.Features.Students.GetStudents;
-using CBT.APIs.Endpoints;
+﻿using CBTPreparation_Application.Abstractions;
+using CBTPreparation.APIs.Endpoints;
 using MapsterMapper;
 using MediatR;
+using CBTPreparation.Application.Features.Students.GetStudents;
 
 namespace CBT_PrepCenter.Endpoints.Students.GetStudents
 {

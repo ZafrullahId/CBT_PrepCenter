@@ -1,8 +1,8 @@
-using CBT.APIs.Extensions;
-using CBT.APIs.Middlewares;
-using Infrastructure.Extensions;
-using Application;
-using Application.Handlers;
+using CBTPreparation.APIs.Extensions;
+using CBTPreparation.APIs.Middlewares;
+using CBTPreparation.Application.Handlers;
+using CBTPreparation_Infrastructure.Extensions;
+using CBTPreparation.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +22,6 @@ builder.Services.ConfigureCors();
 builder.Services.AddEndpoints();
 builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
-builder.Services.AddProblemDetails();
 builder.Services.AddTransient<AuthenticationDelegatingHandler>();
 
 var app = builder.Build();

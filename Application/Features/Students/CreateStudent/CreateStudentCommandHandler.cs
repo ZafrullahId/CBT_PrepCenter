@@ -1,11 +1,11 @@
-﻿using Application.Abstractions;
-using Application.Abstractions.Repositories;
-using Application.Shared;
-using Domain.Entity;
-using Domain.Enum;
+﻿using CBTPreparation.Application.Abstractions;
+using CBTPreparation.Application.Shared;
+using CBTPreparation.Domain.StudentAggregate;
+using CBTPreparation.Domain.UserAggregate;
+using Domain;
 using MediatR;
 
-namespace Application.Features.Students.CreateStudent
+namespace CBTPreparation.Application.Features.Students.CreateStudent
 {
     public class CreateStudentCommandHandler(IStudentRepository _studentRepository, IUserRepository _userRepository, IPasswordHasher _passwordHasher) : IRequestHandler<CreateStudentCommand, CreateStudentCommandResponse>
     {
@@ -20,19 +20,15 @@ namespace Application.Features.Students.CreateStudent
                 request.FirstName,
                 request.LastName,
                 request.Email,
-                _passwordHasher.Hash(request.Password),
-                Role.Student);
+                false,
+                Constants.RoleConstant.StudentRoleName,
+                _passwordHasher.Hash(request.Password));
 
-            var student = Student.Create(user);
+            var student = Student.Create(user.Id);
 
-            await _studentRepository.CreateAsync(student, cancellationToken);
+            await _studentRepository.CreateStudentAsync(student, cancellationToken);
 
-            return new CreateStudentCommandResponse(
-                student.Id,
-                user.FirstName,
-                user.LastName,
-                user.Email,
-                user.PasswordHash,
+            return new CreateStudentCommandResponse(student.Id,
                 new BaseResponse(
                 "Student Successfully Created",
                 true));

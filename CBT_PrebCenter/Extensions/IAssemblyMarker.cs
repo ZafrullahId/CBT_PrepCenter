@@ -1,4 +1,4 @@
-﻿namespace CBT.APIs.Extensions
+﻿namespace CBTPreparation.APIs.Extensions
 {
     internal interface IAssemblyMarker
     {

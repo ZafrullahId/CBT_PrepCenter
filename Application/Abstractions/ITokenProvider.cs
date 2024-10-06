@@ -1,6 +1,6 @@
-﻿using Domain.Entity;
+﻿using CBTPreparation.Domain.UserAggregate;
 
-namespace Application.Abstractions
+namespace CBTPreparation.Application.Abstractions
 {
     public interface ITokenProvider
     {

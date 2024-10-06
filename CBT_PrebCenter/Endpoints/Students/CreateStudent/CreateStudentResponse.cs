@@ -1,6 +1,6 @@
-﻿using CBT.APIs.Shared;
+﻿using CBTPreparation.APIs.Shared;
 
-namespace CBT.APIs.Endpoints.Students.CreateStudent
+namespace CBTPreparation.APIs.Endpoints.Students.CreateStudent
 {
     public record CreateStudentResponse(Guid StudentId,
         string FirstName,

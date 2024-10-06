@@ -1,10 +1,10 @@
-﻿using Application.Abstractions;
-using Application.Features.GoogleAuth;
+﻿using CBTPreparation.Application.Features.GoogleAuth;
+using CBTPreparation_Application.Abstractions;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CBT.APIs.Endpoints.GoogleAuth
+namespace CBTPreparation.APIs.Endpoints.GoogleAuth
 {
     public class GoogleAuthEndpoint : IEndpoint
     {

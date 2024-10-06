@@ -1,4 +1,4 @@
-﻿namespace CBT.APIs.Shared
+﻿namespace CBTPreparation.APIs.Shared
 {
     public record BaseApiResponse(string Message, bool Success);
 }

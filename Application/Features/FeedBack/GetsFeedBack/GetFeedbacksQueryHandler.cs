@@ -1,37 +1,34 @@
-﻿using Application.Abstractions.Repositories;
-using Application.Features.FeedBack.GetFeedBack;
-using Application.Features.Students.GetStudents;
+﻿using CBTPreparation.Application.Features.FeedBack.GetsFeedBack;
+using CBTPreparation.Application.Shared;
+using CBTPreparation.Domain.StudentAggregate;
 using MapsterMapper;
 using MediatR;
-using System.Collections.Generic;
 
-namespace Application.Features.FeedBack.GetsFeedBack
+namespace CBTPreparation_Application.Features.FeedBack.GetsFeedBack
 {
-    public class GetFeedbacksQueryHandler : IRequestHandler<GetFeedbacksQuery, List<GetFeedbacksQueryResponse>>
+    public class GetFeedbacksQueryHandler : IRequestHandler<GetFeedbacksQuery, GetFeedbacksQueryResponse>
     {
-        private readonly IFeedbackRepository _feedbackRepository;
         private readonly IMapper _mapper;
+        private readonly IStudentRepository _studentRepository;
 
-        public GetFeedbacksQueryHandler(IFeedbackRepository feedbackRepository, IMapper mapper)
+        public GetFeedbacksQueryHandler(IStudentRepository studentRepository, IMapper mapper)
         {
-            _feedbackRepository = feedbackRepository;
+            _studentRepository = studentRepository;
             _mapper = mapper;
         }
 
-        public async Task<List<GetFeedbacksQueryResponse>> Handle(GetFeedbacksQuery request, CancellationToken cancellationToken)
+        public async Task<GetFeedbacksQueryResponse> Handle(GetFeedbacksQuery request, CancellationToken cancellationToken)
         {
-            var feedbacks = await _feedbackRepository.GetAllAsync(cancellationToken);
+            var feedbacks = await _studentRepository.GetAllFeedbacksAsync(cancellationToken);
 
             if (feedbacks is { Count: > 0 })
             {
-                var mappedFeedbacks = _mapper.Map<List<GetFeedbacksQueryResponse>>(feedbacks); 
-                return mappedFeedbacks;
+                return new GetFeedbacksQueryResponse(
+                    feedbacks.Select(x => x.Comment),
+                    new BaseResponse("Student Feedback Successfully Retrieved", false));
             }
-
-            return new List<GetFeedbacksQueryResponse>
-            {
-                new GetFeedbacksQueryResponse(string.Empty, new Shared.BaseResponse("No FeedBacks Yet", false))
-            };
+                
+            return new GetFeedbacksQueryResponse([], new BaseResponse("No FeedBacks Yet", false));
         }
     }
 

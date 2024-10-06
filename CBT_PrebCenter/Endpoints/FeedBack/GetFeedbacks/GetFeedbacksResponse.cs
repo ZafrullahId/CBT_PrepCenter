@@ -1,9 +1,9 @@
-﻿using Application.Shared;
+﻿using CBTPreparation.APIs.Shared;
 
-namespace CBT.APIs.Endpoints.FeedBack.GetFeedbacks
+namespace CBTPreparation.APIs.Endpoints.FeedBack.GetFeedbacks
 {
     public record GetFeedbacksResponse(
         string Comment,
-        BaseResponse BaseResponse);
+        BaseApiResponse BaseResponse);
 
 }

@@ -1,15 +1,10 @@
-﻿using Domain.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//using CBTPreparation.Domain.CbtSessionAggregate;
 
-namespace Application.Abstractions.Repositories
-{
-    public interface ISessionQuestionRepository
-    {
-        Task CreateAsync(SessionQuestion result, CancellationToken cancellationToken);
-        Task<IReadOnlyList<SessionQuestion>> GetAsync(Guid sessionId, CancellationToken cancellationToken);
-    }
-}
+//namespace CBTPreparation.Application.Abstractions.Repositories
+//{
+//    public interface ISessionQuestionRepository
+//    {
+//        Task CreateAsync(SessionQuestion result, CancellationToken cancellationToken);
+//        Task<IReadOnlyList<SessionQuestion>> GetAsync(Guid sessionId, CancellationToken cancellationToken);
+//    }
+//}

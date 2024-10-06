@@ -1,8 +1,8 @@
-﻿using Application.Shared;
+﻿using CBTPreparation.Application.Shared;
 
-namespace Application.Features.FeedBack.GetFeedBacksId
+namespace CBTPreparation.Application.Features.FeedBack.GetFeedBacksId
 {
     public record GetFeedbacksIdQueryResponse(
-    string Comment,
+    IEnumerable<string> Comment,
     BaseResponse BaseResponse);
 }

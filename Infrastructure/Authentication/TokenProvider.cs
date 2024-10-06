@@ -1,13 +1,13 @@
 ﻿using System.Security.Claims;
 using System.Text;
-using Domain.Entity;
-using Infrastructure.Jwt;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
-using Application.Abstractions;
+using CBTPreparation.Application.Abstractions;
+using CBTPreparation.Infrastructure.Jwt;
+using CBTPreparation.Domain.UserAggregate;
 
-namespace Infrastructure.Authentication;
+namespace CBTPreparation.Infrastructure.Authentication;
 
 internal sealed class TokenProvider(IOptions<JwtSettings> jwtSettings) : ITokenProvider
 {
@@ -21,11 +21,11 @@ internal sealed class TokenProvider(IOptions<JwtSettings> jwtSettings) : ITokenP
 
         var subject = new ClaimsIdentity(
             [
-                new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString()),
+                new Claim(JwtRegisteredClaimNames.NameId, user.Id.Value.ToString()),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName),
                 new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName),
-                new Claim(ClaimTypes.Role, user.Role.ToString()),
+                new Claim(ClaimTypes.Role, user.Role.Name),
             ]);
         var tokenDescriptor = new SecurityTokenDescriptor
         {

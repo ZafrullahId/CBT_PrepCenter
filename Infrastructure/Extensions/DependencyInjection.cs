@@ -1,23 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Application.Abstractions;
-using Application.Abstractions.Repositories;
-using Infrastructure.Authentication;
-using Infrastructure.Jwt;
-using Infrastructure.Persistence;
-using Infrastructure.Persistence.Context;
+﻿using CBTPreparation.Application.Abstractions;
+using CBTPreparation.Domain;
+using CBTPreparation.Domain.CbtSessionAggregate;
+using CBTPreparation.Domain.FreeQuestionAggregate;
+using CBTPreparation.Domain.StudentAggregate;
+using CBTPreparation.Domain.UserAggregate;
+using CBTPreparation.Infrastructure.Authentication;
+using CBTPreparation.Infrastructure.Jwt;
+using CBTPreparation.Infrastructure.Persistence;
+using CBTPreparation.Infrastructure.Persistence.Context;
+using CBTPreparation.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
 
-namespace Infrastructure.Extensions
+namespace CBTPreparation_Infrastructure.Extensions
 {
     public static class DependencyInjection
     {
@@ -42,19 +41,18 @@ namespace Infrastructure.Extensions
         public static void ConfigureDbContext(this IServiceCollection services,
           IConfiguration configuration) =>
           services.AddDbContext<CBTDbContext>(opts =>
-              opts.UseSqlServer(configuration.GetConnectionString("sqlConnection")));
+              opts.UseSqlServer(configuration.GetConnectionString(CBTDbContextSchema.DefaultConnectionStringName)));
 
         public static IServiceCollection ConfigureInfrastructureLayer(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<ITokenProvider, TokenProvider>();
             services.AddScoped<IPasswordHasher, PasswordHasher>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IGoogleAuthService, GoogleAuthService>();
             services.AddScoped<IStudentRepository, StudentRepository>();
-            services.AddScoped<IFeedbackRepository, FeedbackRepository>();
             services.AddScoped<IUnitOfWorkRepository, UnitOfWorkRepository>();
             services.AddScoped<ICbtSessionRepository, CbtSessionRepository>();
             services.AddScoped<IFreeQuestionRepository, FreeQuestionRepository>();
-            services.AddScoped<ISessionQuestionRepository, SessionQuestionRepository>();
 
             return services;
         }

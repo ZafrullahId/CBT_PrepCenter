@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Application.Features.Students.GetStudents
+namespace CBTPreparation.Application.Features.Students.GetStudents
 {
     public record GetStudentsQuery()  : IRequest<GetStudentsQueryResponse>;
 }

@@ -1,12 +1,9 @@
-﻿using Application.Shared;
+﻿using CBTPreparation.Application.Shared;
+using CBTPreparation.Domain.StudentAggregate;
 
-namespace Application.Features.Students.CreateStudent
+namespace CBTPreparation.Application.Features.Students.CreateStudent
 {
     public record CreateStudentCommandResponse(
-        Guid StudentId,
-        string FirstName,
-        string LastName,
-        string Email,
-        string Password,
+        StudentId StudentId,
         BaseResponse BaseResponse);
 }

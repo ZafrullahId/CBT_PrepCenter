@@ -1,7 +1,7 @@
-﻿using Domain.Exceptions;
+﻿using CBTPreparation.BuildingBlocks.Domain.Exceptions;
 using System.Net;
 
-namespace Application.Features.Auth.GetAuth
+namespace CBTPreparation.Application.Features.Auth.GetAuth
 {
     public sealed class AuthenticationFailedException : DomainException
     {

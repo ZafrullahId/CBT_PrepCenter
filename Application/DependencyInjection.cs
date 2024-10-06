@@ -1,13 +1,13 @@
-﻿using Application.Abstractions.Service;
-using Application.Handlers;
-using Infrastructure.Persistence;
+﻿using CBTPreparation.Application.Abstractions.Service;
+using CBTPreparation.Application.Handlers;
+using CBTPreparation_Infrastructure.Persistence;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Refit;
 
-namespace Application
+namespace CBTPreparation.Application
 {
     public static class DependencyInjection
     {

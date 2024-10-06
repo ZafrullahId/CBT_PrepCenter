@@ -1,10 +1,10 @@
-﻿using Application.Abstractions;
-using Application.Features.FeedBack.GetFeedBacksId;
+﻿using CBTPreparation.Application.Features.FeedBack.GetFeedBacksId;
+using CBTPreparation_Application.Abstractions;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CBT.APIs.Endpoints.FeedBack.GetFeedbacksId
+namespace CBTPreparation.APIs.Endpoints.FeedBack.GetFeedbacksId
 {
     public class GetFeedbacksIdEndpoint : IEndpoint
     {

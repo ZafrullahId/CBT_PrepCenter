@@ -1,4 +1,4 @@
-﻿namespace CBT.APIs.Endpoints
+﻿namespace CBTPreparation.APIs.Endpoints
 {
     public class EndpointSchema
     {

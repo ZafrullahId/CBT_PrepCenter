@@ -1,30 +1,57 @@
-﻿using Application.Abstractions.Repositories;
-using Domain.Entity;
-using Infrastructure.Persistence.Context;
+﻿using CBTPreparation.Domain;
+using CBTPreparation.Domain.StudentAggregate;
+using CBTPreparation.Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Infrastructure.Persistence
+namespace CBTPreparation.Infrastructure.Persistence
 {
     public class StudentRepository(CBTDbContext context) : IStudentRepository
     {
-        public async Task CreateAsync(Student student, CancellationToken cancellationToken)
+        public async Task CreateStudentAsync(Student student, CancellationToken cancellationToken)
         {
             await context.Students.AddAsync(student, cancellationToken);
         }
-        public async Task<Student?> GetAsync(Guid userId, CancellationToken cancellationToken)
+        public async Task<Student?> GetStudentAsync(StudentId studentId, CancellationToken cancellationToken)
         {
-            return await context.Students.Where(x => x.UserId == userId).Include(x => x.User).FirstOrDefaultAsync(cancellationToken);
+            return await context.Students.Where(x => x.Id == studentId).FirstOrDefaultAsync(cancellationToken);
         }
-        public async Task<List<Student>> GetAllAsync(CancellationToken cancellationToken)
+        public async Task<List<StudentWithUserDto>> GetAllStudentAsync(CancellationToken cancellationToken)
         {
-            return await context.Students.ToListAsync(cancellationToken);
+            var students = await (from student in context.Students.AsNoTracking()
+                                  join user in context.Users.AsNoTracking()
+                                  on student.UserId equals user.Id
+                                  select new StudentWithUserDto
+                                  (
+                                      student.Id,
+                                      user.FirstName,
+                                      user.LastName,
+                                      user.Email,
+                                      student.Department.Name,
+                                      student.Courses.Select(c => c.Name).ToList()
+                                  )).ToListAsync();
+
+            return students;
         }
-        // User Repo
-        // Role
+
+        public async Task<IReadOnlyList<Feedback>> GetAllFeedbacksAsync(CancellationToken cancellationToken)
+        {
+            return await context.Students.SelectMany(x => x.Feedbacks)
+                                         .OrderByDescending(x => x.CreatedOn)
+                                         .ToListAsync(cancellationToken);
+        }
+
+        public async Task<Feedback?> GetFeedbackByIdAsync(FeedbackId feedbackId, CancellationToken cancellationToken)
+        {
+            return await context.Students.SelectMany(x => x.Feedbacks)
+                                         .Where(x => x.Id == feedbackId)
+                                         .FirstOrDefaultAsync(cancellationToken);  
+        }
+
+        public async Task<IReadOnlyList<Feedback>> GetAllFeedbackByStudentIdAsync(StudentId studentId, CancellationToken cancellationToken)
+        {
+            return await context.Students.Where(x => x.Id == studentId)
+                                         .SelectMany(x => x.Feedbacks)
+                                         .ToListAsync(cancellationToken);
+        }
     }
 }

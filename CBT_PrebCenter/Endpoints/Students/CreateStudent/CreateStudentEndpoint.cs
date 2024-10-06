@@ -1,11 +1,10 @@
-﻿using Application.Abstractions;
-using Application.Features.Students.CreateStudent;
-using CBT.APIs.Filters;
+using CBTPreparation.Application.Features.Students.CreateStudent;
+using CBTPreparation_Application.Abstractions;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CBT.APIs.Endpoints.Students.CreateStudent
+namespace CBTPreparation.APIs.Endpoints.Students.CreateStudent
 {
     public class CreateStudentEndpoint : IEndpoint
     {

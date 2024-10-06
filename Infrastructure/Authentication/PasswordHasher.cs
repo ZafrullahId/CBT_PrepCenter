@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
-using Application.Abstractions;
+using CBTPreparation.Application.Abstractions;
 
-namespace Infrastructure.Authentication;
+namespace CBTPreparation.Infrastructure.Authentication;
 
 internal sealed class PasswordHasher : IPasswordHasher
 {

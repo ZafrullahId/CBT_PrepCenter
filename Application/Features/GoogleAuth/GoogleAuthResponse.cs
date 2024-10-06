@@ -1,6 +1,6 @@
-﻿using Application.Shared;
+﻿using CBTPreparation.Application.Shared;
 
-namespace Application.Features.GoogleAuth
+namespace CBTPreparation.Application.Features.GoogleAuth
 {
     public record GoogleAuthResponse(
         string Token, 

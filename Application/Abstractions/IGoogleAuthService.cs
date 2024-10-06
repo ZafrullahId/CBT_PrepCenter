@@ -1,6 +1,6 @@
 ﻿using Google.Apis.Auth;
 
-namespace Application.Abstractions
+namespace CBTPreparation.Application.Abstractions
 {
     public interface IGoogleAuthService
     {

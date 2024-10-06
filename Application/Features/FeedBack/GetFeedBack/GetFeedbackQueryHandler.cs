@@ -1,23 +1,22 @@
-﻿using Application.Abstractions.Repositories;
-using Application.Exceptions;
-using Application.Shared;
+﻿using CBTPreparation.Application.Shared;
+using CBTPreparation.Domain.StudentAggregate;
 using MediatR;
 
-namespace Application.Features.FeedBack.GetFeedBack
+namespace CBTPreparation.Application.Features.FeedBack.GetFeedBack
 {
-    public class GetFeedbackQueryHandler(IFeedbackRepository _feedbackRepository) : IRequestHandler<GetFeedbackQuery, GetFeedbackQueryResponse>
+    public class GetFeedbackQueryHandler(IStudentRepository _studentRepository) : IRequestHandler<GetFeedbackQuery, GetFeedbackQueryResponse>
     {
         public async Task<GetFeedbackQueryResponse> Handle(GetFeedbackQuery request, CancellationToken cancellationToken)
         {
-            var feedId = await _feedbackRepository.GetAsync(request.FeedbackId, cancellationToken);
+            var feedback = await _studentRepository.GetFeedbackByIdAsync(request.FeedbackId, cancellationToken);
 
-            if (feedId == null) { throw new FeedbackNotFoundException(feedId.Id); }
+            if (feedback is null) { throw new FeedbackNotFoundException(feedback.Id); }
 
             return new GetFeedbackQueryResponse(
-               feedId.Comment,
-                new BaseResponse(
-                "Comment Retrived Successfully",
-                true));
+               feedback.Comment,
+               new BaseResponse(
+               "Comment Retrieved Successfully",
+               true));
         }
     }
 }

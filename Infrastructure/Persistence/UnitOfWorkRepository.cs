@@ -1,12 +1,7 @@
-﻿using Application.Abstractions.Repositories;
-using Infrastructure.Persistence.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CBTPreparation.Domain;
+using CBTPreparation.Infrastructure.Persistence.Context;
 
-namespace Infrastructure.Persistence
+namespace CBTPreparation.Infrastructure.Persistence
 {
     public class UnitOfWorkRepository(CBTDbContext cBTDbContext) : IUnitOfWorkRepository
     {

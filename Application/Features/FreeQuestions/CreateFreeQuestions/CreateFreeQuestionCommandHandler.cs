@@ -1,11 +1,10 @@
-﻿using Application.Abstractions.Repositories;
-using Application.Abstractions.Service;
-using Application.Shared;
-using Domain.Entity;
+﻿using CBTPreparation.Application.Abstractions.Service;
+using CBTPreparation.Application.Shared;
+using CBTPreparation.Domain.FreeQuestionAggregate;
 using MapsterMapper;
 using MediatR;
 
-namespace Application.Features.FreeQuestions.CreateFreeQuestions
+namespace CBTPreparation.Application.Features.FreeQuestions.CreateFreeQuestions
 {
     public class CreateFreeQuestionCommandHandler(IGetApiQuestionService _apiQuestionService, IFreeQuestionRepository _freeQuestionRepository, IMapper _mapper) : IRequestHandler<CreateFreeQuestionCommand, CreateFreeQuestionCommandResponse>
     {
@@ -30,7 +29,8 @@ namespace Application.Features.FreeQuestions.CreateFreeQuestions
                         var optAlpha = option.Name;
                         var optContent = option.GetValue(result.Option);
                         bool isCorrect = optAlpha.Equals(result.Answer, StringComparison.OrdinalIgnoreCase);
-                        question.AddOption(optContent.ToString(),
+                        question.AddOption(question.Id,
+                                           optContent.ToString(),
                                            char.Parse(optAlpha),
                                            isCorrect);
                     }

@@ -1,4 +1,5 @@
-﻿using CBTPreparation.Domain.FreeQuestionAggregate;
+﻿using CBTPreparation.Domain.AdminAggregate;
+using CBTPreparation.Domain.FreeQuestionAggregate;
 using CBTPreparation.Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -12,6 +13,11 @@ namespace CBTPreparation.Infrastructure.Persistence.Configurations
             builder.ToTable(CBTDbContextSchema.FreeQuestionDbSchema.TableName);
 
             builder.HasKey(t => t.Id);
+
+            builder.Property(x => x.Id)
+               .ValueGeneratedNever()
+               .HasConversion(id => id.Value,
+                              value => FreeQuestionId.Create(value));
 
             builder.Property(x => x.SubjectName)
                 .IsRequired();
@@ -28,6 +34,9 @@ namespace CBTPreparation.Infrastructure.Persistence.Configurations
             builder.OwnsMany(x => x.FreeOptions, fo =>
             {
                 fo.ToTable(CBTDbContextSchema.FreeQuestionDbSchema.FreeOptionTableName);
+
+                fo.WithOwner()
+                .HasForeignKey(x => x.FreeQuestionId);
 
                 fo.Property(x => x.OptionContent)
                     .IsRequired();

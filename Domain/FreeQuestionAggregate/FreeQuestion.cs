@@ -12,19 +12,24 @@ public class FreeQuestion : AggregateRoot<FreeQuestionId>
     public string ExamYear { get; private set; }
     public string? ImageUrl { get; private set; }
     public IReadOnlyCollection<FreeOption> FreeOptions => _freeOptions;
-    private FreeQuestion(FreeQuestionId freeQuestionId,
-                         string questionContent,
-                         string subjectName,
-                         string examType,
-                         string examYear,
-                         string? imageUrl = null) : base(freeQuestionId)
+    private FreeQuestion(FreeQuestionId freeQuestionId) : base(freeQuestionId)
     {
-        QuestionContent = questionContent;
-        ImageUrl = imageUrl;
-        SubjectName = subjectName;
-        ExamType = examType;
-        ExamYear = examYear;
+        _freeOptions = [];
     }
+    private FreeQuestion() : this(null!) { }
+    //private FreeQuestion(FreeQuestionId freeQuestionId,
+    //                     string questionContent,
+    //                     string subjectName,
+    //                     string examType,
+    //                     string examYear,
+    //                     string? imageUrl = null) : base(freeQuestionId)
+    //{
+    //    QuestionContent = questionContent;
+    //    ImageUrl = imageUrl;
+    //    SubjectName = subjectName;
+    //    ExamType = examType;
+    //    ExamYear = examYear;
+    //}
     public static FreeQuestion Create(string questionContent,
                                       string subjectName,
                                       string examType,
@@ -36,21 +41,25 @@ public class FreeQuestion : AggregateRoot<FreeQuestionId>
             throw new QuestionContentNullException();
         }
         // validate subject name
-        var question = new FreeQuestion(FreeQuestionId.CreateUniqueId(),
-                                        questionContent,
-                                        subjectName,
-                                        examType,
-                                        examYear,
-                                        imageUrl);
+        var question = new FreeQuestion(FreeQuestionId.CreateUniqueId())
+        {
+            QuestionContent = questionContent,
+            SubjectName = subjectName,
+            ExamType = examType,
+            ExamYear = examYear,
+            ImageUrl = imageUrl
+        };
         return question;
     }
-    public FreeOption AddOption(string optionContent,
+    public FreeOption AddOption(FreeQuestionId freeQuestionId,
+                                string optionContent,
                                 char optionAlpha,
                                 bool isCorrect,
                                 string? imageUrl = null)
     {
-        // validation here
-        var option = FreeOption.Create(optionContent,
+        // validation here optionContent is not null
+        var option = FreeOption.Create(freeQuestionId,
+                                    optionContent,
                                     optionAlpha,
                                     isCorrect,
                                     imageUrl);

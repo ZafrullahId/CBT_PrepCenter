@@ -5,11 +5,15 @@ namespace CBTPreparation.Domain.FreeQuestionAggregate
 {
     public class FreeOption : Option
     {
-        internal FreeOption(string optionContent,
+        public FreeQuestionId FreeQuestionId { get; set; }
+        internal FreeOption(
+                            FreeQuestionId freeQuestionId, 
+                            string optionContent,
                             char optionAlpha,
                             bool isCorrect,
                             string? imageUrl = null) : base(optionContent, optionAlpha, isCorrect, imageUrl)
         {
+            FreeQuestionId = freeQuestionId;
         }
 
         public override IEnumerable<object> GetEqualityComponents()
@@ -19,12 +23,14 @@ namespace CBTPreparation.Domain.FreeQuestionAggregate
             yield return IsCorrect;
         }
 
-        public static FreeOption Create(string optionContent,
+        public static FreeOption Create(
+                                FreeQuestionId freeQuestionId, 
+                                string optionContent,
                                 char optionAlpha,
                                 bool isCorrect,
                                 string? imageUrl = null)
-        {
-            var option = new FreeOption(optionContent,
+        {   
+            var option = new FreeOption(freeQuestionId, optionContent,
                                     optionAlpha,
                                     isCorrect,
                                     imageUrl);

@@ -2,5 +2,5 @@
 
 namespace CBTPreparation.Application.Features.Auth.GetAuth
 {
-    public record GetTokenQueryResponse(string Token, string RefreshToken, BaseResponse BaseResponse);
+    public record GetTokenQueryResponse(BaseResponse BaseResponse, string? Token = null, string? RefreshToken = null);
 }

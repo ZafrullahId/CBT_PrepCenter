@@ -13,6 +13,11 @@ namespace CBTPreparation.Infrastructure.Persistence.Configurations
 
             builder.HasKey(t => t.Id);
 
+            builder.Property(x => x.Id)
+               .ValueGeneratedNever()
+               .HasConversion(id => id.Value,
+                              value => StudentId.Create(value));
+
             builder.Property(x => x.UnusedTrials)
                 .IsRequired();
 
@@ -35,7 +40,7 @@ namespace CBTPreparation.Infrastructure.Persistence.Configurations
             {
                 cr.Property(x => x.Name)
                 .IsRequired()
-                .HasMaxLength (20)
+                .HasMaxLength(20)
                 .IsUnicode()
                 .HasColumnName(CBTDbContextSchema.StudentDbSchema.CourseName);
             });
@@ -46,6 +51,11 @@ namespace CBTPreparation.Infrastructure.Persistence.Configurations
 
                 fb.HasKey(x => x.Id);
 
+                fb.Property(x => x.Id)
+                   .ValueGeneratedNever()
+                   .HasConversion(id => id.Value,
+                                  value => FeedbackId.Create(value));
+
                 fb.WithOwner()
                 .HasForeignKey(x => x.StudentId);
 
@@ -55,7 +65,40 @@ namespace CBTPreparation.Infrastructure.Persistence.Configurations
                 .HasMaxLength(150);
             });
 
-            builder.OwnsMany(x => x.Transactions);
+            builder.OwnsMany(x => x.Transactions, txn =>
+            {
+                txn.ToTable(CBTDbContextSchema.StudentDbSchema.TrialTransactionTableName);
+
+                txn.HasKey(x => x.Id);
+
+                txn.WithOwner()
+                  .HasForeignKey(x => x.StudentId);
+
+                txn.Property(x => x.Id)
+                       .ValueGeneratedNever()
+                       .HasConversion(id => id.Value,
+                          value => TrialTransactionId.Create(value));
+
+                txn.Property(x => x.PurchaseDate)
+                .IsRequired();
+
+                txn.Property(x => x.TrialPrice)
+                    .IsRequired();
+
+                txn.Property(p => p.TotalAmount)
+                    .HasField(CBTDbContextSchema.StudentDbSchema.TrialTransactionTotalAmountBackendField)
+                    .UsePropertyAccessMode(PropertyAccessMode.Field);
+
+                txn.Property(x => x.Quantity)
+                    .IsRequired();
+
+                txn.Property(x => x.PaymentMethod)
+                    .IsRequired()
+                    .IsUnicode();
+
+            });
+
+
 
         }
 

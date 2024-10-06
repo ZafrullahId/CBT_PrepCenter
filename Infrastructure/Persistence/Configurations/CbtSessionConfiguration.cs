@@ -1,4 +1,5 @@
-﻿using CBTPreparation.Domain.CbtSessionAggregate;
+﻿using CBTPreparation.Domain.AdminAggregate;
+using CBTPreparation.Domain.CbtSessionAggregate;
 using CBTPreparation.Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -12,6 +13,12 @@ namespace CBTPreparation.Infrastructure.Persistence.Configurations
             builder.ToTable(CBTDbContextSchema.CbtSessionDbSchema.TableName);
 
             builder.HasKey(x => x.Id);
+
+            builder.Property(x => x.Id)
+               .ValueGeneratedNever()
+               .HasConversion(
+                    id => id.Value,
+                    value => CbtSessionId.Create(value));
 
             builder.Property(x => x.NumberOfQuestion)
                 .IsRequired();
@@ -39,6 +46,11 @@ namespace CBTPreparation.Infrastructure.Persistence.Configurations
             {
                 cb.ToTable(CBTDbContextSchema.CbtSessionDbSchema.SessionQuestionTableName);
 
+                cb.Property(x => x.Id)
+                   .ValueGeneratedNever()
+                   .HasConversion(id => id.Value,
+                                  value => SessionQuestionId.Create(value));
+
                 cb.HasKey(x => x.Id);
 
                 cb.WithOwner()
@@ -63,6 +75,9 @@ namespace CBTPreparation.Infrastructure.Persistence.Configurations
                 cb.OwnsMany(x => x.PaidOptions, pd =>
                 {
                     pd.ToTable(CBTDbContextSchema.CbtSessionDbSchema.PaidOptionTableName);
+
+                    pd.WithOwner()
+                    .HasForeignKey(x => x.SessionQuestionId);
 
                     pd.Property(x => x.OptionContent)
                      .IsRequired()

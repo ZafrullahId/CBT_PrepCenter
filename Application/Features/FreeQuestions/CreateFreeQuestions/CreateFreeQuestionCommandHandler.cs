@@ -1,5 +1,4 @@
-﻿using CBTPreparation.Application.Abstractions.Repositories;
-using CBTPreparation.Application.Abstractions.Service;
+﻿using CBTPreparation.Application.Abstractions.Service;
 using CBTPreparation.Application.Shared;
 using CBTPreparation.Domain.FreeQuestionAggregate;
 using MapsterMapper;
@@ -30,7 +29,8 @@ namespace CBTPreparation.Application.Features.FreeQuestions.CreateFreeQuestions
                         var optAlpha = option.Name;
                         var optContent = option.GetValue(result.Option);
                         bool isCorrect = optAlpha.Equals(result.Answer, StringComparison.OrdinalIgnoreCase);
-                        question.AddOption(optContent.ToString(),
+                        question.AddOption(question.Id,
+                                           optContent.ToString(),
                                            char.Parse(optAlpha),
                                            isCorrect);
                     }

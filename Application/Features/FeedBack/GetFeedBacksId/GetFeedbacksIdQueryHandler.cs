@@ -1,35 +1,34 @@
-﻿using CBTPreparation.Application.Abstractions.Repositories;
-using CBTPreparation.Application.Shared;
+﻿using CBTPreparation.Application.Shared;
+using CBTPreparation.Domain.StudentAggregate;
 using MapsterMapper;
 using MediatR;
 
 namespace CBTPreparation.Application.Features.FeedBack.GetFeedBacksId
 {
-    public class GetFeedbacksQueryHandler : IRequestHandler<GetFeedbacksIdQuery, List<GetFeedbacksIdQueryResponse>>
+    public class GetFeedbacksQueryHandler : IRequestHandler<GetFeedbacksIdQuery, GetFeedbacksIdQueryResponse>
     {
-        private readonly IFeedbackRepository _feedbackRepository;
+        private readonly IStudentRepository _studentRepository;
         private readonly IMapper _mapper;
 
-        public GetFeedbacksQueryHandler(IFeedbackRepository feedbackRepository, IMapper mapper)
+        public GetFeedbacksQueryHandler(IStudentRepository studentRepository, IMapper mapper)
         {
-            _feedbackRepository = feedbackRepository;
+            _studentRepository = studentRepository;
             _mapper = mapper;
         }
 
-        public async Task<List<GetFeedbacksIdQueryResponse>> Handle(GetFeedbacksIdQuery request, CancellationToken cancellationToken)
+        public async Task<GetFeedbacksIdQueryResponse> Handle(GetFeedbacksIdQuery request, CancellationToken cancellationToken)
         {
-            var feedbacks = await _feedbackRepository.GetAllAsyncId(request.StudentId,cancellationToken);
+            var feedbacks = await _studentRepository.GetAllFeedbackByStudentIdAsync(request.StudentId, cancellationToken);
 
             if (feedbacks is { Count: > 0 })
             {
-                var mappedFeedbacks = _mapper.Map<List<GetFeedbacksIdQueryResponse>>(feedbacks);
-                return mappedFeedbacks;
+                var mappedFeedbacks = _mapper.Map<GetFeedbacksIdQueryResponse>(feedbacks);
+                return new GetFeedbacksIdQueryResponse(
+                    feedbacks.Select(x => x.Comment),
+                    new BaseResponse("Student Feedback Successfully Retrieved", false));
             }
-
-            return new List<GetFeedbacksIdQueryResponse>
-            {
-                new GetFeedbacksIdQueryResponse(string.Empty, new BaseResponse("No Student Feedback Yet", false))
-            };
+            return new GetFeedbacksIdQueryResponse([], new BaseResponse("No Student Feedback Yet", false));
         }
+
     }
 }

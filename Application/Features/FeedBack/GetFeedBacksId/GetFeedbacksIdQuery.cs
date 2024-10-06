@@ -1,7 +1,8 @@
-﻿using MediatR;
+﻿using CBTPreparation.Domain.StudentAggregate;
+using MediatR;
 
 
 namespace CBTPreparation.Application.Features.FeedBack.GetFeedBacksId
 {
-    public record GetFeedbacksIdQuery(Guid StudentId) : IRequest<List<GetFeedbacksIdQueryResponse>>;
+    public record GetFeedbacksIdQuery(StudentId StudentId) : IRequest<GetFeedbacksIdQueryResponse>;
 }

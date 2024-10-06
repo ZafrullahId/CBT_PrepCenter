@@ -1,24 +1,33 @@
-﻿using CBTPreparation.Application.Abstractions.Repositories;
-using CBTPreparation.Application.Shared;
+﻿using CBTPreparation.Application.Shared;
+using CBTPreparation.Domain.StudentAggregate;
+using CBTPreparation.Domain.UserAggregate;
 using MediatR;
 
 namespace CBTPreparation.Application.Features.Students.GetStudent
 {
-    public class GetStudentQueryHandler(IStudentRepository _studentRepository) : IRequestHandler<GetStudentQuery, GetStudentQueryResponse>
+    public class GetStudentQueryHandler(IStudentRepository _studentRepository, IUserRepository _userRepository) : IRequestHandler<GetStudentQuery, GetStudentQueryResponse>
     {
         public async Task<GetStudentQueryResponse> Handle(GetStudentQuery request, CancellationToken cancellationToken)
         {
-            var student = await _studentRepository.GetAsync(request.StudentId, cancellationToken);
+            var student = await _studentRepository.GetStudentAsync(request.StudentId, cancellationToken);
 
-            return student is null
-                ? throw new StudentNotFoundException(request.StudentId)
-                : new GetStudentQueryResponse(
-               student.User.FirstName,
-               student.User.LastName,
-               student.User.Email,
-                new BaseResponse(
-                "Student Retrieved Successfully",
-                true));
+            if (student is { })
+            {
+                var studentUser = await _userRepository.GetAsync(x => x.Id == student.UserId, cancellationToken);
+
+                return new GetStudentQueryResponse(
+                               student.Id,
+                               studentUser.FirstName,
+                               studentUser.LastName,
+                               studentUser.Email,
+                               student.Department.Name,
+                               student.Courses.Select(x => x.Name),
+                                new BaseResponse(
+                                "Student Retrieved Successfully",
+                                true));
+            }
+
+            throw new StudentNotFoundException(request.StudentId);
         }
     }
 }

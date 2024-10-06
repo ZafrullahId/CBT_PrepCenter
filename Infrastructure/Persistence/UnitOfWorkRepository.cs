@@ -1,4 +1,4 @@
-﻿using CBTPreparation.Application.Abstractions.Repositories;
+﻿using CBTPreparation.Domain;
 using CBTPreparation.Infrastructure.Persistence.Context;
 
 namespace CBTPreparation.Infrastructure.Persistence

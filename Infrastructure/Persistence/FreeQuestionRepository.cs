@@ -1,5 +1,4 @@
-﻿using CBTPreparation.Application.Abstractions.Repositories;
-using CBTPreparation.Infrastructure.Persistence.Context;
+﻿using CBTPreparation.Infrastructure.Persistence.Context;
 using CBTPreparation.Domain.CbtSessionAggregate;
 using CBTPreparation.Domain.FreeQuestionAggregate;
 

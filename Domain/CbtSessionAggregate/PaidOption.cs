@@ -4,11 +4,14 @@ namespace CBTPreparation.Domain.CbtSessionAggregate
 {
     public class PaidOption : Option
     {
+        public SessionQuestionId SessionQuestionId { get; init; }
         internal PaidOption(char optionAlpha,
                             string optionContent,
                             bool isCorrect,
-                            string? imageUrl) : base(optionContent, optionAlpha, isCorrect, imageUrl)
+                            string? imageUrl,
+                            SessionQuestionId sessionQuestionId) : base(optionContent, optionAlpha, isCorrect, imageUrl)
         {
+            SessionQuestionId = sessionQuestionId;
         }
 
         public override IEnumerable<object> GetEqualityComponents()

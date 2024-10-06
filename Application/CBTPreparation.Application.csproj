@@ -29,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CBTPreparation.BuildingBlocks\CBTPreparation.BuildingBlocks.csproj" />
     <ProjectReference Include="..\Domain\CBTPreparation.Domain.csproj" />
   </ItemGroup>
 

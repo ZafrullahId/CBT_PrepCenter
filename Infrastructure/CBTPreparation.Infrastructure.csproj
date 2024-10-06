@@ -34,6 +34,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj" />
     <ProjectReference Include="..\Application\CBTPreparation.Application.csproj" />
+    <ProjectReference Include="..\Domain\CBTPreparation.Domain.csproj" />
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 

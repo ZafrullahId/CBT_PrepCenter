@@ -1,9 +1,8 @@
 ﻿using CBTPreparation.Application.Abstractions;
-using CBTPreparation.Application.Abstractions.Repositories;
 using CBTPreparation.Application.Shared;
 using CBTPreparation.Domain.StudentAggregate;
 using CBTPreparation.Domain.UserAggregate;
-using Domain.Enum;
+using Domain;
 using MediatR;
 
 namespace CBTPreparation.Application.Features.Students.CreateStudent
@@ -21,19 +20,15 @@ namespace CBTPreparation.Application.Features.Students.CreateStudent
                 request.FirstName,
                 request.LastName,
                 request.Email,
-                _passwordHasher.Hash(request.Password),
-                Role.Student);
+                false,
+                Constants.RoleConstant.StudentRoleName,
+                _passwordHasher.Hash(request.Password));
 
-            var student = Student.Create(user);
+            var student = Student.Create(user.Id);
 
-            await _studentRepository.CreateAsync(student, cancellationToken);
+            await _studentRepository.CreateStudentAsync(student, cancellationToken);
 
-            return new CreateStudentCommandResponse(
-                student.Id,
-                user.FirstName,
-                user.LastName,
-                user.Email,
-                user.PasswordHash,
+            return new CreateStudentCommandResponse(student.Id,
                 new BaseResponse(
                 "Student Successfully Created",
                 true));

@@ -6,13 +6,15 @@ namespace CBTPreparation.Domain.AdminAggregate;
 public class Admin : AggregateRoot<AdminId>
 {
     public UserId UserId { get; init; }
-    private Admin(AdminId id, UserId userId) : base(id)
+    private Admin(AdminId id) : base(id)
     {
-        UserId = userId;
     }
+    private Admin() : this(null!) { }
     public static Admin Create(UserId userId)
     {
-        return new Admin(AdminId.CreateUniqueId(),
-                         userId);
+        return new Admin(AdminId.CreateUniqueId())
+        {
+            UserId = userId
+        };
     }
 }

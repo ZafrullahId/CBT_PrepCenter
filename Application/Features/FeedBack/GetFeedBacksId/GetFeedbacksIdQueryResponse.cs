@@ -3,6 +3,6 @@
 namespace CBTPreparation.Application.Features.FeedBack.GetFeedBacksId
 {
     public record GetFeedbacksIdQueryResponse(
-    string Comment,
+    IEnumerable<string> Comment,
     BaseResponse BaseResponse);
 }

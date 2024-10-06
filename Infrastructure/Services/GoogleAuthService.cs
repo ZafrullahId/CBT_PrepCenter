@@ -1,7 +1,7 @@
 ﻿using CBTPreparation.Application.Abstractions;
 using Google.Apis.Auth;
 
-namespace CBTPreparation_Infrastructure.Services
+namespace CBTPreparation.Infrastructure.Services
 {
     public class GoogleAuthService : IGoogleAuthService
     {

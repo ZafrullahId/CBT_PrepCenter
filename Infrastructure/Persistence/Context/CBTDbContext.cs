@@ -2,9 +2,9 @@
 using CBTPreparation.Domain.CbtSessionAggregate;
 using CBTPreparation.Domain.FreeQuestionAggregate;
 using CBTPreparation.Domain.StudentAggregate;
-using CBTPreparation.Domain.TrialTransactionAggregate;
 using CBTPreparation.Domain.UserAggregate;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 
 namespace CBTPreparation.Infrastructure.Persistence.Context
 {
@@ -20,6 +20,10 @@ namespace CBTPreparation.Infrastructure.Persistence.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema(CBTDbContextSchema.DefaultSchema);
+
+            modelBuilder.Entity<Student>().HasQueryFilter(p => !p.IsDeleted);
+
+            modelBuilder.Entity<Admin>().HasQueryFilter(p => !p.IsDeleted);
 
             var infrastructureAssembly = typeof(IAssemblyMarker).Assembly;
             modelBuilder.ApplyConfigurationsFromAssembly(infrastructureAssembly);

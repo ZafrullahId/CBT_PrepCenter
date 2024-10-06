@@ -1,6 +1,5 @@
 ﻿using CBTPreparation.BuildingBlocks.Domain;
 using CBTPreparation.Domain.Entity;
-using CBTPreparation.Domain.TrialTransactionAggregate;
 using CBTPreparation.Domain.UserAggregate;
 namespace CBTPreparation.Domain.StudentAggregate;
 
@@ -14,17 +13,26 @@ public class Student : AggregateRoot<StudentId>
     public Department? Department { get; private set; }
     public IReadOnlyCollection<Course> Courses => _courses;
     public IReadOnlyCollection<Feedback> Feedbacks => _feedbacks;
-
     public IReadOnlyCollection<TrialTransaction> Transactions => _trialTransactions;
 
-    private Student(StudentId studentId, UserId userId, int unusedTrials = 3) : base(studentId)
+    private Student(StudentId studentId) : base(studentId)
     {
-        UserId = userId;
-        UnusedTrials = unusedTrials;
+        _trialTransactions = [];
+        _feedbacks = [];
+        _courses = [];
     }
+    private Student() : base(null!) { }
+    //private Student(StudentId studentId, UserId userId, int unusedTrials = 3) : base(studentId)
+    //{
+    //    UserId = userId;
+    //    UnusedTrials = unusedTrials;
+    //}
     public static Student Create(UserId userId)
     {
-        var student = new Student(StudentId.CreateUniqueId(), userId);
+        var student = new Student(StudentId.CreateUniqueId())
+        {
+            UserId = userId
+        };
         return student;
     }
     public void Update(string departmentName, IReadOnlyList<Course> courses)

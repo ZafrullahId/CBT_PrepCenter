@@ -29,14 +29,12 @@
             public const string ForeignKey = "StudentId";
             public const string CourseName = "Course_Name";
             public const string FeedBackTableName = "Feedbacks";
+            public const string TrialTransactionTableName = "TrialTransactions";
+            public const string TrialTransactionForeignKey = "StudentId";
+            public const string TrialTransactionTotalAmountBackendField = "_totalAmount";
             public const string DepartmentName = "Department_Name";
             public const string CourseBackendField = "_courses";
             public const string FeedbacksBackendField = "_feedbacks";
-        }
-        public static class TralTransactionDbSchema
-        {
-            public const string TableName = "TralTransactions";
-            public const string ForeignKey = "StudentId";
         }
         public static class UserDbSchema
         {

@@ -1,7 +1,8 @@
-﻿using MediatR;
+﻿using CBTPreparation.Domain.StudentAggregate;
+using MediatR;
 
 namespace CBTPreparation.Application.Features.Students.GetStudent
 {
-    public record GetStudentQuery(Guid StudentId) : IRequest<GetStudentQueryResponse>;
+    public record GetStudentQuery(StudentId StudentId) : IRequest<GetStudentQueryResponse>;
     
 }

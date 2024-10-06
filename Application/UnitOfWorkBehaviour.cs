@@ -1,4 +1,4 @@
-﻿using CBTPreparation.Application.Abstractions.Repositories;
+﻿using CBTPreparation.Domain;
 using MediatR;
 
 namespace CBTPreparation_Infrastructure.Persistence

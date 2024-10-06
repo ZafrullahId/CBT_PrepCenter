@@ -1,4 +1,4 @@
-﻿using CBTPreparation.Application.Features.Students.CreateStudent;
+using CBTPreparation.Application.Features.Students.CreateStudent;
 using CBTPreparation_Application.Abstractions;
 using MapsterMapper;
 using MediatR;
@@ -20,7 +20,8 @@ namespace CBTPreparation.APIs.Endpoints.Students.CreateStudent
                 var response = await mediator.Send(command, cancellationToken);
 
                 return mapper.Map<CreateStudentResponse>(response);
-            }).WithTags(EndpointSchema.Student);
+            }).Validator< CreateStudentRequest>()
+            .WithTags(EndpointSchema.Student);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using CBTPreparation.Application.Features.FeedBack.CreateFeedBack;
+using CBTPreparation.Application.Features.FeedBack.CreateFeedBack;
 using CBTPreparation_Application.Abstractions;
 using MapsterMapper;
 using MediatR;
@@ -20,7 +20,8 @@ namespace CBTPreparation.APIs.Endpoints.FeedBack.CreateFeedback
                 var response = await mediator.Send(command, cancellationToken);
 
                 return mapper.Map<CreateFeedbackResponse>(response);
-            });
+            }).Validator<CreateFeedbackRequest>()
+            .WithTags(EndpointSchema.Feedback);
         }
     }
 }

@@ -1,18 +1,19 @@
 ﻿using CBTPreparation.APIs.Endpoints.FeedBack.GetFeedbacks;
+using CBTPreparation.APIs.Filters;
 using CBTPreparation.Application.Features.FeedBack.GetFeedBacksId;
 using CBTPreparation_Application.Abstractions;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CBTPreparation.APIs.Endpoints.FeedBack.GetFeedbacksId
+namespace CBTPreparation.APIs.Endpoints.FeedBack.GetStudentFeedback
 {
-    public class GetFeedbacksIdEndpoint : IEndpoint
+    public class GetStudentFeedbackEndpoint : IEndpoint
     {
         public void MapEndpoint(IEndpointRouteBuilder app)
         {
-            app.MapGet("/feedbackstudent-id/{feedbackstudent-id:guid}", async (
-                   [AsParameters] GetFeedbacksIdRequest request,
+            app.MapGet("/feedbacks/student/{student-id:guid}", async (
+                   [AsParameters] GetStudentFeedbackRequest request,
                     IMapper mapper,
                     IMediator mediator,
                     CancellationToken cancellationToken) =>
@@ -21,7 +22,8 @@ namespace CBTPreparation.APIs.Endpoints.FeedBack.GetFeedbacksId
                 var result = await mediator.Send(command, cancellationToken);
 
                 return mapper.Map<IEnumerable<GetFeedbacksResponse>>(result);
-            });
+            }).Validator<GetStudentFeedbackRequest>()
+            .WithTags(EndpointSchema.Feedback);
         }
     }
 }

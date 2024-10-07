@@ -1,4 +1,5 @@
-﻿using CBTPreparation.Application.Features.FeedBack.GetFeedBack;
+﻿using CBTPreparation.APIs.Filters;
+using CBTPreparation.Application.Features.FeedBack.GetFeedBack;
 using CBTPreparation_Application.Abstractions;
 using MapsterMapper;
 using MediatR;
@@ -10,7 +11,7 @@ namespace CBTPreparation.APIs.Endpoints.FeedBack.GetFeedback
     {
         public void MapEndpoint(IEndpointRouteBuilder app)
         {
-            app.MapGet("/feedback/{feedback-id:guid}", async (
+            app.MapGet("/feedbacks/{feedback-id:guid}", async (
                     [AsParameters] GetFeedbackRequest request,
                     IMapper mapper,
                     IMediator mediator,
@@ -20,7 +21,8 @@ namespace CBTPreparation.APIs.Endpoints.FeedBack.GetFeedback
                 var response = await mediator.Send(command, cancellationToken);
 
                 return mapper.Map<GetFeedbackResponse>(response);
-            });
+            }).Validator<GetFeedbackRequest>()
+            .WithTags(EndpointSchema.Feedback);
         }
     }
 }

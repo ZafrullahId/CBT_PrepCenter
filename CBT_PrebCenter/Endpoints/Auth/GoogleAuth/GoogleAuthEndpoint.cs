@@ -1,17 +1,18 @@
-﻿using CBTPreparation.Application.Features.GoogleAuth;
+﻿using CBTPreparation.APIs.Endpoints.Auth.GetRefreshToken;
+using CBTPreparation.APIs.Filters;
+using CBTPreparation.Application.Features.GoogleAuth;
 using CBTPreparation_Application.Abstractions;
 using MapsterMapper;
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
 
-namespace CBTPreparation.APIs.Endpoints.GoogleAuth
+namespace CBTPreparation.APIs.Endpoints.Auth.GoogleAuth
 {
     public class GoogleAuthEndpoint : IEndpoint
     {
         public void MapEndpoint(IEndpointRouteBuilder app)
         {
-            app.MapGet("/google/{id-token}", async (
-                    [AsParameters] GoogleAuthRequestEndpoint request,
+            app.MapGet("/token/google/{token-id}", async (
+                    [AsParameters] GoogleAuthRequest request,
                     IMapper mapper,
                     IMediator mediator,
                     CancellationToken cancellationToken) =>
@@ -19,8 +20,9 @@ namespace CBTPreparation.APIs.Endpoints.GoogleAuth
                 var command = mapper.Map<GoogleAuthCommand>(request);
                 var response = await mediator.Send(command, cancellationToken);
 
-                return mapper.Map< GoogleAuthResponseEndpoint> (response);
-            });
+                return mapper.Map<GoogleAuthResponse>(response);
+            }).Validator<GetTokenRequest>()
+            .WithTags(EndpointSchema.Auth);
         }
     }
 }

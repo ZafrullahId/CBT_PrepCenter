@@ -1,6 +1,6 @@
 ﻿using CBTPreparation.APIs.Endpoints.FeedBack.GetFeedbacks;
 using CBTPreparation.APIs.Filters;
-using CBTPreparation.Application.Features.FeedBack.GetFeedBacksId;
+using CBTPreparation.Application.Features.Feedback.GetStudentFeedbacks;
 using CBTPreparation_Application.Abstractions;
 using MapsterMapper;
 using MediatR;
@@ -18,7 +18,7 @@ namespace CBTPreparation.APIs.Endpoints.FeedBack.GetStudentFeedback
                     IMediator mediator,
                     CancellationToken cancellationToken) =>
             {
-                var command = mapper.Map<GetFeedbacksIdQuery>(request);
+                var command = mapper.Map<GetStudentFeedbackQuery>(request);
                 var result = await mediator.Send(command, cancellationToken);
 
                 return mapper.Map<IEnumerable<GetFeedbacksResponse>>(result);

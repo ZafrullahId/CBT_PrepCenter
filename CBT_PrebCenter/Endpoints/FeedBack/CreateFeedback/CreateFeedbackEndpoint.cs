@@ -1,5 +1,5 @@
 using CBTPreparation.APIs.Filters;
-using CBTPreparation.Application.Features.FeedBack.CreateFeedBack;
+using CBTPreparation.Application.Features.Feedback.CreateFeedback;
 using CBTPreparation_Application.Abstractions;
 using MapsterMapper;
 using MediatR;

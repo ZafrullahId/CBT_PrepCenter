@@ -7,12 +7,12 @@ namespace CBTPreparation.Infrastructure.Persistence
 {
     public class UserRepository(CBTDbContext context) : IUserRepository
     {
-        public  async Task CreateAsync(User user, CancellationToken cancellationToken)
+        public  async Task CreateUserAsync(User user, CancellationToken cancellationToken)
         {
             await context.Users.AddAsync(user, cancellationToken);
         }
 
-        public  async Task<User?> GetAsync(Expression<Func<User, bool>> expression, CancellationToken cancellationToken)
+        public  async Task<User?> GetUserAsync(Expression<Func<User, bool>> expression, CancellationToken cancellationToken)
         {
             return await context.Users
                  .Where(expression)

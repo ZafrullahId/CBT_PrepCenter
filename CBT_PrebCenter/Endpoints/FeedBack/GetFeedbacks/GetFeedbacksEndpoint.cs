@@ -1,4 +1,4 @@
-﻿using CBTPreparation.Application.Features.FeedBack.GetsFeedBack;
+﻿using CBTPreparation.Application.Features.Feedback.GetFeedbacks;
 using CBTPreparation_Application.Abstractions;
 using MapsterMapper;
 using MediatR;

@@ -4,7 +4,7 @@ using CBTPreparation.Domain;
 using CBTPreparation.Domain.StudentAggregate;
 using MediatR;
 
-namespace CBTPreparation.Application.Features.FeedBack.CreateFeedBack
+namespace CBTPreparation.Application.Features.Feedback.CreateFeedback
 {
     public class CreateFeedbackCommandHandler(IStudentRepository _studentRepository, IUnitOfWorkRepository _unitOfWorkRepository) : IRequestHandler<CreateFeedbackCommand, CreateFeedbackCommandResponse>
     {

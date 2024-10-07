@@ -13,7 +13,7 @@ namespace CBTPreparation.Application.Features.Students.GetStudent
 
             if (student is { })
             {
-                var studentUser = await _userRepository.GetAsync(x => x.Id == student.UserId, cancellationToken);
+                var studentUser = await _userRepository.GetUserAsync(x => x.Id == student.UserId, cancellationToken);
 
                 return new GetStudentQueryResponse(
                                student.Id,

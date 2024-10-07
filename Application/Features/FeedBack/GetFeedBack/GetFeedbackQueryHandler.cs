@@ -2,7 +2,7 @@
 using CBTPreparation.Domain.StudentAggregate;
 using MediatR;
 
-namespace CBTPreparation.Application.Features.FeedBack.GetFeedBack
+namespace CBTPreparation.Application.Features.Feedback.GetFeedback
 {
     public class GetFeedbackQueryHandler(IStudentRepository _studentRepository) : IRequestHandler<GetFeedbackQuery, GetFeedbackQueryResponse>
     {

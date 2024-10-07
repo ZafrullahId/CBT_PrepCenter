@@ -38,7 +38,7 @@ namespace CBTPreparation.Application.Features.GoogleAuth
                 throw new GoogleTokenIdNotFoundException($"{ex.Message}");
             }
 
-            var dbUser = await _userRepository.GetAsync(u => u.Email == payload.Email, cancellationToken);
+            var dbUser = await _userRepository.GetUserAsync(u => u.Email == payload.Email, cancellationToken);
 
             if (dbUser is null)
             {

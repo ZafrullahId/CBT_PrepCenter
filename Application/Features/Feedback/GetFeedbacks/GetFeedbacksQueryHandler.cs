@@ -1,10 +1,9 @@
-﻿using CBTPreparation.Application.Features.FeedBack.GetsFeedBack;
-using CBTPreparation.Application.Shared;
+﻿using CBTPreparation.Application.Shared;
 using CBTPreparation.Domain.StudentAggregate;
 using MapsterMapper;
 using MediatR;
 
-namespace CBTPreparation_Application.Features.FeedBack.GetsFeedBack
+namespace CBTPreparation.Application.Features.Feedback.GetFeedbacks
 {
     public class GetFeedbacksQueryHandler : IRequestHandler<GetFeedbacksQuery, GetFeedbacksQueryResponse>
     {
@@ -27,7 +26,7 @@ namespace CBTPreparation_Application.Features.FeedBack.GetsFeedBack
                     feedbacks.Select(x => x.Comment),
                     new BaseResponse("Student Feedback Successfully Retrieved", false));
             }
-                
+
             return new GetFeedbacksQueryResponse([], new BaseResponse("No FeedBacks Yet", false));
         }
     }

@@ -1,6 +1,6 @@
 ﻿using CBTPreparation.Application.Shared;
 
-namespace CBTPreparation.Application.Features.FeedBack.GetFeedBack
+namespace CBTPreparation.Application.Features.Feedback.GetFeedback
 {
     public record GetFeedbackQueryResponse(
         string Comment,

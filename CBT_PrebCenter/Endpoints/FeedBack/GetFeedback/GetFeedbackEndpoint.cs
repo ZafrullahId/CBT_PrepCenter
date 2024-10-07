@@ -10,8 +10,8 @@ namespace CBTPreparation.APIs.Endpoints.FeedBack.GetFeedback
     {
         public void MapEndpoint(IEndpointRouteBuilder app)
         {
-            app.MapGet("/feedback/{feedback-id}", async (
-                    [FromRoute] GetFeedbackRequest request,
+            app.MapGet("/feedback/{feedback-id:guid}", async (
+                    [AsParameters] GetFeedbackRequest request,
                     IMapper mapper,
                     IMediator mediator,
                     CancellationToken cancellationToken) =>

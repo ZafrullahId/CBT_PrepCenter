@@ -1,4 +1,5 @@
-﻿using CBTPreparation.Application.Features.FeedBack.GetFeedBacksId;
+﻿using CBTPreparation.APIs.Endpoints.FeedBack.GetFeedbacks;
+using CBTPreparation.Application.Features.FeedBack.GetFeedBacksId;
 using CBTPreparation_Application.Abstractions;
 using MapsterMapper;
 using MediatR;
@@ -10,8 +11,8 @@ namespace CBTPreparation.APIs.Endpoints.FeedBack.GetFeedbacksId
     {
         public void MapEndpoint(IEndpointRouteBuilder app)
         {
-            app.MapGet("/feedbacks/{feedback-id}", async (
-                   [FromRoute] GetFeedbacksIdRequest request,
+            app.MapGet("/feedbackstudent-id/{feedbackstudent-id:guid}", async (
+                   [AsParameters] GetFeedbacksIdRequest request,
                     IMapper mapper,
                     IMediator mediator,
                     CancellationToken cancellationToken) =>
@@ -19,7 +20,7 @@ namespace CBTPreparation.APIs.Endpoints.FeedBack.GetFeedbacksId
                 var command = mapper.Map<GetFeedbacksIdQuery>(request);
                 var result = await mediator.Send(command, cancellationToken);
 
-                return mapper.Map<IEnumerable<GetFeedbacksIdQuery>>(result);
+                return mapper.Map<IEnumerable<GetFeedbacksResponse>>(result);
             });
         }
     }

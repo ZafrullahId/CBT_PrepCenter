@@ -2,5 +2,5 @@
 
 namespace CBTPreparation.APIs.Endpoints.FeedBack.GetFeedback
 {
-    public record GetFeedbackRequest([FromRoute(Name = "feedback-id")] string FeedbackId);
+    public record GetFeedbackRequest([FromRoute(Name = "feedback-id")] Guid FeedbackId);
 }

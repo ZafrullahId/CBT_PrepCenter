@@ -11,7 +11,7 @@ namespace CBTPreparation.APIs.Endpoints.GoogleAuth
         public void MapEndpoint(IEndpointRouteBuilder app)
         {
             app.MapGet("/google/{id-token}", async (
-                    [FromRoute] GoogleAuthRequestEndpoint request,
+                    [AsParameters] GoogleAuthRequestEndpoint request,
                     IMapper mapper,
                     IMediator mediator,
                     CancellationToken cancellationToken) =>

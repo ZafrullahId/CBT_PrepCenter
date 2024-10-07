@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using CBTPreparation.APIs.Endpoints.Students.CreateStudent;
+using FluentValidation;
 
 namespace CBT.APIs.Endpoints.Students.CreateStudent
 {

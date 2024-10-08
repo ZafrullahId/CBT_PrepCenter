@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CBTPreparation.Infrastructure.Migrations
 {
     [DbContext(typeof(CBTDbContext))]
-    [Migration("20241006095610_ddd_v1")]
+    [Migration("20241008091840_ddd_v1")]
     partial class ddd_v1
     {
         /// <inheritdoc />
@@ -189,7 +189,13 @@ namespace CBTPreparation.Infrastructure.Migrations
                     b.Property<int>("UnusedTrials")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Students", "cbtprep");
                 });
@@ -423,6 +429,12 @@ namespace CBTPreparation.Infrastructure.Migrations
 
             modelBuilder.Entity("CBTPreparation.Domain.StudentAggregate.Student", b =>
                 {
+                    b.HasOne("CBTPreparation.Domain.UserAggregate.User", null)
+                        .WithOne()
+                        .HasForeignKey("CBTPreparation.Domain.StudentAggregate.Student", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.OwnsMany("CBTPreparation.Domain.StudentAggregate.Course", "Courses", b1 =>
                         {
                             b1.Property<Guid>("StudentId")
@@ -514,23 +526,6 @@ namespace CBTPreparation.Infrastructure.Migrations
                                 .HasForeignKey("StudentId");
                         });
 
-                    b.OwnsOne("CBTPreparation.Domain.UserAggregate.UserId", "UserId", b1 =>
-                        {
-                            b1.Property<Guid>("StudentId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<Guid>("Value")
-                                .HasColumnType("uniqueidentifier")
-                                .HasColumnName("UserId");
-
-                            b1.HasKey("StudentId");
-
-                            b1.ToTable("Students", "cbtprep");
-
-                            b1.WithOwner()
-                                .HasForeignKey("StudentId");
-                        });
-
                     b.OwnsMany("CBTPreparation.Domain.StudentAggregate.TrialTransaction", "Transactions", b1 =>
                         {
                             b1.Property<Guid>("Id")
@@ -572,9 +567,11 @@ namespace CBTPreparation.Infrastructure.Migrations
                                 .HasColumnType("uniqueidentifier");
 
                             b1.Property<decimal>("TotalAmount")
+                                .HasPrecision(18, 2)
                                 .HasColumnType("decimal(18,2)");
 
                             b1.Property<decimal>("TrialPrice")
+                                .HasPrecision(18, 2)
                                 .HasColumnType("decimal(18,2)");
 
                             b1.HasKey("Id");
@@ -594,9 +591,6 @@ namespace CBTPreparation.Infrastructure.Migrations
                     b.Navigation("Feedbacks");
 
                     b.Navigation("Transactions");
-
-                    b.Navigation("UserId")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("CBTPreparation.Domain.UserAggregate.User", b =>

@@ -1,4 +1,5 @@
 ﻿using CBTPreparation.Domain.StudentAggregate;
+using CBTPreparation.Domain.UserAggregate;
 using CBTPreparation.Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -21,6 +22,11 @@ namespace CBTPreparation.Infrastructure.Persistence.Configurations
             builder.Property(x => x.UnusedTrials)
                 .IsRequired();
 
+            builder.HasOne<User>()
+              .WithOne()
+              .HasForeignKey<Student>(x => x.UserId)
+              .OnDelete(DeleteBehavior.Cascade);
+
             builder.OwnsOne(x => x.Department, dp =>
             {
                 dp.Property(x => x.Name)
@@ -30,12 +36,6 @@ namespace CBTPreparation.Infrastructure.Persistence.Configurations
                 .HasColumnName(CBTDbContextSchema.StudentDbSchema.DepartmentName);
             });
 
-            builder.OwnsOne(x => x.UserId, ud =>
-            {
-                ud.Property(x => x.Value)
-                .HasColumnName(CBTDbContextSchema.UserDbSchema.ForeignKey);
-            });
-
             builder.OwnsMany(x => x.Courses, cr =>
             {
                 cr.Property(x => x.Name)
@@ -43,7 +43,14 @@ namespace CBTPreparation.Infrastructure.Persistence.Configurations
                 .HasMaxLength(20)
                 .IsUnicode()
                 .HasColumnName(CBTDbContextSchema.StudentDbSchema.CourseName);
-            });
+
+                cr.WithOwner()
+                .HasForeignKey(CBTDbContextSchema.StudentDbSchema.ForeignKey);
+
+            }).UsePropertyAccessMode(PropertyAccessMode.Field);
+
+            builder.Navigation(x => x.Courses)
+                .Metadata.SetField(CBTDbContextSchema.StudentDbSchema.CourseBackendField);
 
             builder.OwnsMany(x => x.Feedbacks, fb =>
             {
@@ -63,7 +70,10 @@ namespace CBTPreparation.Infrastructure.Persistence.Configurations
                 .IsRequired()
                 .IsUnicode()
                 .HasMaxLength(150);
-            });
+            }).UsePropertyAccessMode(PropertyAccessMode.Field);
+
+            builder.Navigation(x => x.Feedbacks)
+                .Metadata.SetField(CBTDbContextSchema.StudentDbSchema.FeedbacksBackendField);
 
             builder.OwnsMany(x => x.Transactions, txn =>
             {
@@ -83,10 +93,12 @@ namespace CBTPreparation.Infrastructure.Persistence.Configurations
                 .IsRequired();
 
                 txn.Property(x => x.TrialPrice)
-                    .IsRequired();
+                    .IsRequired()
+                    .HasPrecision(18, 2);
 
                 txn.Property(p => p.TotalAmount)
                     .HasField(CBTDbContextSchema.StudentDbSchema.TrialTransactionTotalAmountBackendField)
+                    .HasPrecision(18, 2)
                     .UsePropertyAccessMode(PropertyAccessMode.Field);
 
                 txn.Property(x => x.Quantity)
@@ -96,10 +108,10 @@ namespace CBTPreparation.Infrastructure.Persistence.Configurations
                     .IsRequired()
                     .IsUnicode();
 
-            });
+            }).UsePropertyAccessMode(PropertyAccessMode.Field);
 
-
-
+            builder.Navigation(x => x.Transactions)
+                .Metadata.SetField(CBTDbContextSchema.StudentDbSchema.TrialTransactionBackendField);
         }
 
     }

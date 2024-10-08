@@ -1,4 +1,6 @@
 ﻿using CBTPreparation.Domain.AdminAggregate;
+using CBTPreparation.Domain.StudentAggregate;
+using CBTPreparation.Domain.UserAggregate;
 using CBTPreparation.Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -16,11 +18,16 @@ namespace CBTPreparation.Infrastructure.Persistence.Configurations
         {
             builder.HasKey(x => x.Id);
 
-            builder.OwnsOne(x => x.UserId, ud =>
-            {
-                ud.Property(x => x.Value)
-                .HasColumnName(CBTDbContextSchema.UserDbSchema.ForeignKey);
-            });
+            builder.HasOne<User>()
+              .WithOne()
+              .HasForeignKey<Admin>(x => x.UserId)
+              .OnDelete(DeleteBehavior.Cascade);
+
+            //builder.OwnsOne(x => x.UserId, ud =>
+            //{
+            //    ud.Property(x => x.Value)
+            //    .HasColumnName(CBTDbContextSchema.UserDbSchema.ForeignKey);
+            //});
 
             builder.Property(x => x.Id)
                .ValueGeneratedNever()

@@ -18,6 +18,13 @@ namespace CBTPreparation.Infrastructure.Persistence
                  .Where(expression)
                  .FirstOrDefaultAsync(cancellationToken);
         }
+        
+        public  async Task<User?> GetUserAsync(UserId userId, CancellationToken cancellationToken)
+        {
+            return await context.Users
+                 .Where(x => x.Id == userId)
+                 .FirstOrDefaultAsync(cancellationToken);
+        }
 
         public async Task<User?> LoginAsync(User user, CancellationToken cancellationToken)
         {

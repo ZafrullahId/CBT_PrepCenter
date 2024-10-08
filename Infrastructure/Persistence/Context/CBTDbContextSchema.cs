@@ -32,6 +32,7 @@
             public const string TrialTransactionTableName = "TrialTransactions";
             public const string TrialTransactionForeignKey = "StudentId";
             public const string TrialTransactionTotalAmountBackendField = "_totalAmount";
+            public const string TrialTransactionBackendField = "_trialTransactions";
             public const string DepartmentName = "Department_Name";
             public const string CourseBackendField = "_courses";
             public const string FeedbacksBackendField = "_feedbacks";

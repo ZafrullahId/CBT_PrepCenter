@@ -20,8 +20,11 @@ namespace CBT.APIs.Endpoints.Students.CreateStudent
                 .EmailAddress()
                     .WithMessage("Invalid Email Address.");
 
-            RuleFor(p => p.Password).Cascade(CascadeMode.Stop)
-                .NotEmpty();
+            RuleFor(p => p.Password)
+                .Cascade(CascadeMode.Stop)
+                .NotEmpty()
+                .NotNull()
+                .Length(8);
         }
     }
 }

@@ -51,6 +51,9 @@ namespace CBTPreparation.Infrastructure.Persistence.Configurations
                 .IsRequired(false);
 
             });
+
+            builder.Navigation(x => x.FreeOptions)
+                .Metadata.SetField(CBTDbContextSchema.FreeQuestionDbSchema.FreeOptionBackendField);
         }
     }
 }

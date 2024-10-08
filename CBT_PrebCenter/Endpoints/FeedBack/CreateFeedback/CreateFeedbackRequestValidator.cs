@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace CBT.APIs.Endpoints.FeedBack.CreateFeedback
 {
-    public class CreateFeedbackRequestValidator  : AbstractValidator<CreateFeedbackRequest>
+    public class CreateFeedbackRequestValidator  : AbstractValidator<CreateCommentRequest>
     {
         public CreateFeedbackRequestValidator()
         {

@@ -87,28 +87,6 @@ namespace CBTPreparation.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Students",
-                schema: "cbtprep",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UnusedTrials = table.Column<int>(type: "int", nullable: false),
-                    Department_Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Students", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Users",
                 schema: "cbtprep",
                 columns: table => new
@@ -189,6 +167,60 @@ namespace CBTPreparation.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Students",
+                schema: "cbtprep",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UnusedTrials = table.Column<int>(type: "int", nullable: false),
+                    Department_Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Students", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Students_Users_UserId",
+                        column: x => x.UserId,
+                        principalSchema: "cbtprep",
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PaidOptions",
+                schema: "cbtprep",
+                columns: table => new
+                {
+                    SessionQuestionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OptionContent = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OptionAlpha = table.Column<string>(type: "nvarchar(1)", nullable: false),
+                    IsCorrect = table.Column<bool>(type: "bit", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PaidOptions", x => new { x.SessionQuestionId, x.Id });
+                    table.ForeignKey(
+                        name: "FK_PaidOptions_SessionQuestions_SessionQuestionId",
+                        column: x => x.SessionQuestionId,
+                        principalSchema: "cbtprep",
+                        principalTable: "SessionQuestions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Course",
                 schema: "cbtprep",
                 columns: table => new
@@ -246,9 +278,9 @@ namespace CBTPreparation.Infrastructure.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     StudentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PurchaseDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    TrialPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    TrialPrice = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    TotalAmount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     PaymentMethod = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -270,31 +302,6 @@ namespace CBTPreparation.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "PaidOptions",
-                schema: "cbtprep",
-                columns: table => new
-                {
-                    SessionQuestionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    OptionContent = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OptionAlpha = table.Column<string>(type: "nvarchar(1)", nullable: false),
-                    IsCorrect = table.Column<bool>(type: "bit", nullable: false),
-                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PaidOptions", x => new { x.SessionQuestionId, x.Id });
-                    table.ForeignKey(
-                        name: "FK_PaidOptions_SessionQuestions_SessionQuestionId",
-                        column: x => x.SessionQuestionId,
-                        principalSchema: "cbtprep",
-                        principalTable: "SessionQuestions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Feedbacks_StudentId",
                 schema: "cbtprep",
@@ -306,6 +313,13 @@ namespace CBTPreparation.Infrastructure.Migrations
                 schema: "cbtprep",
                 table: "SessionQuestions",
                 column: "CbtSessionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Students_UserId",
+                schema: "cbtprep",
+                table: "Students",
+                column: "UserId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_TrialTransactions_StudentId",
@@ -342,10 +356,6 @@ namespace CBTPreparation.Infrastructure.Migrations
                 schema: "cbtprep");
 
             migrationBuilder.DropTable(
-                name: "Users",
-                schema: "cbtprep");
-
-            migrationBuilder.DropTable(
                 name: "FreeQuestions",
                 schema: "cbtprep");
 
@@ -359,6 +369,10 @@ namespace CBTPreparation.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "CbtSessions",
+                schema: "cbtprep");
+
+            migrationBuilder.DropTable(
+                name: "Users",
                 schema: "cbtprep");
         }
     }

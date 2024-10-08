@@ -11,8 +11,8 @@ namespace CBTPreparation.APIs.Endpoints.FeedBack.CreateFeedback
     {
         public void MapEndpoint(IEndpointRouteBuilder app)
         {
-            app.MapPost("/feedbacks/", async (
-                    [FromBody] CreateFeedbackRequest request,
+            app.MapPost("/feedbacks/{student-id:guid}", async (
+                    [AsParameters] CreateFeedbackRequest request,
                     IMapper mapper,
                     IMediator mediator,
                     CancellationToken cancellationToken) =>

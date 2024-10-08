@@ -13,7 +13,8 @@ namespace CBTPreparation.Infrastructure.Persistence
         }
         public async Task<Student?> GetStudentAsync(StudentId studentId, CancellationToken cancellationToken)
         {
-            return await context.Students.Where(x => x.Id == studentId).FirstOrDefaultAsync(cancellationToken);
+            return await context.Students
+                .FirstOrDefaultAsync(x => x.Id == studentId, cancellationToken);
         }
         public async Task<List<StudentWithUserDto>> GetAllStudentAsync(CancellationToken cancellationToken)
         {

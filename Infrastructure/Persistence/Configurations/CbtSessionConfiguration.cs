@@ -64,7 +64,7 @@ namespace CBTPreparation.Infrastructure.Persistence.Configurations
 
                 cb.Property(x => x.ChosenOption)
                 .IsRequired(false);
-                
+
                 cb.Property(x => x.IsChosenOptionCorrect)
                 .IsRequired();
 
@@ -88,13 +88,18 @@ namespace CBTPreparation.Infrastructure.Persistence.Configurations
 
                     pd.Property(x => x.ImageUrl)
                     .IsRequired(false);
-                    
+
                     pd.Property(x => x.IsCorrect)
                     .IsRequired();
 
                 }).UsePropertyAccessMode(PropertyAccessMode.Field);
+
+                cb.Navigation(x => x.PaidOptions)
+                .Metadata.SetField(CBTDbContextSchema.CbtSessionDbSchema.PaidOptionBackendField);
             });
 
+            builder.Navigation(x => x.SessionQuestions)
+                .Metadata.SetField(CBTDbContextSchema.CbtSessionDbSchema.SessionQuestionBackendField);
         }
     }
 }

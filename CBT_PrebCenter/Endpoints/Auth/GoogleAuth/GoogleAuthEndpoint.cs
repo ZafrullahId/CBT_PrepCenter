@@ -1,5 +1,6 @@
 ﻿using CBTPreparation.APIs.Endpoints.Auth.GetRefreshToken;
 using CBTPreparation.APIs.Filters;
+using CBTPreparation.Application.Features.Auth.GetAuth;
 using CBTPreparation.Application.Features.GoogleAuth;
 using CBTPreparation_Application.Abstractions;
 using MapsterMapper;
@@ -20,7 +21,7 @@ namespace CBTPreparation.APIs.Endpoints.Auth.GoogleAuth
                 var command = mapper.Map<GoogleAuthCommand>(request);
                 var response = await mediator.Send(command, cancellationToken);
 
-                return mapper.Map<GoogleAuthResponse>(response);
+                return mapper.Map<GoogleAuthCommandResponse>(response);
             }).Validator<GetTokenRequest>()
             .WithTags(EndpointSchema.Auth);
         }

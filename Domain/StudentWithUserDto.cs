@@ -1,4 +1,5 @@
-﻿using CBTPreparation.Domain.StudentAggregate;
+﻿using CBTPreparation.Domain.CourseAggregate;
+using CBTPreparation.Domain.StudentAggregate;
 
 namespace CBTPreparation.Domain
 {
@@ -8,5 +9,5 @@ namespace CBTPreparation.Domain
      string LastName,
      string Email,
      string Department,
-     List<string> Courses);
+     List<CourseId> Courses);
 }

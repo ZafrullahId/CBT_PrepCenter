@@ -21,7 +21,8 @@ namespace CBTPreparation.Application.Features.Students.GetStudent
                                studentUser.LastName,
                                studentUser.Email,
                                student.Department.Name,
-                               student.Courses.Select(x => x.Name),
+                               student.CoursesIds.Select(async x => await _studentRepository
+                               .GetCourseAsync(x, cancellationToken)).Select(x => x.Result.Name),
                                 new BaseResponse(
                                 "Student Retrieved Successfully",
                                 true));

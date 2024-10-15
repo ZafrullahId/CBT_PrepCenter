@@ -1,9 +1,8 @@
 ﻿using CBTPreparation.BuildingBlocks.Domain;
-using CBTPreparation.Domain.UserAggregate;
 
 namespace CBTPreparation.Domain.StudentAggregate
 {
-    public sealed class StudentId : ValueObject<UserId>
+    public sealed class StudentId : ValueObject<StudentId>
     {
         public Guid Value { get; init; }
         public override IEnumerable<object> GetEqualityComponents()

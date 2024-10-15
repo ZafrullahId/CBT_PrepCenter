@@ -6,7 +6,7 @@ namespace CBTPreparation.APIs.Endpoints.FeedBack.GetStudentFeedback
     {
         public GetStudentFeedbackValidator()
         {
-            RuleFor(c => c.FeedbackStudentId)
+            RuleFor(c => c.StudentId)
                 .NotEmpty()
                 .NotNull();
         }

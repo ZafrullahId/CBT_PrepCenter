@@ -3,11 +3,6 @@ using CBTPreparation.Application.Shared;
 using CBTPreparation.Domain.StudentAggregate;
 using CBTPreparation.Domain.UserAggregate;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CBTPreparation.Application.Features.Students.UpdateStudent
 {

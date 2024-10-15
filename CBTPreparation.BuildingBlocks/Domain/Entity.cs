@@ -1,6 +1,4 @@
-﻿using CBTPreparation.BuildingBlocks.Domain;
-
-namespace Blogger.BuildingBlocks.Domain;
+﻿namespace CBTPreparation.BuildingBlocks.Domain;
 
 public abstract class Entity<TId> : AuditableEntity, IEquatable<Entity<TId>> where TId : notnull
 {

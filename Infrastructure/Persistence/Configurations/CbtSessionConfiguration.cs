@@ -1,5 +1,5 @@
-﻿using CBTPreparation.Domain.AdminAggregate;
-using CBTPreparation.Domain.CbtSessionAggregate;
+﻿using CBTPreparation.Domain.CbtSessionAggregate;
+using CBTPreparation.Domain.StudentAggregate;
 using CBTPreparation.Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -35,11 +35,16 @@ namespace CBTPreparation.Infrastructure.Persistence.Configurations
             builder.Property(x => x.InProgress)
                 .IsRequired();
 
-            builder.OwnsOne(x => x.StudentId, cb =>
+            //builder.HasOne<Student>()
+            //    .WithMany()
+            //    .HasForeignKey(x => x.StudentId)
+            //    .OnDelete(DeleteBehavior.Cascade);
+
+            builder.OwnsOne(x => x.StudentId, st =>
             {
-                cb.Property(c => c.Value)
-                    .IsRequired()
-                    .HasColumnName(CBTDbContextSchema.CbtSessionDbSchema.StudentId);
+                st.Property(c => c.Value)
+                .IsRequired()
+                .HasColumnName(CBTDbContextSchema.StudentDbSchema.ForeignKey);
             });
 
             builder.OwnsMany(x => x.SessionQuestions, cb =>
@@ -60,7 +65,7 @@ namespace CBTPreparation.Infrastructure.Persistence.Configurations
                 .ValueGeneratedNever()
                 .IsRequired()
                 .HasConversion(id => id.Value,
-                                value => SessionQuestionId.Create(value)); ;
+                                value => SessionQuestionId.Create(value));
 
                 cb.Property(x => x.ChosenOption)
                 .IsRequired(false);

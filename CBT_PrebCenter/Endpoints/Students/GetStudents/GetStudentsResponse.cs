@@ -6,6 +6,9 @@ namespace CBT_PrepCenter.Endpoints.Students.GetStudents
         string FirstName,
         string LastName,
         string Email,
-        string Password,
+        string Department,
+        IEnumerable<string> Courses,
         BaseApiResponse BaseResponse);
+    public record GetStudentsQueryResponse(List<GetStudentsResponse> Students,
+                                           BaseApiResponse BaseResponse);
 }

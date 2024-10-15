@@ -1,5 +1,4 @@
-﻿using CBTPreparation.Domain.AdminAggregate;
-using CBTPreparation.Domain.FreeQuestionAggregate;
+﻿using CBTPreparation.Domain.FreeQuestionAggregate;
 using CBTPreparation.Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

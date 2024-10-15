@@ -1,5 +1,4 @@
-﻿using CBTPreparation.BuildingBlocks.Domain;
-using CBTPreparation.Domain.Common;
+﻿using CBTPreparation.Domain.Common;
 
 namespace CBTPreparation.Domain.FreeQuestionAggregate
 {

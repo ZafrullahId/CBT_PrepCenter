@@ -3,7 +3,6 @@ using CBTPreparation.Application.Features.Students.UpdateStudent;
 using CBTPreparation_Application.Abstractions;
 using MapsterMapper;
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
 
 namespace CBTPreparation.APIs.Endpoints.Students.UpdateStudent
 {
@@ -21,7 +20,7 @@ namespace CBTPreparation.APIs.Endpoints.Students.UpdateStudent
                 var response = await mediator.Send(command, cancellationToken);
 
                 return mapper.Map<UpdateStudentResponse>(response);
-            }).Validator<UpdateStudentRequest>()
+            }).Validator<UpdateStudentRequestModel>()
             .WithTags(EndpointSchema.Student);
         }
     }

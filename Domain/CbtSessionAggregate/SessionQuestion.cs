@@ -1,10 +1,10 @@
-﻿using Blogger.BuildingBlocks.Domain;
+﻿using CBTPreparation.BuildingBlocks.Domain;
 
 namespace CBTPreparation.Domain.CbtSessionAggregate
 {
     public class SessionQuestion : Entity<SessionQuestionId>
     {
-        private readonly List<PaidOption> _paidOptions = new();
+        private readonly List<PaidOption> _paidOptions = null!;
         private SessionQuestion(SessionQuestionId sessionQuestionId) : base(sessionQuestionId)
         {
             _paidOptions = [];
@@ -25,7 +25,7 @@ namespace CBTPreparation.Domain.CbtSessionAggregate
         public char? ChosenOption { get; private set; }
         public bool IsChosenOptionCorrect { get; private set; }
         public string Question { get; private set; } = default!;
-        public IReadOnlyCollection<PaidOption> PaidOptions => _paidOptions;
+        public IReadOnlyCollection<PaidOption> PaidOptions => [.._paidOptions];
         public static SessionQuestion Create(char chosenOption,
                                              CbtSessionId cbtSessionId,
                                              string question,

@@ -18,7 +18,7 @@ namespace CBT_PrepCenter.Endpoints.Students.GetStudents
                 var command = new GetStudentsQuery();
                 var result = await mediator.Send(command, cancellationToken);
 
-                return mapper.Map<IEnumerable<GetStudentsQuery>>(result);
+                return mapper.Map<GetStudentsQueryResponse>(result);
             }).WithTags(EndpointSchema.Student);
         }
     }

@@ -13,8 +13,8 @@ namespace CBTPreparation.APIs.Endpoints.FeedBack.GetFeedbacksId
         {
             app.MapGet("/feedbackstudent-id/{feedbackstudent-id:guid}", async (
                    [AsParameters] GetFeedbacksIdRequest request,
-                    IMapper mapper,
-                    IMediator mediator,
+                    [FromServices] IMapper mapper,
+                    [FromServices] IMediator mediator,
                     CancellationToken cancellationToken) =>
             {
                 var command = mapper.Map<GetFeedbacksIdQuery>(request);

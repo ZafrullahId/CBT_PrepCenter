@@ -3,6 +3,7 @@ using CBTPreparation.APIs.Endpoints;
 using MapsterMapper;
 using MediatR;
 using CBTPreparation.Application.Features.Students.GetStudent;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CBT_PrepCenter.Endpoints.Students.GetStudent
 {
@@ -12,8 +13,8 @@ namespace CBT_PrepCenter.Endpoints.Students.GetStudent
         {
             app.MapGet("/students/{student-id:guid}", async (
                     [AsParameters] GetStudentRequest request,
-                    IMapper mapper,
-                    IMediator mediator,
+                    [FromServices] IMapper mapper,
+                    [FromServices] IMediator mediator,
                     CancellationToken cancellationToken) =>
             {
                 var command = mapper.Map<GetStudentQuery>(request);

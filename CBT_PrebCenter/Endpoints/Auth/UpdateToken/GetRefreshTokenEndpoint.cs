@@ -14,8 +14,8 @@ namespace CBTPreparation.APIs.Endpoints.Auth.UpdateToken
         {
             app.MapPost("token/refresh/", async (
                     [FromBody] GetRefreshTokenRequest request,
-                    IMapper mapper,
-                    IMediator mediator,
+                    [FromServices] IMapper mapper,
+                    [FromServices] IMediator mediator,
                     CancellationToken cancellationToken) =>
             {
                 var command = mapper.Map<GetTokenQuery>(request);

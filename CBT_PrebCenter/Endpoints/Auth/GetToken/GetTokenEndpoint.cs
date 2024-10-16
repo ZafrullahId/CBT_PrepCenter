@@ -13,8 +13,8 @@ namespace CBTPreparation.APIs.Endpoints.Auth.GetRefreshToken
         {
             app.MapPost("/token/", async (
                     [FromBody] GetTokenRequest request,
-                    IMapper mapper,
-                    IMediator mediator,
+                    [FromServices] IMapper mapper,
+                    [FromServices] IMediator mediator,
                     CancellationToken cancellationToken) =>
             {
                 var command = mapper.Map<GetTokenQuery>(request);

@@ -13,8 +13,8 @@ namespace CBTPreparation.APIs.Endpoints.FeedBack.CreateFeedback
         {
             app.MapPost("/feedback/", async (
                     [FromBody] CreateFeedbackRequest request,
-                    IMapper mapper,
-                    IMediator mediator,
+                    [FromServices] IMapper mapper,
+                    [FromServices] IMediator mediator,
                     CancellationToken cancellationToken) =>
             {
                 var command = mapper.Map<CreateFeedbackCommand>(request);

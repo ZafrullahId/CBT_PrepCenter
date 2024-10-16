@@ -3,6 +3,8 @@ using CBTPreparation.APIs.Middlewares;
 using CBTPreparation.Application.Handlers;
 using CBTPreparation_Infrastructure.Extensions;
 using CBTPreparation.Application;
+using Hangfire;
+using CBTPreparation.Infrastructure.BackgroundJobService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,6 +45,24 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
+// Add Hangfire Dashboard middleware and start the Hangfire server
+app.UseHangfireDashboard("/hangfire");
+
+app.UseHangfireServer();
+
+
 app.MapEndpoints();
+
+using (var scope = app.Services.CreateScope())
+{
+    CancellationToken token = new();
+    var recurringJobManager = scope.ServiceProvider.GetRequiredService<IRecurringJobManager>();
+    var questionBackgroundService = scope.ServiceProvider.GetRequiredService<QuestionBackgroundService>();
+
+    recurringJobManager.AddOrUpdate(
+        "monthly-question-update",
+        () => questionBackgroundService.FetchAndProcessQuestions(token),
+        Cron.Minutely);
+}
 
 app.Run();

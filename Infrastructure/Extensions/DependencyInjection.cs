@@ -1,14 +1,19 @@
 ﻿using CBTPreparation.Application.Abstractions;
+using CBTPreparation.Application.Abstractions.Service;
+using CBTPreparation.Application.Handlers;
 using CBTPreparation.Domain;
 using CBTPreparation.Domain.CbtSessionAggregate;
 using CBTPreparation.Domain.FreeQuestionAggregate;
 using CBTPreparation.Domain.StudentAggregate;
 using CBTPreparation.Domain.UserAggregate;
 using CBTPreparation.Infrastructure.Authentication;
+using CBTPreparation.Infrastructure.BackgroundJobService;
 using CBTPreparation.Infrastructure.Jwt;
 using CBTPreparation.Infrastructure.Persistence;
 using CBTPreparation.Infrastructure.Persistence.Context;
 using CBTPreparation.Infrastructure.Services;
+using Hangfire;
+using Hangfire.SqlServer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -52,7 +57,27 @@ namespace CBTPreparation_Infrastructure.Extensions
             services.AddScoped<IStudentRepository, StudentRepository>();
             services.AddScoped<IUnitOfWorkRepository, UnitOfWorkRepository>();
             services.AddScoped<ICbtSessionRepository, CbtSessionRepository>();
-            services.AddScoped<IFreeQuestionRepository, FreeQuestionRepository>();
+            services.AddScoped<IFreeQuestionRepository, FreeQuestionRepository>();  
+            services.AddScoped<QuestionBackgroundService>();
+
+            services.AddHangfire(config =>
+            {
+                config.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+                      .UseSimpleAssemblyNameTypeSerializer()
+                      .UseRecommendedSerializerSettings()
+                      .UseSqlServerStorage(configuration.GetConnectionString("HangfireConnection"), new SqlServerStorageOptions
+                      {
+                          CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+                          SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+                          QueuePollInterval = TimeSpan.Zero,
+                          UseRecommendedIsolationLevel = true,
+                          DisableGlobalLocks = true
+                      });
+
+            });
+
+            services.AddHangfireServer();
+
 
             return services;
         }

@@ -1,7 +1,9 @@
 ﻿using CBTPreparation.Application.Features.FeedBack.GetsFeedBack;
+using CBTPreparation.Application.Features.Students.GetStudents;
 using CBTPreparation_Application.Abstractions;
 using MapsterMapper;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CBTPreparation.APIs.Endpoints.FeedBack.GetFeedbacks
 {
@@ -10,12 +12,12 @@ namespace CBTPreparation.APIs.Endpoints.FeedBack.GetFeedbacks
         public void MapEndpoint(IEndpointRouteBuilder app)
         {
             app.MapGet("/feedbacks/", async (
-                     GetFeedbacksRequest request,
-                    IMapper mapper,
-                    IMediator mediator,
+                   
+                    [FromServices] IMapper mapper,
+                    [FromServices] IMediator mediator,
                     CancellationToken cancellationToken) =>
             {
-                var command = mapper.Map<GetFeedbacksQuery>(request);
+                var command = new GetFeedbacksQuery();
                 var result = await mediator.Send(command, cancellationToken);
 
                 return mapper.Map<IEnumerable<GetFeedbacksQuery>>(result);

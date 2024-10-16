@@ -13,8 +13,8 @@ namespace CBTPreparation.APIs.Endpoints.Students.CreateStudent
         {
             app.MapPost("/students/", async (
                     [FromBody] CreateStudentRequest request,
-                    IMapper mapper,
-                    IMediator mediator,
+                    [FromServices] IMapper mapper,
+                    [FromServices] IMediator mediator,
                     CancellationToken cancellationToken) =>
             {
                 var command = mapper.Map<CreateStudentCommand>(request);

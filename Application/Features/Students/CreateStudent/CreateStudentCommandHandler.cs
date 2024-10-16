@@ -11,7 +11,7 @@ namespace CBTPreparation.Application.Features.Students.CreateStudent
     {
         public async Task<CreateStudentCommandResponse> Handle(CreateStudentCommand request, CancellationToken cancellationToken)
         {
-            var userExist = await _userRepository.GetAsync(x => x.Email == request.Email, cancellationToken);
+            var userExist = await _userRepository.GetUserAsync(x => x.Email == request.Email, cancellationToken);
             if (userExist is not null)
             {
                 throw new StudentAlreadyExistException(userExist.Email);
@@ -25,6 +25,13 @@ namespace CBTPreparation.Application.Features.Students.CreateStudent
                 _passwordHasher.Hash(request.Password));
 
             var student = Student.Create(user.Id);
+
+            if (!string.IsNullOrEmpty(request.Department) || request.Courses.Count != 0)
+            {
+                student.Update(request.Department, request.Courses);
+            }
+
+            await _userRepository.CreateUserAsync(user, cancellationToken);
 
             await _studentRepository.CreateStudentAsync(student, cancellationToken);
 

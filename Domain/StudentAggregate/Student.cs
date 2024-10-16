@@ -1,32 +1,34 @@
 ﻿using CBTPreparation.BuildingBlocks.Domain;
+using CBTPreparation.Domain.CourseAggregate;
 using CBTPreparation.Domain.Entity;
+using CBTPreparation.Domain.FeedbackAggregate;
+using CBTPreparation.Domain.TrialTransactionAggregate;
 using CBTPreparation.Domain.UserAggregate;
+
 namespace CBTPreparation.Domain.StudentAggregate;
 
 public class Student : AggregateRoot<StudentId>
 {
     public UserId UserId { get; private set; }
-    private readonly List<Feedback> _feedbacks = new();
-    private readonly List<Course> _courses = new();
-    private readonly List<TrialTransaction> _trialTransactions = new();
-    public int UnusedTrials { get; init; }
+    public int UnusedTrials { get; private set; }
     public Department? Department { get; private set; }
-    public IReadOnlyCollection<Course> Courses => _courses;
-    public IReadOnlyCollection<Feedback> Feedbacks => _feedbacks;
-    public IReadOnlyCollection<TrialTransaction> Transactions => _trialTransactions;
+
+    private readonly List<CourseId> _coursesIds = null!;
+    public IReadOnlyCollection<CourseId> CoursesIds => [.. _coursesIds];
+
+    private readonly List<FeedbackId> _feedbackIds = null!;
+    public IReadOnlyCollection<FeedbackId> FeedbackIds => [.. _feedbackIds];
+
+    private readonly List<TrialTransactionId> _trialTransactionIds = null!;
+    public IReadOnlyCollection<TrialTransactionId> TrialTransactionIds => [.. _trialTransactionIds];
 
     private Student(StudentId studentId) : base(studentId)
     {
-        _trialTransactions = [];
-        _feedbacks = [];
-        _courses = [];
+        _trialTransactionIds = [];
+        _feedbackIds = [];
+        _coursesIds = [];
     }
     private Student() : base(null!) { }
-    //private Student(StudentId studentId, UserId userId, int unusedTrials = 3) : base(studentId)
-    //{
-    //    UserId = userId;
-    //    UnusedTrials = unusedTrials;
-    //}
     public static Student Create(UserId userId)
     {
         var student = new Student(StudentId.CreateUniqueId())
@@ -35,25 +37,21 @@ public class Student : AggregateRoot<StudentId>
         };
         return student;
     }
-    public void Update(string departmentName, IReadOnlyList<Course> courses)
+    public void Update(string departmentName, IReadOnlyList<CourseId> courses)
     {
         ArgumentOutOfRangeException.ThrowIfZero(courses.Count);
         ArgumentOutOfRangeException.ThrowIfGreaterThan(courses.Count, Constant.MaximumNumberOfCouse);
         Department = Department.Assign(departmentName);
-        AddCourses(courses);
+        UpdateCourses(courses);
 
     }
-    public void AddCourses(IReadOnlyCollection<Course> courses)
+    public void UpdateCourses(IReadOnlyCollection<CourseId> courses)
     {
-        _courses.Clear();
+        // check if course exist in the command Handler
 
-        _courses.AddRange(courses);
-    }
-    public Feedback AddFeedBack(string comment)
-    {
-        var feedBack = Feedback.Create(Id,
-                                    comment);
-        _feedbacks.Add(feedBack);
-        return feedBack;
+        _coursesIds.Clear();
+
+        _coursesIds.AddRange(courses);
+
     }
 }

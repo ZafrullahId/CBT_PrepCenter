@@ -5,13 +5,13 @@ namespace CBTPreparation.Domain.FreeQuestionAggregate;
 
 public class FreeQuestion : AggregateRoot<FreeQuestionId>
 {
-    private readonly List<FreeOption> _freeOptions = new();
+    private readonly List<FreeOption> _freeOptions = null!;
     public string SubjectName { get; private set; }
     public string QuestionContent { get; private set; }
     public string ExamType { get; private set; }
     public string ExamYear { get; private set; }
     public string? ImageUrl { get; private set; }
-    public IReadOnlyCollection<FreeOption> FreeOptions => _freeOptions;
+    public IReadOnlyCollection<FreeOption> FreeOptions => [.._freeOptions];
     private FreeQuestion(FreeQuestionId freeQuestionId) : base(freeQuestionId)
     {
         _freeOptions = [];

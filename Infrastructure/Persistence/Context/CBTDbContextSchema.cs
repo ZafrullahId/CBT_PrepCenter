@@ -8,6 +8,11 @@
         {
             public const string TableName = "Admins";
         }
+        public static class CourseDbSchema
+        {
+            public const string TableName = "Courses";
+            public const string ForeignKey = "CourseId";
+        }
         public static class CbtSessionDbSchema
         {
             public const string TableName = "CbtSessions";
@@ -27,20 +32,33 @@
         {
             public const string TableName = "Students";
             public const string ForeignKey = "StudentId";
+            public const string CourseIdsTableName = "StudentCourseIds";
             public const string CourseName = "Course_Name";
-            public const string FeedBackTableName = "Feedbacks";
-            public const string TrialTransactionTableName = "TrialTransactions";
-            public const string TrialTransactionForeignKey = "StudentId";
+            public const string FeedBackIdTableName = "StudentFeedbackIds";
+            public const string TrialTransactionIdTableName = "StudentTrialTransactionIds";
             public const string TrialTransactionTotalAmountBackendField = "_totalAmount";
+            public const string TrialTransactionBackendField = "_trialTransactionIds";
             public const string DepartmentName = "Department_Name";
-            public const string CourseBackendField = "_courses";
-            public const string FeedbacksBackendField = "_feedbacks";
+            public const string CourseBackendField = "_coursesIds";
+            public const string FeedbacksBackendField = "_feedbackIds";
         }
         public static class UserDbSchema
         {
             public const string TableName = "Users";
             public const string ForeignKey = "UserId";
             public const string RoleName = "Role_Name";
+        }
+
+        public static class FeedbackDbSchema
+        {
+            public const string TableName = "Feedbacks";
+            public const string ForeignKey = "FeedbackId";
+        }
+        public static class TrialTransactionDbSchema
+        {
+            public const string TableName = "TrialTransactions";
+            public const string ForeignKey = "TrialTransactionId";
+            public const string TotalAmountBackendField = "_totalAmount";
         }
     }
 }

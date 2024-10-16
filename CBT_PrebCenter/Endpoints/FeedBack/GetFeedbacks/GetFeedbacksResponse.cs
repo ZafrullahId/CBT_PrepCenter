@@ -3,7 +3,7 @@
 namespace CBTPreparation.APIs.Endpoints.FeedBack.GetFeedbacks
 {
     public record GetFeedbacksResponse(
-        string Comment,
-        BaseApiResponse BaseResponse);
+        IEnumerable<string> Comment,
+    BaseApiResponse BaseApiResponse);
 
 }

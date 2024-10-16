@@ -4,7 +4,7 @@ using CBTPreparation.Application.Handlers;
 using CBTPreparation_Infrastructure.Extensions;
 using CBTPreparation.Application;
 
-var builder = WebApplication.CreateBuilder(args);
+    var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 

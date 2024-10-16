@@ -1,5 +1,4 @@
-﻿using CBTPreparation.Domain.AdminAggregate;
-using CBTPreparation.Domain.FreeQuestionAggregate;
+﻿using CBTPreparation.Domain.FreeQuestionAggregate;
 using CBTPreparation.Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -51,6 +50,9 @@ namespace CBTPreparation.Infrastructure.Persistence.Configurations
                 .IsRequired(false);
 
             });
+
+            builder.Navigation(x => x.FreeOptions)
+                .Metadata.SetField(CBTDbContextSchema.FreeQuestionDbSchema.FreeOptionBackendField);
         }
     }
 }

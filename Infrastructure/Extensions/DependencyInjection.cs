@@ -1,4 +1,5 @@
 ﻿using CBTPreparation.Application.Abstractions;
+using CBTPreparation.Application.Abstractions.Repositories;
 using CBTPreparation.Domain;
 using CBTPreparation.Domain.CbtSessionAggregate;
 using CBTPreparation.Domain.FreeQuestionAggregate;
@@ -50,6 +51,7 @@ namespace CBTPreparation_Infrastructure.Extensions
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IGoogleAuthService, GoogleAuthService>();
             services.AddScoped<IStudentRepository, StudentRepository>();
+            services.AddScoped<IFeedbackRepository, FeedbackRepository>();
             services.AddScoped<IUnitOfWorkRepository, UnitOfWorkRepository>();
             services.AddScoped<ICbtSessionRepository, CbtSessionRepository>();
             services.AddScoped<IFreeQuestionRepository, FreeQuestionRepository>();

@@ -10,7 +10,7 @@ namespace CBTPreparation.Application.Features.Auth.GetAuth
     {
         public async Task<GetTokenQueryResponse> Handle(GetTokenQuery request, CancellationToken cancellationToken)
         {
-            var user = await userRepository.GetAsync(x => x.Email == request.Email, cancellationToken);
+            var user = await userRepository.GetUserAsync(x => x.Email == request.Email, cancellationToken);
 
             if (user is { })
             {

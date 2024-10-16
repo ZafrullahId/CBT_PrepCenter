@@ -1,6 +1,4 @@
-﻿using Blogger.BuildingBlocks.Domain;
-
-namespace CBTPreparation.BuildingBlocks.Domain;
+﻿namespace CBTPreparation.BuildingBlocks.Domain;
 public abstract class AggregateRoot<TId> : Entity<TId>, IAggregateRoot
     where TId : notnull
 {

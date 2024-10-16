@@ -30,7 +30,7 @@ namespace CBTPreparation.APIs.Middlewares
                 {
                     Status = StatusCodes.Status500InternalServerError,
                     Title = "Server error",
-                    Detail = "Server Error",
+                    Detail = exception.InnerException?.Message ?? exception.Message,
 
                 };
         }

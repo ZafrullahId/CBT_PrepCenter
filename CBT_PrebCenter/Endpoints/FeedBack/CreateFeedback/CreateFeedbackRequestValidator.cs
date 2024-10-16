@@ -7,8 +7,11 @@ namespace CBT.APIs.Endpoints.FeedBack.CreateFeedback
     {
         public CreateFeedbackRequestValidator()
         {
+            RuleFor(p => p.StudentId)
+                .NotEmpty()
+                .NotNull();
 
-            RuleFor(p => p.Comment).Cascade(CascadeMode.Stop)
+            RuleFor(p => p.body.Comment).Cascade(CascadeMode.Stop)
                 .NotEmpty()
                     .WithMessage("Invalid Input.");
         }

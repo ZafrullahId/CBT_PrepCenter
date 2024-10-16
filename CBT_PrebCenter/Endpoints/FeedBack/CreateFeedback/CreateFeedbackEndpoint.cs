@@ -1,9 +1,8 @@
 using CBTPreparation.APIs.Filters;
-using CBTPreparation.Application.Features.FeedBack.CreateFeedBack;
+using CBTPreparation.Application.Features.Feedbacks.CreateFeedback;
 using CBTPreparation_Application.Abstractions;
 using MapsterMapper;
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
 
 namespace CBTPreparation.APIs.Endpoints.FeedBack.CreateFeedback
 {
@@ -11,8 +10,8 @@ namespace CBTPreparation.APIs.Endpoints.FeedBack.CreateFeedback
     {
         public void MapEndpoint(IEndpointRouteBuilder app)
         {
-            app.MapPost("/feedback/", async (
-                    [FromBody] CreateFeedbackRequest request,
+            app.MapPost("/feedbacks/{student-id:guid}", async (
+                    [AsParameters] CreateFeedbackRequest request,
                     IMapper mapper,
                     IMediator mediator,
                     CancellationToken cancellationToken) =>

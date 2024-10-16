@@ -1,4 +1,8 @@
-﻿using CBTPreparation.Domain.StudentAggregate;
+﻿using CBTPreparation.Domain.CourseAggregate;
+using CBTPreparation.Domain.FeedbackAggregate;
+using CBTPreparation.Domain.StudentAggregate;
+using CBTPreparation.Domain.TrialTransactionAggregate;
+using CBTPreparation.Domain.UserAggregate;
 using CBTPreparation.Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -21,6 +25,18 @@ namespace CBTPreparation.Infrastructure.Persistence.Configurations
             builder.Property(x => x.UnusedTrials)
                 .IsRequired();
 
+            //builder.HasOne<User>()
+            //  .WithOne()
+            //  .HasForeignKey<Student>(x => x.UserId)
+            //  .OnDelete(DeleteBehavior.Cascade);
+
+            builder.OwnsOne(x => x.UserId, us =>
+            {
+                us.Property(x => x.Value)
+                .IsRequired()
+                .HasColumnName(CBTDbContextSchema.UserDbSchema.ForeignKey);
+            });
+
             builder.OwnsOne(x => x.Department, dp =>
             {
                 dp.Property(x => x.Name)
@@ -29,77 +45,42 @@ namespace CBTPreparation.Infrastructure.Persistence.Configurations
                 .IsUnicode()
                 .HasColumnName(CBTDbContextSchema.StudentDbSchema.DepartmentName);
             });
-
-            builder.OwnsOne(x => x.UserId, ud =>
+                            
+            builder.OwnsMany(x => x.CoursesIds, cr =>
             {
-                ud.Property(x => x.Value)
-                .HasColumnName(CBTDbContextSchema.UserDbSchema.ForeignKey);
-            });
+                cr.ToTable(CBTDbContextSchema.StudentDbSchema.CourseIdsTableName);
 
-            builder.OwnsMany(x => x.Courses, cr =>
+                cr.Property(x => x.Value)
+               .HasColumnName(CBTDbContextSchema.CourseDbSchema.ForeignKey);
+
+            }).UsePropertyAccessMode(PropertyAccessMode.Field);
+
+            builder.Navigation(x => x.CoursesIds)
+                .Metadata.SetField(CBTDbContextSchema.StudentDbSchema.CourseBackendField);
+
+            builder.OwnsMany(x => x.FeedbackIds, fb =>
             {
-                cr.Property(x => x.Name)
-                .IsRequired()
-                .HasMaxLength(20)
-                .IsUnicode()
-                .HasColumnName(CBTDbContextSchema.StudentDbSchema.CourseName);
-            });
+                fb.ToTable(CBTDbContextSchema.StudentDbSchema.FeedBackIdTableName);
 
-            builder.OwnsMany(x => x.Feedbacks, fb =>
+                fb.Property(x => x.Value)
+                .HasColumnName(CBTDbContextSchema.FeedbackDbSchema.ForeignKey);
+
+            }).UsePropertyAccessMode(PropertyAccessMode.Field);
+
+            builder.Navigation(x => x.FeedbackIds)
+                .Metadata.SetField(CBTDbContextSchema.StudentDbSchema.FeedbacksBackendField);
+
+            builder.OwnsMany(x => x.TrialTransactionIds, txn =>
             {
-                fb.ToTable(CBTDbContextSchema.StudentDbSchema.FeedBackTableName);
+                txn.ToTable(CBTDbContextSchema.StudentDbSchema.TrialTransactionIdTableName);
 
-                fb.HasKey(x => x.Id);
+                txn.Property(x => x.Value)
+                .HasColumnName(CBTDbContextSchema.TrialTransactionDbSchema.ForeignKey);
 
-                fb.Property(x => x.Id)
-                   .ValueGeneratedNever()
-                   .HasConversion(id => id.Value,
-                                  value => FeedbackId.Create(value));
+            }).UsePropertyAccessMode(PropertyAccessMode.Field);
 
-                fb.WithOwner()
-                .HasForeignKey(x => x.StudentId);
-
-                fb.Property(x => x.Comment)
-                .IsRequired()
-                .IsUnicode()
-                .HasMaxLength(150);
-            });
-
-            builder.OwnsMany(x => x.Transactions, txn =>
-            {
-                txn.ToTable(CBTDbContextSchema.StudentDbSchema.TrialTransactionTableName);
-
-                txn.HasKey(x => x.Id);
-
-                txn.WithOwner()
-                  .HasForeignKey(x => x.StudentId);
-
-                txn.Property(x => x.Id)
-                       .ValueGeneratedNever()
-                       .HasConversion(id => id.Value,
-                          value => TrialTransactionId.Create(value));
-
-                txn.Property(x => x.PurchaseDate)
-                .IsRequired();
-
-                txn.Property(x => x.TrialPrice)
-                    .IsRequired();
-
-                txn.Property(p => p.TotalAmount)
-                    .HasField(CBTDbContextSchema.StudentDbSchema.TrialTransactionTotalAmountBackendField)
-                    .UsePropertyAccessMode(PropertyAccessMode.Field);
-
-                txn.Property(x => x.Quantity)
-                    .IsRequired();
-
-                txn.Property(x => x.PaymentMethod)
-                    .IsRequired()
-                    .IsUnicode();
-
-            });
-
-
-
+            builder.Navigation(x => x.TrialTransactionIds)
+                .Metadata.SetField(CBTDbContextSchema.StudentDbSchema.TrialTransactionBackendField);
         }
 
     }

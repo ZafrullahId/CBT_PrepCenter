@@ -109,6 +109,77 @@ namespace CBTPreparation.Infrastructure.Migrations
                     b.ToTable("CbtSessions", "cbtprep");
                 });
 
+            modelBuilder.Entity("CBTPreparation.Domain.CourseAggregate.Course", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("LastModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Courses", "cbtprep");
+                });
+
+            modelBuilder.Entity("CBTPreparation.Domain.FeedbackAggregate.Feedback", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("LastModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Feedbacks", "cbtprep");
+                });
+
             modelBuilder.Entity("CBTPreparation.Domain.FreeQuestionAggregate.FreeQuestion", b =>
                 {
                     b.Property<Guid>("Id")
@@ -191,6 +262,54 @@ namespace CBTPreparation.Infrastructure.Migrations
                     b.ToTable("Students", "cbtprep");
                 });
 
+            modelBuilder.Entity("CBTPreparation.Domain.TrialTransactionAggregate.TrialTransaction", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("LastModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PaymentMethod")
+                        .IsRequired()
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("PurchaseDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TrialPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TrialTransactions", "cbtprep");
+                });
+
             modelBuilder.Entity("CBTPreparation.Domain.UserAggregate.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -271,6 +390,23 @@ namespace CBTPreparation.Infrastructure.Migrations
 
             modelBuilder.Entity("CBTPreparation.Domain.CbtSessionAggregate.CbtSession", b =>
                 {
+                    b.OwnsOne("CBTPreparation.Domain.StudentAggregate.StudentId", "StudentId", b1 =>
+                        {
+                            b1.Property<Guid>("CbtSessionId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<Guid>("Value")
+                                .HasColumnType("uniqueidentifier")
+                                .HasColumnName("StudentId");
+
+                            b1.HasKey("CbtSessionId");
+
+                            b1.ToTable("CbtSessions", "cbtprep");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CbtSessionId");
+                        });
+
                     b.OwnsMany("CBTPreparation.Domain.CbtSessionAggregate.SessionQuestion", "SessionQuestions", b1 =>
                         {
                             b1.Property<Guid>("Id")
@@ -357,24 +493,30 @@ namespace CBTPreparation.Infrastructure.Migrations
                             b1.Navigation("PaidOptions");
                         });
 
+                    b.Navigation("SessionQuestions");
+
+                    b.Navigation("StudentId")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CBTPreparation.Domain.FeedbackAggregate.Feedback", b =>
+                {
                     b.OwnsOne("CBTPreparation.Domain.StudentAggregate.StudentId", "StudentId", b1 =>
                         {
-                            b1.Property<Guid>("CbtSessionId")
+                            b1.Property<Guid>("FeedbackId")
                                 .HasColumnType("uniqueidentifier");
 
                             b1.Property<Guid>("Value")
                                 .HasColumnType("uniqueidentifier")
                                 .HasColumnName("StudentId");
 
-                            b1.HasKey("CbtSessionId");
+                            b1.HasKey("FeedbackId");
 
-                            b1.ToTable("CbtSessions", "cbtprep");
+                            b1.ToTable("Feedbacks", "cbtprep");
 
                             b1.WithOwner()
-                                .HasForeignKey("CbtSessionId");
+                                .HasForeignKey("FeedbackId");
                         });
-
-                    b.Navigation("SessionQuestions");
 
                     b.Navigation("StudentId")
                         .IsRequired();
@@ -420,7 +562,7 @@ namespace CBTPreparation.Infrastructure.Migrations
 
             modelBuilder.Entity("CBTPreparation.Domain.StudentAggregate.Student", b =>
                 {
-                    b.OwnsMany("CBTPreparation.Domain.StudentAggregate.Course", "Courses", b1 =>
+                    b.OwnsMany("CBTPreparation.Domain.CourseAggregate.CourseId", "CoursesIds", b1 =>
                         {
                             b1.Property<Guid>("StudentId")
                                 .HasColumnType("uniqueidentifier");
@@ -431,16 +573,36 @@ namespace CBTPreparation.Infrastructure.Migrations
 
                             SqlServerPropertyBuilderExtensions.UseIdentityColumn(b1.Property<int>("Id"));
 
-                            b1.Property<string>("Name")
-                                .IsRequired()
-                                .HasMaxLength(20)
-                                .IsUnicode(true)
-                                .HasColumnType("nvarchar(20)")
-                                .HasColumnName("Course_Name");
+                            b1.Property<Guid>("Value")
+                                .HasColumnType("uniqueidentifier")
+                                .HasColumnName("CourseId");
 
                             b1.HasKey("StudentId", "Id");
 
-                            b1.ToTable("Course", "cbtprep");
+                            b1.ToTable("StudentCourseIds", "cbtprep");
+
+                            b1.WithOwner()
+                                .HasForeignKey("StudentId");
+                        });
+
+                    b.OwnsMany("CBTPreparation.Domain.FeedbackAggregate.FeedbackId", "FeedbackIds", b1 =>
+                        {
+                            b1.Property<Guid>("StudentId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("int");
+
+                            SqlServerPropertyBuilderExtensions.UseIdentityColumn(b1.Property<int>("Id"));
+
+                            b1.Property<Guid>("Value")
+                                .HasColumnType("uniqueidentifier")
+                                .HasColumnName("FeedbackId");
+
+                            b1.HasKey("StudentId", "Id");
+
+                            b1.ToTable("StudentFeedbackIds", "cbtprep");
 
                             b1.WithOwner()
                                 .HasForeignKey("StudentId");
@@ -466,51 +628,6 @@ namespace CBTPreparation.Infrastructure.Migrations
                                 .HasForeignKey("StudentId");
                         });
 
-                    b.OwnsMany("CBTPreparation.Domain.StudentAggregate.Feedback", "Feedbacks", b1 =>
-                        {
-                            b1.Property<Guid>("Id")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<string>("Comment")
-                                .IsRequired()
-                                .HasMaxLength(150)
-                                .IsUnicode(true)
-                                .HasColumnType("nvarchar(150)");
-
-                            b1.Property<Guid>("CreatedBy")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<DateTime>("CreatedOn")
-                                .HasColumnType("datetime2");
-
-                            b1.Property<Guid?>("DeletedBy")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<DateTime?>("DeletedOn")
-                                .HasColumnType("datetime2");
-
-                            b1.Property<bool>("IsDeleted")
-                                .HasColumnType("bit");
-
-                            b1.Property<Guid>("LastModifiedBy")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<DateTime?>("LastModifiedOn")
-                                .HasColumnType("datetime2");
-
-                            b1.Property<Guid>("StudentId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.HasKey("Id");
-
-                            b1.HasIndex("StudentId");
-
-                            b1.ToTable("Feedbacks", "cbtprep");
-
-                            b1.WithOwner()
-                                .HasForeignKey("StudentId");
-                        });
-
                     b.OwnsOne("CBTPreparation.Domain.UserAggregate.UserId", "UserId", b1 =>
                         {
                             b1.Property<Guid>("StudentId")
@@ -528,71 +645,61 @@ namespace CBTPreparation.Infrastructure.Migrations
                                 .HasForeignKey("StudentId");
                         });
 
-                    b.OwnsMany("CBTPreparation.Domain.StudentAggregate.TrialTransaction", "Transactions", b1 =>
+                    b.OwnsMany("CBTPreparation.Domain.TrialTransactionAggregate.TrialTransactionId", "TrialTransactionIds", b1 =>
                         {
-                            b1.Property<Guid>("Id")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<Guid>("CreatedBy")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<DateTime>("CreatedOn")
-                                .HasColumnType("datetime2");
-
-                            b1.Property<Guid?>("DeletedBy")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<DateTime?>("DeletedOn")
-                                .HasColumnType("datetime2");
-
-                            b1.Property<bool>("IsDeleted")
-                                .HasColumnType("bit");
-
-                            b1.Property<Guid>("LastModifiedBy")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<DateTime?>("LastModifiedOn")
-                                .HasColumnType("datetime2");
-
-                            b1.Property<string>("PaymentMethod")
-                                .IsRequired()
-                                .IsUnicode(true)
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<DateTimeOffset>("PurchaseDate")
-                                .HasColumnType("datetimeoffset");
-
-                            b1.Property<int>("Quantity")
-                                .HasColumnType("int");
-
                             b1.Property<Guid>("StudentId")
                                 .HasColumnType("uniqueidentifier");
 
-                            b1.Property<decimal>("TotalAmount")
-                                .HasColumnType("decimal(18,2)");
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("int");
 
-                            b1.Property<decimal>("TrialPrice")
-                                .HasColumnType("decimal(18,2)");
+                            SqlServerPropertyBuilderExtensions.UseIdentityColumn(b1.Property<int>("Id"));
 
-                            b1.HasKey("Id");
+                            b1.Property<Guid>("Value")
+                                .HasColumnType("uniqueidentifier")
+                                .HasColumnName("TrialTransactionId");
 
-                            b1.HasIndex("StudentId");
+                            b1.HasKey("StudentId", "Id");
 
-                            b1.ToTable("TrialTransactions", "cbtprep");
+                            b1.ToTable("StudentTrialTransactionIds", "cbtprep");
 
                             b1.WithOwner()
                                 .HasForeignKey("StudentId");
                         });
 
-                    b.Navigation("Courses");
+                    b.Navigation("CoursesIds");
 
                     b.Navigation("Department");
 
-                    b.Navigation("Feedbacks");
+                    b.Navigation("FeedbackIds");
 
-                    b.Navigation("Transactions");
+                    b.Navigation("TrialTransactionIds");
 
                     b.Navigation("UserId")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CBTPreparation.Domain.TrialTransactionAggregate.TrialTransaction", b =>
+                {
+                    b.OwnsOne("CBTPreparation.Domain.StudentAggregate.StudentId", "StudentId", b1 =>
+                        {
+                            b1.Property<Guid>("TrialTransactionId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<Guid>("Value")
+                                .HasColumnType("uniqueidentifier")
+                                .HasColumnName("StudentId");
+
+                            b1.HasKey("TrialTransactionId");
+
+                            b1.ToTable("TrialTransactions", "cbtprep");
+
+                            b1.WithOwner()
+                                .HasForeignKey("TrialTransactionId");
+                        });
+
+                    b.Navigation("StudentId")
                         .IsRequired();
                 });
 

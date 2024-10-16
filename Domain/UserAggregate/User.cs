@@ -52,4 +52,12 @@ public class User : AggregateRoot<UserId>
 
         return user;
     }
+
+    public void Update(string firstName, string lastName)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(firstName);
+        ArgumentException.ThrowIfNullOrWhiteSpace(lastName);
+        FirstName = firstName;
+        LastName = lastName;
+    }
 }

@@ -11,7 +11,7 @@ namespace CBTPreparation.APIs.Endpoints.FreeQuestion.CreateFreeQuestion
         public void MapEndpoint(IEndpointRouteBuilder app)
         {
             app.MapPost("/question/free/{subject}", async (
-                    [FromBody] CreateFreeQuestionRequest request,
+                    [AsParameters] CreateFreeQuestionRequest request,
                     IMapper mapper,
                     IMediator mediator,
                     CancellationToken cancellationToken) =>

@@ -10,7 +10,7 @@ using MediatR;
 
 namespace CBTPreparation.Application.Features.GoogleAuth
 {
-    public class GoogleAuthCommandHandler : IRequestHandler<GoogleAuthCommand, GoogleAuthResponse>
+    public class GoogleAuthCommandHandler : IRequestHandler<GoogleAuthCommand, GoogleAuthCommandResponse>
     {
         private readonly IUserRepository _userRepository;
         private readonly ITokenProvider _tokenProvider;
@@ -26,7 +26,7 @@ namespace CBTPreparation.Application.Features.GoogleAuth
             _googleAuthService = googleAuthService;
         }
 
-        public async Task<GoogleAuthResponse> Handle(GoogleAuthCommand request, CancellationToken cancellationToken)
+        public async Task<GoogleAuthCommandResponse> Handle(GoogleAuthCommand request, CancellationToken cancellationToken)
         {
             GoogleJsonWebSignature.Payload payload;
             try
@@ -38,7 +38,7 @@ namespace CBTPreparation.Application.Features.GoogleAuth
                 throw new GoogleTokenIdNotFoundException($"{ex.Message}");
             }
 
-            var dbUser = await _userRepository.GetAsync(u => u.Email == payload.Email, cancellationToken);
+            var dbUser = await _userRepository.GetUserAsync(u => u.Email == payload.Email, cancellationToken);
 
             if (dbUser is null)
             {
@@ -55,7 +55,7 @@ namespace CBTPreparation.Application.Features.GoogleAuth
 
                 var (NewUserToken, NewUserRefreshToken) = _tokenProvider.Create(user);
 
-                return new GoogleAuthResponse(
+                return new GoogleAuthCommandResponse(
                                 NewUserToken,
                                 NewUserRefreshToken,
                                 new BaseResponse(
@@ -65,7 +65,7 @@ namespace CBTPreparation.Application.Features.GoogleAuth
 
             var (Token, RefreshToken) = _tokenProvider.Create(dbUser);
 
-            return new GoogleAuthResponse(
+            return new GoogleAuthCommandResponse(
                             Token,
                             RefreshToken,
                             new BaseResponse(

@@ -2,5 +2,5 @@
 
 namespace CBTPreparation.APIs.Endpoints.Auth.UpdateToken
 {
-    public record CreateRefreshTokenResponse(string Token, string RefreshToken, BaseApiResponse BaseResponse);
+    public record CreateRefreshTokenResponse(string Token, string RefreshToken, BaseApiResponse BaseAipResponse);
 }

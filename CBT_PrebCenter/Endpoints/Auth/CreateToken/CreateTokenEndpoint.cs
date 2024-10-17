@@ -3,25 +3,25 @@ using CBTPreparation.APIs.Filters;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using CBTPreparation.Application.Features.Auth.GetAuth;
+using CBTPreparation.Application.Features.Auth.CreateToken;
 
-namespace CBTPreparation.APIs.Endpoints.Auth.GetRefreshToken
+namespace CBTPreparation.APIs.Endpoints.Auth.CreateToken
 {
-    public class GetTokenEndpoint : IEndpoint
+    public class CreateTokenEndpoint : IEndpoint
     {
         public void MapEndpoint(IEndpointRouteBuilder app)
         {
             app.MapPost("/token/", async (
-                    [FromBody] GetTokenRequest request,
+                    [FromBody] CreateTokenRequest request,
                     IMapper mapper,
                     IMediator mediator,
                     CancellationToken cancellationToken) =>
             {
-                var command = mapper.Map<GetTokenQuery>(request);
+                var command = mapper.Map<CreateTokenCommand>(request);
                 var response = await mediator.Send(command, cancellationToken);
 
-                return mapper.Map<GetTokenResponse>(response);
-            }).Validator<GetTokenRequest>()
+                return mapper.Map<CreateTokenResponse>(response);
+            }).Validator<CreateTokenRequest>()
             .WithTags(EndpointSchema.Auth);
         }
     }

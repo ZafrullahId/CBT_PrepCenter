@@ -1,7 +1,7 @@
 ﻿using CBTPreparation.Application.Features.Feedbacks.GetFeedback;
 using Mapster;
 
-namespace CBTPreparation.APIs.Endpoints.FeedBack.GetFeedback
+namespace CBTPreparation.APIs.Endpoints.Feedback.GetFeedback
 {
     public class GetFeedbackMappingProfile : IRegister
     {

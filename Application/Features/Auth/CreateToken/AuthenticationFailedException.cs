@@ -1,7 +1,7 @@
 ﻿using CBTPreparation.BuildingBlocks.Domain.Exceptions;
 using System.Net;
 
-namespace CBTPreparation.Application.Features.Auth.GetAuth
+namespace CBTPreparation.Application.Features.Auth.CreateToken
 {
     public sealed class AuthenticationFailedException : DomainException
     {
@@ -9,7 +9,7 @@ namespace CBTPreparation.Application.Features.Auth.GetAuth
 
         public AuthenticationFailedException(string email, HttpStatusCode statusCode = HttpStatusCode.Unauthorized) : base(string.Format(_messages, email), statusCode)
         {
-            
+
         }
     }
 }

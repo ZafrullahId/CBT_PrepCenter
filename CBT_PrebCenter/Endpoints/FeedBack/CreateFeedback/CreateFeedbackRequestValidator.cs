@@ -1,9 +1,8 @@
-﻿using CBTPreparation.APIs.Endpoints.FeedBack.CreateFeedback;
-using FluentValidation;
+﻿using FluentValidation;
 
-namespace CBT.APIs.Endpoints.FeedBack.CreateFeedback
+namespace CBTPreparation.APIs.Endpoints.Feedback.CreateFeedback
 {
-    public class CreateFeedbackRequestValidator  : AbstractValidator<CreateFeedbackRequest>
+    public class CreateFeedbackRequestValidator : AbstractValidator<CreateFeedbackRequest>
     {
         public CreateFeedbackRequestValidator()
         {

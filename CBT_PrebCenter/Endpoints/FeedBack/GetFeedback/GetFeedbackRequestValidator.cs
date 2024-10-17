@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace CBTPreparation.APIs.Endpoints.FeedBack.GetFeedback
+namespace CBTPreparation.APIs.Endpoints.Feedback.GetFeedback
 {
     public class GetFeedbackRequestValidator : AbstractValidator<GetFeedbackRequest>
     {

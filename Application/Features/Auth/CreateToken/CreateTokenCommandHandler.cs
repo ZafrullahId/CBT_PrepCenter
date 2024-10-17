@@ -4,17 +4,17 @@ using CBTPreparation.Domain.UserAggregate;
 using MediatR;
 
 
-namespace CBTPreparation.Application.Features.Auth.GetAuth
+namespace CBTPreparation.Application.Features.Auth.CreateToken
 {
-    public class GetTokenQueryHandler(IUserRepository userRepository, IPasswordHasher _passwordHasher, ITokenProvider tokenProvider) : IRequestHandler<GetTokenQuery, GetTokenQueryResponse>
+    public class CreateTokenCommandHandler(IUserRepository userRepository, IPasswordHasher _passwordHasher, ITokenProvider tokenProvider) : IRequestHandler<CreateTokenCommand, CreateTokenCommandResponse>
     {
-        public async Task<GetTokenQueryResponse> Handle(GetTokenQuery request, CancellationToken cancellationToken)
+        public async Task<CreateTokenCommandResponse> Handle(CreateTokenCommand request, CancellationToken cancellationToken)
         {
             var user = await userRepository.GetUserAsync(x => x.Email == request.Email, cancellationToken);
 
             if (user is { })
             {
-                if (user.PasswordHash is not null)
+                if (!string.IsNullOrWhiteSpace(user.PasswordHash))
                 {
                     bool verified = _passwordHasher.Verify(request.Password, user.PasswordHash);
 
@@ -24,10 +24,10 @@ namespace CBTPreparation.Application.Features.Auth.GetAuth
                     }
                     var (Token, RefreshToken) = tokenProvider.Create(user);
                     // log the user
-                    return new GetTokenQueryResponse(new BaseResponse("Successfully LoggedIn", false), Token, RefreshToken);
+                    return new CreateTokenCommandResponse(new BaseResponse("Successfully LoggedIn", false), Token, RefreshToken);
                 }
             }
-            return new GetTokenQueryResponse(new BaseResponse("Invalid Credentials", false));
+            return new CreateTokenCommandResponse(new BaseResponse("Invalid Credentials", false));
         }
     }
 }

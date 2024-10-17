@@ -1,13 +1,10 @@
-﻿using CBTPreparation.APIs.Endpoints.Auth.GoogleAuth;
-using CBTPreparation.APIs.Filters;
+﻿using CBTPreparation.APIs.Filters;
 using CBTPreparation.Application.Features.Feedbacks.GetFeedback;
-using CBTPreparation.Application.Features.GoogleAuth;
 using CBTPreparation_Application.Abstractions;
 using MapsterMapper;
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
 
-namespace CBTPreparation.APIs.Endpoints.FeedBack.GetFeedback
+namespace CBTPreparation.APIs.Endpoints.Feedback.GetFeedback
 {
     public class GetFeedbackEndpoint : IEndpoint
     {

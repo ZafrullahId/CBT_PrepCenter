@@ -2,7 +2,7 @@
 using CBTPreparation.Domain.StudentAggregate;
 using Mapster;
 
-namespace CBTPreparation.APIs.Endpoints.FeedBack.CreateFeedback
+namespace CBTPreparation.APIs.Endpoints.Feedback.CreateFeedback
 {
     public class CreateFeedbackMappingProfile : IRegister
     {

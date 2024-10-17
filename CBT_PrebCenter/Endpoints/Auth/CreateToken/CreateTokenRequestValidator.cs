@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace CBTPreparation.APIs.Endpoints.Auth.GetRefreshToken
+namespace CBTPreparation.APIs.Endpoints.Auth.CreateToken
 {
-    public class GetTokenRequestValidator : AbstractValidator<GetTokenRequest>
+    public class CreateTokenRequestValidator : AbstractValidator<CreateTokenRequest>
     {
-        public GetTokenRequestValidator()
+        public CreateTokenRequestValidator()
         {
             RuleFor(p => p.Email).Cascade(CascadeMode.Stop)
                 .NotEmpty()

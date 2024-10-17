@@ -1,8 +1,8 @@
-﻿using CBTPreparation.APIs.Endpoints.FeedBack.GetFeedbacks;
+﻿using CBTPreparation.APIs.Endpoints.Feedback.GetFeedbacks;
 using CBTPreparation.Application.Features.Feedbacks.GetStudentFeedbacks;
 using Mapster;
 
-namespace CBTPreparation.APIs.Endpoints.FeedBack.GetStudentFeedback
+namespace CBTPreparation.APIs.Endpoints.Feedback.GetStudentFeedback
 {
     public partial class GetStudentFeedbackEndpoint
     {

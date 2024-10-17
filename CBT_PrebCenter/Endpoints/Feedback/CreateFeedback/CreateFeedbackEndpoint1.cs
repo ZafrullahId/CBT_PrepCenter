@@ -4,7 +4,7 @@ using CBTPreparation_Application.Abstractions;
 using MapsterMapper;
 using MediatR;
 
-namespace CBTPreparation.APIs.Endpoints.FeedBack.CreateFeedback
+namespace CBTPreparation.APIs.Endpoints.Feedback.CreateFeedback
 {
     public class CreateFeedbackEndpoint : IEndpoint
     {

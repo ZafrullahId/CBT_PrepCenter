@@ -80,7 +80,7 @@ namespace CBTPreparation.Infrastructure.BackgroundJobService
 
             try
             {
-                var sub = await questionRepository.GetSubjectName(subject);
+               /* var sub = await questionRepository.GetSubjectName(subject);
                 if(sub is not null)
                 {
                     await questionRepository.DeleteOldQuestionsAsync(subject, 40);
@@ -89,7 +89,8 @@ namespace CBTPreparation.Infrastructure.BackgroundJobService
                 else
                 {
                     _logger.LogError($"Unable to delete old questions for subject {subject}");
-                }
+                    return;
+                }*/
 
 
             }
@@ -108,13 +109,38 @@ namespace CBTPreparation.Infrastructure.BackgroundJobService
                 return;
             }
 
-            var questionEntities = questionResponse.Data.Select(q => FreeQuestion.Create(
+            /*var questionEntities = questionResponse.Data.Select(q => FreeQuestion.Create(
                 questionContent: q.Question,
                 subjectName: subject,
                 examType: q.ExamType,
                 examYear: q.ExamYear,
                 imageUrl: q.Image
-            )).ToList();
+            )).ToList();*/
+
+            List<FreeQuestion> questionEntities = new();
+
+
+            foreach (var result in questionResponse.Data)
+            {
+                var question = FreeQuestion.Create(result.Question,
+                                                   subject,
+                                                   result.ExamType,
+                                                   result.ExamYear,
+                                                   result.Image);
+
+                foreach (var option in result.Option.GetType().GetProperties())
+                {
+                    var optAlpha = option.Name;
+                    var optContent = option.GetValue(result.Option);
+                    bool isCorrect = optAlpha.Equals(result.Answer, StringComparison.OrdinalIgnoreCase);
+                    question.AddOption(question.Id,
+                                       optContent.ToString(),
+                                       char.Parse(optAlpha),
+                                       isCorrect);
+                }
+                questionEntities.Add(question);
+            }
+
 
             try
             {

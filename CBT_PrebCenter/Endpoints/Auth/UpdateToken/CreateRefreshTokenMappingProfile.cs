@@ -1,4 +1,4 @@
-﻿using CBTPreparation.Application.Features.UpdateToken;
+﻿using CBTPreparation.Application.Features.Auth.UpdateToken;
 using Mapster;
 
 namespace CBTPreparation.APIs.Endpoints.Auth.UpdateToken

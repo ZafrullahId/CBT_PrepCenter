@@ -3,7 +3,7 @@ using CBTPreparation.Domain.StudentAggregate;
 using CBTPreparation.Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace CBTPreparation.Infrastructure.Persistence
+namespace CBTPreparation.Infrastructure.Persistence.Repositories
 {
     public class CbtSessionRepository(CBTDbContext context) : ICbtSessionRepository
     {

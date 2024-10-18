@@ -4,7 +4,7 @@ using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using CBTPreparation.APIs.Endpoints.Auth.CreateToken;
-using CBTPreparation.Application.Features.UpdateToken;
+using CBTPreparation.Application.Features.Auth.UpdateToken;
 
 namespace CBTPreparation.APIs.Endpoints.Auth.UpdateToken
 {

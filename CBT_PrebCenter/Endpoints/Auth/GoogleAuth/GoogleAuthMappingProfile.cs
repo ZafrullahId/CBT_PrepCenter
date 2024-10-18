@@ -1,6 +1,6 @@
 ﻿using CBTPreparation.APIs.Endpoints.Feedback.CreateFeedback;
+using CBTPreparation.Application.Features.Auth.GoogleAuth;
 using CBTPreparation.Application.Features.Feedbacks.CreateFeedback;
-using CBTPreparation.Application.Features.GoogleAuth;
 using Mapster;
 
 namespace CBTPreparation.APIs.Endpoints.Auth.GoogleAuth

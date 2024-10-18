@@ -7,6 +7,7 @@ using CBTPreparation.Application.Abstractions;
 using CBTPreparation.Infrastructure.Jwt;
 using CBTPreparation.Domain.UserAggregate;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Cryptography;
 
 namespace CBTPreparation.Infrastructure.Authentication;
 
@@ -37,14 +38,7 @@ internal sealed class TokenProvider(IOptions<JwtSettings> jwtSettings) : ITokenP
             Audience = _jwtSettings.Audience
         };
 
-        var refreshTokenDescriptor = new SecurityTokenDescriptor
-        {
-            Subject = subject,
-            Expires = DateTime.UtcNow.AddDays(_jwtSettings.RefreshTokenExpirationInDays),
-            SigningCredentials = credentials,
-            Issuer = _jwtSettings.Issuer,
-            Audience = _jwtSettings.Audience
-        };
+        var refreshTokenDescriptor = GenerateRefreshToken();
 
         var handler = new JsonWebTokenHandler();
 
@@ -54,7 +48,7 @@ internal sealed class TokenProvider(IOptions<JwtSettings> jwtSettings) : ITokenP
         return (token, refreshToken);
     }
 
-    public string CreateRefresh(IEnumerable<Claim> claims)
+    public string Create(IEnumerable<Claim> claims)
     {
         var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key));
         var signInCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
@@ -69,7 +63,15 @@ internal sealed class TokenProvider(IOptions<JwtSettings> jwtSettings) : ITokenP
         return token;
     }
 
-    public ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
+    public string GenerateRefreshToken()
+    {
+        var randomNumber = new byte[410];
+        using var rng = RandomNumberGenerator.Create();
+        rng.GetBytes(randomNumber);
+        return Convert.ToBase64String(randomNumber);
+    }
+
+    public ClaimsPrincipal GetPrincipalFromToken(string token)
     {
         var Key = Encoding.UTF8.GetBytes(_jwtSettings.Key);
 

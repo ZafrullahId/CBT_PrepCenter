@@ -2,9 +2,9 @@
 using CBTPreparation.Domain.CbtSessionAggregate;
 using CBTPreparation.Domain.FreeQuestionAggregate;
 
-namespace CBTPreparation.Infrastructure.Persistence
+namespace CBTPreparation.Infrastructure.Persistence.Repositories
 {
-    public class FreeQuestionRepository(CBTDbContext context)  : IFreeQuestionRepository
+    public class FreeQuestionRepository(CBTDbContext context) : IFreeQuestionRepository
     {
         public async Task CreateAsync(List<FreeQuestion> result, CancellationToken cancellationToken)
         {

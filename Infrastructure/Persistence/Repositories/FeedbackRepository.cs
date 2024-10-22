@@ -5,7 +5,7 @@ using CBTPreparation.Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
 
-namespace CBTPreparation.Infrastructure.Persistence
+namespace CBTPreparation.Infrastructure.Persistence.Repositories
 {
     public class FeedbackRepository(CBTDbContext context) : IFeedbackRepository
     {

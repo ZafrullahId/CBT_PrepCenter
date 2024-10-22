@@ -1,7 +1,7 @@
 ﻿using CBTPreparation.Domain;
 using CBTPreparation.Infrastructure.Persistence.Context;
 
-namespace CBTPreparation.Infrastructure.Persistence
+namespace CBTPreparation.Infrastructure.Persistence.Repositories
 {
     public class UnitOfWorkRepository(CBTDbContext cBTDbContext) : IUnitOfWorkRepository
     {

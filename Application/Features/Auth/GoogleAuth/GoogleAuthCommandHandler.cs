@@ -4,11 +4,10 @@ using CBTPreparation.Domain.StudentAggregate;
 using CBTPreparation.Domain.UserAggregate;
 using Domain;
 using Google.Apis.Auth;
-using MapsterMapper;
 using MediatR;
 
 
-namespace CBTPreparation.Application.Features.GoogleAuth
+namespace CBTPreparation.Application.Features.Auth.GoogleAuth
 {
     public class GoogleAuthCommandHandler : IRequestHandler<GoogleAuthCommand, GoogleAuthCommandResponse>
     {

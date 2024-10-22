@@ -1,6 +1,6 @@
 ﻿using CBTPreparation.APIs.Endpoints.Auth.CreateToken;
 using CBTPreparation.APIs.Filters;
-using CBTPreparation.Application.Features.GoogleAuth;
+using CBTPreparation.Application.Features.Auth.GoogleAuth;
 using CBTPreparation_Application.Abstractions;
 using MapsterMapper;
 using MediatR;

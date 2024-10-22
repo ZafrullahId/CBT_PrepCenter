@@ -1,9 +1,9 @@
 ﻿using CBTPreparation.Application.Shared;
 
-namespace CBTPreparation.Application.Features.GoogleAuth
+namespace CBTPreparation.Application.Features.Auth.GoogleAuth
 {
     public record GoogleAuthCommandResponse(
-        string Token, 
+        string Token,
         string RefreshToken,
         BaseResponse BaseResponse);
 }

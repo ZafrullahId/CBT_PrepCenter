@@ -3,9 +3,8 @@ using CBTPreparation.APIs.Filters;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using CBTPreparation.APIs.Endpoints.Auth.GetRefreshToken;
 using CBTPreparation.APIs.Endpoints.Auth.CreateToken;
-using CBTPreparation.Application.Features.Auth.CreateToken;
+using CBTPreparation.Application.Features.Auth.UpdateToken;
 
 namespace CBTPreparation.APIs.Endpoints.Auth.UpdateToken
 {
@@ -19,11 +18,11 @@ namespace CBTPreparation.APIs.Endpoints.Auth.UpdateToken
                     IMediator mediator,
                     CancellationToken cancellationToken) =>
             {
-                var command = mapper.Map<CreateTokenCommand>(request);
+                var command = mapper.Map<UpdateTokenCommand>(request);
                 var response = await mediator.Send(command, cancellationToken);
 
                 return mapper.Map<CreateRefreshTokenResponse>(response);
-            }).Validator<CreateTokenRequest>()
+            })
             .WithTags(EndpointSchema.Auth);
         }
     }

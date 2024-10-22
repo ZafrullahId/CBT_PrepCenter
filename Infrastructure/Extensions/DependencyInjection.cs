@@ -7,8 +7,9 @@ using CBTPreparation.Domain.StudentAggregate;
 using CBTPreparation.Domain.UserAggregate;
 using CBTPreparation.Infrastructure.Authentication;
 using CBTPreparation.Infrastructure.Jwt;
-using CBTPreparation.Infrastructure.Persistence;
+using CBTPreparation.Infrastructure.Persistence.Cache;
 using CBTPreparation.Infrastructure.Persistence.Context;
+using CBTPreparation.Infrastructure.Persistence.Repositories;
 using CBTPreparation.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -55,6 +56,7 @@ namespace CBTPreparation_Infrastructure.Extensions
             services.AddScoped<IUnitOfWorkRepository, UnitOfWorkRepository>();
             services.AddScoped<ICbtSessionRepository, CbtSessionRepository>();
             services.AddScoped<IFreeQuestionRepository, FreeQuestionRepository>();
+            services.AddScoped<ICacheService, CacheService>();
 
             return services;
         }
